@@ -1,8 +1,13 @@
-import React from "react";
-
+import React, {useContext} from "react";
+import { CRMContext } from '../../context/CRMContext';
 import {Link} from 'react-router-dom'
 
 const Navegacion = ()=>{
+
+    const [auth, guardarAuth] = useContext(CRMContext);
+
+    if(!auth.auth) return null;
+
     return(
         
         <aside className="sidebar col-3">
@@ -15,6 +20,6 @@ const Navegacion = ()=>{
             </nav>
         </aside>
 
-    )
+    );
 }
 export default Navegacion;
