@@ -3,65 +3,62 @@ import clienteAxios from "../../config/axios";
 import {useNavigate} from 'react-router-dom'
 import Swal from "sweetalert2";
 
-function AgregarCliente(){
+function AgregarUsuario(){
 
     const navigate = useNavigate();
 
-    //Se guarda primero el cliente en el useState
-    const[cliente,guardarCliente] = useState({
+    //Se guarda primero el usuario en el useState
+    const[usuario,guardarUsuario] = useState({
         nombre: '',
         correo: '',
-        numeroTelefonico: '',
-        cedula:'',
-        tipoCedula:''
+        contrasena:'',
+        rol: ''
     });
 
     //Leer los datos del formulario
     const actualizarState = e => {
             //Almacena lo que el usuario escribe en el state
-            guardarCliente({
-                ...cliente,
+            guardarUsuario({
+                ...usuario,
                 [e.target.name] : e.target.value
             })
 
     }
 
     //validar el formulario
-    const ValidarCliente = () => {
+    const ValidarUsuario = () => {
         //Destructuring
-        const {_idCliente, nombre, correo, numeroTelefonico,cedula, tipoCedula} = cliente;
+        const {_idUsuario, nombre, correo, contrasena,rol} = usuario;
 
         //Revisa que no haya campos vacíos
-        let valido = !nombre.length || !correo.length || !numeroTelefonico.length || !cedula.length
-         || !tipoCedula.length;
+        let valido = !nombre.length || !correo.length || !contrasena.length || !rol.length;
 
-         console.log(valido);
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
     }
 
-    //Añade en la rest api un cliente nuevo
-    const GuardarCliente = e =>{
+    //Añade en la rest api un usuario nuevo
+    const GuardarUsuario = e =>{
         e.preventDefault();
 
-        clienteAxios.post('/clientes', cliente)
+        clienteAxios.post('/crear-cuenta', usuario)
         .then(res => {
             console.log(res)
             Swal.fire(
-                'Se agregó el cliente',
+                'Se agregó el usuario',
                 res.data.mensaje,
                 'success'
             )
         });
-        navigate('/');
+        navigate('/usuario');
     }
 
 
     return(
         <Fragment>
-            <h2>Agregar Cliente</h2>
+            <h2>Agregar Usuario</h2>
 
-            <form onSubmit={GuardarCliente}>
+            <form onSubmit={GuardarUsuario}>
                 <legend>Llena todos los campos</legend>
 
                 <div className="campo">
@@ -85,31 +82,21 @@ function AgregarCliente(){
                 </div>
             
                 <div className="campo">
-                    <label>Numero Telefonico</label>
+                    <label>Contraseña: </label>
                     <input 
-                        type="number" 
-                        placeholder="Ingrese el telefono" 
-                        name="numeroTelefonico"
+                        type="password" 
+                        placeholder="Ingrese la contraseña" 
+                        name="contrasena"
                         onChange={actualizarState}
                     />
                 </div>
 
                 <div className="campo">
-                    <label>Cédula:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese la Cédula" 
-                        name="cedula"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Tipo Cedula:</label>
+                    <label>Rol: </label>
                     <input 
                         type="text" 
-                        placeholder="Ingrese el tipo cédula" 
-                        name="tipoCedula"
+                        placeholder="Ingrese el rol" 
+                        name="rol"
                         onChange={actualizarState}
                     />
                 </div>
@@ -118,8 +105,8 @@ function AgregarCliente(){
                         <input 
                             type="submit" 
                             className="btn btn-azul" 
-                            value="Agregar Cliente"
-                            disabled={ValidarCliente()}
+                            value="Agregar Usuario"
+                            disabled={ValidarUsuario()}
                         />
                 </div>
 
@@ -129,4 +116,4 @@ function AgregarCliente(){
     )
 }
 
-export default AgregarCliente;
+export default AgregarUsuario;

@@ -13,6 +13,8 @@ import AgregarCliente from "./components/clientes/AgregarCliente";
 import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
 import Reservacion from "./components/reservación/Reservacion";
+import Usuarios from "./components/usuarios/Usuarios";
+import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider} from "./context/CRMContext";
@@ -43,6 +45,10 @@ function App() {
               <Route exact path="/Reservacion" element={<Reservacion/>}/>
 
               <Route exact path="/iniciar-sesion" element={<Login/>}/>
+
+              <Route exact path="/usuario" element={<Usuarios/>}/>
+
+              <Route exact path="/usuario/nuevo" element={<AgregarUsuario/>}/>
             </Routes>
           </main>
         </div>

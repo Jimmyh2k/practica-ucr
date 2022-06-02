@@ -21,6 +21,10 @@ const Header = (props) => {
         navigate('/iniciar-sesion');
     }
 
+    const VerUsuarios = () => {
+        navigate('/usuario');
+    }
+
     return (
         <header className="barra">
             <div className="contenedor">
@@ -36,6 +40,16 @@ const Header = (props) => {
                         >
                             <i className="far fa-times-circle"></i>
                             Cerrar Sesión
+                        </button>
+                    ) : null }
+                    { auth.auth ? (
+                        <button 
+                            type="button"
+                            className="btn btn-rojo"
+                            onClick={VerUsuarios}
+                        >
+                            <i className="far fa-times-circle"></i>
+                            Ver Usuarios
                         </button>
                     ) : null }
                     

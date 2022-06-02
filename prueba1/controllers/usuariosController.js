@@ -58,3 +58,59 @@ exports.autenticarUsuario = async (req, res, next) => {
 
     }
 }
+
+//Mostrar Usuarios
+exports.mostrarUsuarios = async (req, res, next) => {
+    try {
+        const usuarios = await Usuarios.findAll();
+        res.json(usuarios);
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
+
+//Mostrar cliente por id (busqueda)
+exports.buscarUsuario = async (req, res, next) => {
+    const usuario = await Usuarios.findOne({
+        where : {
+        idUsuario: req.params.idUsuario
+        }
+    });
+
+    if(!usuario) {
+        res.json({mensaje : 'Ese usuario no existe'});
+        next()
+    }
+    // Mostrar el cliente
+    res.json(usuario);
+}
+
+//Actualizar el cliente //No funciona F -------------------------------------
+exports.actualizarUsuario = async (req, res, next) => {
+    try {
+        const cliente = await Clientes.update({
+            where:{
+            idCliente : req.params.idCliente }
+        });
+        res.json({mensaje : 'Se ha actualizado el cliente'});
+    }
+    catch (error) {
+        res.send(error);
+        next();
+    }
+}
+
+// Elimina un cliente por su ID 
+exports.eliminarUsuario = async (req, res, next) => {
+    try {
+        await Usuarios.destroy({
+            where:{
+            idUsuario : req.params.idUsuario }
+        });
+        res.json({mensaje : 'El usuario se ha eliminado'});
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}

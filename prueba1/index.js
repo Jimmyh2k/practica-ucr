@@ -8,7 +8,8 @@ const cors = require('cors');
 
 //Importa el modelo para crear las tablas por default
 require('./models/Clientes');
-require('./models/Habitacion')
+require('./models/Habitacion');
+require('./models/Usuarios');
 
 db.sync()  //.authenticate sirve solo para conectar, .sync sirve para crear las tablas
     .then(() => console.log('Conectado al servidor'))

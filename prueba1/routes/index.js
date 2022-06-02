@@ -63,6 +63,18 @@ module.exports = function() {
         usuariosController.autenticarUsuario
     );
 
+    //Mostrar los usuarios via GET
+    router.get('/usuarios',auth, usuariosController.mostrarUsuarios);
+
+    //Muestra un cliente por id (buscar)
+    router.get('/usuarios/:idUsuario', usuariosController.buscarUsuario);
+
+    //Actualzar Cliente
+    router.put('/usuarios/:idUsuario', usuariosController.actualizarUsuario);
+
+    //elimina un cliente
+    router.delete('/usuarios/:idUsuario', usuariosController.eliminarUsuario);
+
 
     return router;
 }
