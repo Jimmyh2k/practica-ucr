@@ -1,6 +1,7 @@
 import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import {Link} from 'react-router-dom'
 
 function Cliente(props){
 //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
@@ -43,10 +44,10 @@ function Cliente(props){
                         <p className="empresa">Tipo Cédula:{tipoCedula}</p>
                     </div>
                     <div className="acciones">
-                        <a href="#" className="btn btn-azul">
+                        <Link to={`/clientes/editar/${idCliente}`} className="btn btn-azul">
                             <i className="fas fa-pen-alt"></i>
                             Editar Cliente
-                        </a>
+                        </Link>
 
                         <button 
                             type="button" 

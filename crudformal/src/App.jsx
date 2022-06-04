@@ -10,6 +10,7 @@ import {BrowserRouter as Router, Route , Routes} from 'react-router-dom';
 //Componentes
 import Clientes from "./components/clientes/Clientes";
 import AgregarCliente from "./components/clientes/AgregarCliente";
+import EditarCliente from "./components/clientes/EditarClientes";
 import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
 import Reservacion from "./components/reservación/Reservacion";
@@ -37,6 +38,8 @@ function App() {
               <Route exact path="/" element={<Clientes/>}/>
               
               <Route exact path="/clientes/nuevo" element={<AgregarCliente/>}/>
+
+              <Route exact path="/clientes/editar/:id" element={<EditarCliente/>}/>
 
               <Route exact path="/habitacion" element={<Habitaciones/>}/>
 

@@ -45,17 +45,18 @@ exports.buscarCliente = async (req, res, next) => {
 
 //Actualizar el cliente //No funciona F
 exports.actualizarCliente = async (req, res, next) => {
-    try {
-        const cliente = await Clientes.update({
-            where:{
-            idCliente : req.params.idCliente }
-        });
-        res.json({mensaje : 'Se ha actualizado el cliente'});
-    }
-    catch (error) {
-        res.send(error);
-        next();
-    }
+    await Clientes.update(
+        {
+          nombre: req.body.nombre,
+          correo: req.body.correo,
+          numeroTelefonico: req.body.cedula,
+          cedula: req.body.cedula,
+          tipoCedula: req.body.tipoCedula
+        },
+        {
+          where: { idCliente: req.params.idCliente }
+        }
+      ).then(() => res.send("success"));
 }
 
 // Elimina un cliente por su ID 
