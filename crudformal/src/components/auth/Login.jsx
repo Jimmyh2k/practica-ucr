@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Swal from 'sweetalert2';
 import clienteAxios from '../../config/axios';
 import { useNavigate } from 'react-router-dom';
@@ -51,13 +51,17 @@ function Login() {
     }
 
     const leerDatos = e => {
+        // console.log(e.target.value);
         guardarCredenciales({
             ...credenciales,
             [e.target.name]: e.target.value
         })
     }
+    useEffect(() => console.log(credenciales), [credenciales]);
+
 
     return (
+
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
@@ -71,49 +75,52 @@ function Login() {
                     borderRadius: '10px'
                 }}
             >
+
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Iniciar Sesión
                 </Typography>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                    onChange={leerDatos}
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={leerDatos}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                >              Iniciar Sesión
-                </Button>
+
+                <form onSubmit={iniciarSesion}>
+
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="correo"
+                        type="text"
+                        label="Correo Electronico"
+                        name="correo"
+                        autoComplete="email"
+                        autoFocus
+                        onChange={leerDatos}
+                    />
+
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="contrasena"
+                        label="Password"
+                        type="password"
+                        id="contrasena"
+                        autoComplete="current-password"
+                        onChange={leerDatos}
+                    />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >              Iniciar Sesión
+                    </Button>
+                </form>
+
             </Box>
         </Container >
-    );
-}
-
-export default Login;
-
-
 
         // <div className="login">
         //     <h2>Iniciar Sesión</h2>
@@ -147,3 +154,9 @@ export default Login;
         //         </form>
         //     </div>
         // </div>
+    );
+}
+
+export default Login;
+
+
