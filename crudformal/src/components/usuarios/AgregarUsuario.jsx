@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from "react";
 import clienteAxios from "../../config/axios";
-import {useNavigate,} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import Swal from "sweetalert2";
 
 function AgregarUsuario(){
