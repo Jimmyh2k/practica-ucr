@@ -3,7 +3,7 @@ import clienteAxios from "../../config/axios";
 import {useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
 
-function EditarCliente(props){
+function EditarHabitacion(props){
 
     const navigate = useNavigate();
 
@@ -11,20 +11,19 @@ function EditarCliente(props){
     const { id } = useParams();
 
 
-    //Se guarda primero el cliente en el useState
-    const[cliente,datosCliente] = useState({
-        nombre: '',
-        correo: '',
-        numeroTelefonico: 0,
-        cedula:'',
-        tipoCedula:''
+    //Se guarda primero la hab en el useState
+    const[habitacion,datosHabitacion] = useState({
+        numero: 0,
+        camasIndividuales: 0,
+        camasDobles: 0,
+        recomendacionPrecioNacional: 0,
+        recomendacionPrecioExtranjero: 0
     });
 
         //Query a la api
         const consultarApi = async () => {
-            const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
-            console.log(clienteConsulta.data);
-            datosCliente(clienteConsulta.data);
+            const habitacionConsulta = await clienteAxios.get(`/habitacion/${id}`);
+            datosHabitacion(habitacionConsulta.data);
         }
 
         useEffect( () => {
@@ -34,26 +33,26 @@ function EditarCliente(props){
     //Leer los datos del formulario
     const actualizarState = e => {
             //Almacena lo que el usuario escribe en el state
-            datosCliente({
-                ...cliente,
+            datosHabitacion({
+                ...habitacion,
                 [e.target.name] : e.target.value
             })
 
     }
 
-        // Envia una petición por axios para actualizar el cliente
-        const actualizarCliente = e => {
+        // Envia una petición por axios para actualizar el la habitacion
+        const actualizarHabitacion = e => {
             e.preventDefault();
     
             // enviar petición por axios
-            clienteAxios.put(`/clientes/${cliente.idCliente}`, cliente) 
+            clienteAxios.put(`/habitacion/${habitacion.idHabitacion}`, habitacion) 
                 .then(res => {
                     // validar si hay errores de mongo 
                     if(res.data.code === 11000) {
                         Swal.fire({
                             type: 'error',
                             title: 'Hubo un error',
-                            text: 'Ese cliente ya esta registrado'
+                            text: 'Esta habitacion ya esta registrado'
                         })
                     } else {
                         Swal.fire(
@@ -64,21 +63,19 @@ function EditarCliente(props){
                     }
     
                     // redireccionar
-                    navigate('/');
+                    navigate('/habitacion');
                 })
         }
 
     //validar el formulario
-    const ValidarCliente = () => {
+    const ValidarHabitacion = () => {
         //Destructuring
-        const {_idCliente, nombre, correo, numeroTelefonico,cedula, tipoCedula} = cliente;
-        console.log(cliente.numeroTelefonico);
-        console.log(numeroTelefonico);
-        console.log("--------");
+        const {numero, camasIndividuales, camasDobles,recomendacionPrecioNacional, recomendacionPrecioExtranjero} = habitacion;
 
         //Revisa que no haya campos vacíos
-        let valido = !nombre.length || !correo.length || !numeroTelefonico.toString().length || !cedula.length
-         || !tipoCedula.length;
+        let valido = !numero.toString().length || !camasIndividuales.toString().length ||
+        !camasDobles.toString().length || !recomendacionPrecioNacional.toString().length
+         || !recomendacionPrecioExtranjero.toString().length;
 
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
@@ -87,64 +84,64 @@ function EditarCliente(props){
 
     return(
         <Fragment>
-            <h2>Editar Cliente</h2>
+            <h2>Editar Habitacion</h2>
 
-            <form onSubmit={actualizarCliente}>
+            <form onSubmit={actualizarHabitacion}>
 
                 <legend>Llena todos los campos</legend>
 
                 <div className="campo">
-                    <label>Nombre:</label>
+                    <label>Numero de Hab.:</label>
                     <input 
-                        type="text" 
+                        type="number" 
                         placeholder="Ingrese el nombre" 
-                        name="nombre"
+                        name="numero"
                         onChange={actualizarState}
-                        value= {cliente.nombre}
+                        value= {habitacion.numero}
                     />
                 </div>
 
                 <div className="campo">
-                    <label>Correo Electronico:</label>
+                    <label>Camas Individuales:</label>
                     <input 
-                        type="email" 
+                        type="number" 
                         placeholder="Ingrese el correo" 
-                        name="correo"
+                        name="camasIndividuales"
                         onChange={actualizarState}
-                        value= {cliente.correo}
+                        value= {habitacion.camasIndividuales}
                     />
                 </div>
             
                 <div className="campo">
-                    <label>Numero Telefonico</label>
+                    <label>Camas dobles</label>
                     <input 
                         type="number" 
                         placeholder="Ingrese el telefono" 
-                        name="numeroTelefonico"
+                        name="camasDobles"
                         onChange={actualizarState}
-                        value= {cliente.numeroTelefonico}
+                        value= {habitacion.camasDobles}
                     />
                 </div>
 
                 <div className="campo">
-                    <label>Cédula:</label>
+                    <label>Precio Nacionales:</label>
                     <input 
                         type="number" 
-                        placeholder="Ingrese la Cédula" 
-                        name="cedula"
+                        placeholder="Ingrese el precio para nacionales" 
+                        name="recomendacionPrecioNacional"
                         onChange={actualizarState}
-                        value= {cliente.cedula}
+                        value= {habitacion.recomendacionPrecioNacional}
                     />
                 </div>
 
                 <div className="campo">
-                    <label>Tipo Cedula:</label>
+                    <label>Precio Extranjeros</label>
                     <input 
-                        type="text" 
-                        placeholder="Ingrese el tipo cédula" 
-                        name="tipoCedula"
+                        type="number" 
+                        placeholder="Ingrese el precio para extranjeros" 
+                        name="recomendacionPrecioExtranjero"
                         onChange={actualizarState}
-                        value= {cliente.tipoCedula}
+                        value= {habitacion.recomendacionPrecioExtranjero}
                     />
                 </div>
 
@@ -153,7 +150,7 @@ function EditarCliente(props){
                             type="submit" 
                             className="btn btn-azul" 
                             value="Guardar Cambios"
-                            disabled={ValidarCliente()}
+                            disabled={ValidarHabitacion()}
                         />
                 </div>
 
@@ -163,4 +160,4 @@ function EditarCliente(props){
     )
 }
 
-export default EditarCliente;
+export default EditarHabitacion;

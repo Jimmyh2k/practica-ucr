@@ -1,6 +1,7 @@
 import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import {Link} from 'react-router-dom'
 
 function Habitacion(props){
 //console.log(props.habitacion.nombre); //Consultar por manera mas sencilla de usar props
@@ -43,10 +44,10 @@ function Habitacion(props){
                         <p className="empresa">Precio Extranjeros:{recomendacionPrecioExtranjero}</p>
                     </div>
                     <div className="acciones">
-                        <a href="#" className="btn btn-azul">
+                    <Link to={`/habitacion/editar/${idHabitacion}`} className="btn btn-azul">
                             <i className="fas fa-pen-alt"></i>
-                            Editar Habitacion
-                        </a>
+                            Editar Habitación
+                        </Link>
 
                         <button 
                             type="button" 

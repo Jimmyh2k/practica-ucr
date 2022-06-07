@@ -3,7 +3,7 @@ import clienteAxios from "../../config/axios";
 import {useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
 
-function EditarCliente(props){
+function EditarUsuario(){
 
     const navigate = useNavigate();
 
@@ -11,20 +11,19 @@ function EditarCliente(props){
     const { id } = useParams();
 
 
-    //Se guarda primero el cliente en el useState
-    const[cliente,datosCliente] = useState({
+    //Se guarda primero el usuario en el useState
+    const[usuario,datosUsuario] = useState({
         nombre: '',
         correo: '',
-        numeroTelefonico: 0,
-        cedula:'',
-        tipoCedula:''
+        contrasena: '',
+        rol: ''
     });
 
         //Query a la api
         const consultarApi = async () => {
-            const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
+            const clienteConsulta = await clienteAxios.get(`/usuarios/${id}`);
             console.log(clienteConsulta.data);
-            datosCliente(clienteConsulta.data);
+            datosUsuario(clienteConsulta.data);
         }
 
         useEffect( () => {
@@ -34,26 +33,26 @@ function EditarCliente(props){
     //Leer los datos del formulario
     const actualizarState = e => {
             //Almacena lo que el usuario escribe en el state
-            datosCliente({
-                ...cliente,
+            datosUsuario({
+                ...usuario,
                 [e.target.name] : e.target.value
             })
 
     }
 
-        // Envia una petición por axios para actualizar el cliente
-        const actualizarCliente = e => {
+        // Envia una petición por axios para actualizar el usuario
+        const actualizarUsuario = e => {
             e.preventDefault();
     
             // enviar petición por axios
-            clienteAxios.put(`/clientes/${cliente.idCliente}`, cliente) 
+            clienteAxios.put(`/usuario/${usuario.idUsuario}`, usuario) 
                 .then(res => {
                     // validar si hay errores de mongo 
                     if(res.data.code === 11000) {
                         Swal.fire({
                             type: 'error',
                             title: 'Hubo un error',
-                            text: 'Ese cliente ya esta registrado'
+                            text: 'Ese usuario ya esta registrado'
                         })
                     } else {
                         Swal.fire(
@@ -64,21 +63,17 @@ function EditarCliente(props){
                     }
     
                     // redireccionar
-                    navigate('/');
+                    navigate('/usuario');
                 })
         }
 
     //validar el formulario
-    const ValidarCliente = () => {
+    const ValidarUsuario = () => {
         //Destructuring
-        const {_idCliente, nombre, correo, numeroTelefonico,cedula, tipoCedula} = cliente;
-        console.log(cliente.numeroTelefonico);
-        console.log(numeroTelefonico);
-        console.log("--------");
+        const {_idUsuario, nombre, correo, contrasena,rol} = usuario;
 
         //Revisa que no haya campos vacíos
-        let valido = !nombre.length || !correo.length || !numeroTelefonico.toString().length || !cedula.length
-         || !tipoCedula.length;
+        let valido = !nombre.length || !correo.length || !contrasena.length || !rol.length;
 
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
@@ -87,9 +82,9 @@ function EditarCliente(props){
 
     return(
         <Fragment>
-            <h2>Editar Cliente</h2>
+            <h2>Editar Usuario</h2>
 
-            <form onSubmit={actualizarCliente}>
+            <form onSubmit={actualizarUsuario}>
 
                 <legend>Llena todos los campos</legend>
 
@@ -100,7 +95,7 @@ function EditarCliente(props){
                         placeholder="Ingrese el nombre" 
                         name="nombre"
                         onChange={actualizarState}
-                        value= {cliente.nombre}
+                        value= {usuario.nombre}
                     />
                 </div>
 
@@ -111,40 +106,29 @@ function EditarCliente(props){
                         placeholder="Ingrese el correo" 
                         name="correo"
                         onChange={actualizarState}
-                        value= {cliente.correo}
+                        value= {usuario.correo}
                     />
                 </div>
             
                 <div className="campo">
-                    <label>Numero Telefonico</label>
+                    <label>Nueva contrasena:</label>
                     <input 
-                        type="number" 
-                        placeholder="Ingrese el telefono" 
-                        name="numeroTelefonico"
+                        type="password" 
+                        placeholder="Ingrese la contraseña" 
+                        name="contrasena"
                         onChange={actualizarState}
-                        value= {cliente.numeroTelefonico}
+                        value= {usuario.contrasena}
                     />
                 </div>
 
                 <div className="campo">
-                    <label>Cédula:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese la Cédula" 
-                        name="cedula"
-                        onChange={actualizarState}
-                        value= {cliente.cedula}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Tipo Cedula:</label>
+                    <label>Rol:</label>
                     <input 
                         type="text" 
-                        placeholder="Ingrese el tipo cédula" 
-                        name="tipoCedula"
+                        placeholder="Ingrese el rol" 
+                        name="rol"
                         onChange={actualizarState}
-                        value= {cliente.tipoCedula}
+                        value= {usuario.rol}
                     />
                 </div>
 
@@ -153,7 +137,7 @@ function EditarCliente(props){
                             type="submit" 
                             className="btn btn-azul" 
                             value="Guardar Cambios"
-                            disabled={ValidarCliente()}
+                            disabled={ValidarUsuario()}
                         />
                 </div>
 
@@ -163,4 +147,4 @@ function EditarCliente(props){
     )
 }
 
-export default EditarCliente;
+export default EditarUsuario;

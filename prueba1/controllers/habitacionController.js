@@ -56,3 +56,18 @@ exports.eliminarHabitacion = async (req, res, next) => {
         next();
     }
 }
+
+exports.actualizarHabitacion = async (req, res, next) => {
+    await Habitacion.update(
+        {
+          numero: req.body.numero,
+          camasIndividuales: req.body.camasIndividuales,
+          camasDobles: req.body.camasDobles,
+          recomendacionPrecioNacional: req.body.recomendacionPrecioNacional,
+          recomendacionPrecioExtranjero: req.body.recomendacionPrecioExtranjero
+        },
+        {
+          where: { idHabitacion: req.params.idHabitacion }
+        }
+      ).then(() => res.send("success"));
+}

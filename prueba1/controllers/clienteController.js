@@ -49,7 +49,7 @@ exports.actualizarCliente = async (req, res, next) => {
         {
           nombre: req.body.nombre,
           correo: req.body.correo,
-          numeroTelefonico: req.body.cedula,
+          numeroTelefonico: req.body.numeroTelefonico,
           cedula: req.body.cedula,
           tipoCedula: req.body.tipoCedula
         },

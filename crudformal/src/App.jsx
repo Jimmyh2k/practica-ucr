@@ -13,9 +13,11 @@ import AgregarCliente from "./components/clientes/AgregarCliente";
 import EditarCliente from "./components/clientes/EditarClientes";
 import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
+import EditarHabitacion from "./components/habitación/EditarHabitacion";
 import Reservacion from "./components/reservación/Reservacion";
 import Usuarios from "./components/usuarios/Usuarios";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
+import EditarUsuario from "./components/usuarios/EditarUsuario";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider} from "./context/CRMContext";
@@ -45,6 +47,8 @@ function App() {
 
               <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion/>}/>
 
+              <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion/>}/>
+
               <Route exact path="/Reservacion" element={<Reservacion/>}/>
 
               <Route exact path="/iniciar-sesion" element={<Login/>}/>
@@ -52,6 +56,9 @@ function App() {
               <Route exact path="/usuario" element={<Usuarios/>}/>
 
               <Route exact path="/usuario/nuevo" element={<AgregarUsuario/>}/>
+
+              <Route exact path="/usuario/editar/:id" element={<EditarUsuario/>}/>
+              
             </Routes>
           </main>
         </div>
