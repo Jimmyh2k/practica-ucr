@@ -86,13 +86,13 @@ exports.buscarUsuario = async (req, res, next) => {
     res.json(usuario);
 }
 
-//Actualizar el cliente //No funciona F -------------------------------------
+
 exports.actualizarUsuario = async (req, res, next) => {
     await Usuarios.update(
         {
           nombre: req.body.nombre,
           correo: req.body.correo,
-          contrasena: req.body.contrasena,
+          contrasena: await bcrypt.hash(req.body.contrasena, 12),
           rol: req.body.rol
         },
         {

@@ -45,7 +45,7 @@ function EditarUsuario(){
             e.preventDefault();
     
             // enviar petición por axios
-            clienteAxios.put(`/usuario/${usuario.idUsuario}`, usuario) 
+            clienteAxios.put(`/usuarios/${usuario.idUsuario}`, usuario) 
                 .then(res => {
                     // validar si hay errores de mongo 
                     if(res.data.code === 11000) {
@@ -117,7 +117,6 @@ function EditarUsuario(){
                         placeholder="Ingrese la contraseña" 
                         name="contrasena"
                         onChange={actualizarState}
-                        value= {usuario.contrasena}
                     />
                 </div>
 
