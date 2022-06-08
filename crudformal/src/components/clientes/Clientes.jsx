@@ -67,43 +67,50 @@ function Clientes() {
                 <i className="fas fa-plus-circle"></i>
                 Nuevo Cliente
             </Link> */}
-            <Button variant="contained" component={Link} to="/clientes/nuevo" color="secondary">
-                <AddCircleOutlinedIcon />
+            <Button variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                 Nuevo Cliente
             </Button>
             <TableContainer component={Paper}>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>
-                            <Typography variant="h6" component="h2" gutterBottom>
-                                Nombre
-                            </Typography>
+                <Table sx={{ minWidth: 650 }} aria-label="tabla clientes">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>
+                                <Typography variant="h6" component="h2" gutterBottom>
+                                    Nombre
+                                </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Typography variant="h6" component="h2" gutterBottom>
+                                    Correo
+                                </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Typography variant="h6" component="h2" gutterBottom>
+                                    Telefono
+                                </Typography>
+                            </TableCell>
+                            <TableCell align="right">
+                                <Typography variant="h6" component="h2" gutterBottom>
+                                    Cédula
+                                </Typography>
+                            </TableCell>
+                            <TableCell align="right">
 
-                        </TableCell>
-                        <TableCell><Typography variant="h6" component="h2" gutterBottom>
-                            Correo</Typography></TableCell>
-                        <TableCell><Typography variant="h6" component="h2" gutterBottom>
-                            Telefono
-                        </Typography></TableCell>
-                        <TableCell><Typography variant="h6" component="h2" gutterBottom>
-                            Cédula
-                        </Typography></TableCell>
-                        <TableCell><Typography variant="h6" component="h2" gutterBottom>
-                            Tipo Cédula
-                        </Typography></TableCell>
-                        <TableCell></TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {clientes.map(cliente => (
-                        <Cliente
-                            key={cliente.idCliente}
-                            cliente={cliente}
-                        />
-                    ))}
-                </TableBody>
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody sx={{ width: "100%" }}>
+                        {clientes.map(cliente => (
+                            <Cliente
+
+                                key={cliente.idCliente}
+                                cliente={cliente}
+                            />
+                        ))}
+                    </TableBody>
+                </Table>
             </TableContainer>
-        </Fragment>
+        </Fragment >
 
 
 

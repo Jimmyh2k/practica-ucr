@@ -1,11 +1,11 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 
 //Layout
 import Header from "./components/layout/Header";
 import Navegacion from "./components/layout/Navegacion";
 
 //Routing
-import {BrowserRouter as Router, Route , Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 //Componentes
 import Clientes from "./components/clientes/Clientes";
@@ -17,7 +17,7 @@ import Usuarios from "./components/usuarios/Usuarios";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 
 import Login from "./components/auth/Login";
-import { CRMContext, CRMProvider} from "./context/CRMContext";
+import { CRMContext, CRMProvider } from "./context/CRMContext";
 
 function App() {
 
@@ -28,30 +28,30 @@ function App() {
     <Router>
       <div className="App">
         <CRMProvider value={[auth, guardarAuth]}>
-        <Header></Header>
-        <div className="grid contenedor contenido-principal">
-          <Navegacion></Navegacion>
+          {/* <Header></Header> */}
+          <div className="grid contenedor contenido-principal">
+            {/* <Navegacion></Navegacion> */}
 
-          <main className="caja-contenido col-9">
-            <Routes>
-              <Route exact path="/" element={<Clientes/>}/>
-              
-              <Route exact path="/clientes/nuevo" element={<AgregarCliente/>}/>
+            <main className="caja-contenido col-9">
+              <Routes>
+                <Route exact path="/" element={<Clientes />} />
 
-              <Route exact path="/habitacion" element={<Habitaciones/>}/>
+                <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
 
-              <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion/>}/>
+                <Route exact path="/habitacion" element={<Habitaciones />} />
 
-              <Route exact path="/Reservacion" element={<Reservacion/>}/>
+                <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
 
-              <Route exact path="/iniciar-sesion" element={<Login/>}/>
+                <Route exact path="/Reservacion" element={<Reservacion />} />
 
-              <Route exact path="/usuario" element={<Usuarios/>}/>
+                <Route exact path="/iniciar-sesion" element={<Login />} />
 
-              <Route exact path="/usuario/nuevo" element={<AgregarUsuario/>}/>
-            </Routes>
-          </main>
-        </div>
+                <Route exact path="/usuario" element={<Usuarios />} />
+
+                <Route exact path="/usuario/nuevo" element={<AgregarUsuario />} />
+              </Routes>
+            </main>
+          </div>
         </CRMProvider>
       </div>
     </Router>

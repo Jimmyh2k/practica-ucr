@@ -2,6 +2,8 @@ import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell } from '@mui/material';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Cliente(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
@@ -35,26 +37,33 @@ function Cliente(props) {
     }
 
     return (
-        <TableRow>
-
+        <TableRow key={cedula}>
             <TableCell>
                 {nombre}
             </TableCell>
-            <TableCell>
-                {correo}
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {correo}
+                </Typography>
             </TableCell>
-            <TableCell>
+            <TableCell align="right">
                 {numeroTelefonico}
             </TableCell>
-            <TableCell>
+            <TableCell align="right">
                 {cedula}
             </TableCell>
-            <TableCell>
+            {/* <TableCell align="right">
                 {tipoCedula}
-            </TableCell>
-            <TableCell>
-                <Button size="small"><i className="fas fa-pen-alt"></i> Editar</Button>
-                <Button size="small"><i className="fas fa-times"></i> Eliminar</Button>
+            </TableCell> */}
+            <TableCell align="right">
+                <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+
+                    Editar
+
+                </Button>
+                <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
+                    Eliminar
+                </Button>
                 {/* 
                 <a href="#" className="btn btn-azul">
                     
