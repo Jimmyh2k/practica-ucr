@@ -3,15 +3,25 @@ import clienteAxios from '../../config/axios';
 import Cliente from "./Cliente";
 import { Link, useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
-import { Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
+import { styled } from '@mui/material/styles';
+
+
 
 
 function Clientes() {
+    const Item = styled(Paper)(({ theme }) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
 
     const navigate = useNavigate();
 
@@ -121,7 +131,7 @@ function Clientes() {
                     </Table>
                 </TableContainer>
             </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+            <Box pl={1} pr={1} sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
                         mr: 2,
@@ -138,6 +148,50 @@ function Clientes() {
                 <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                     Nuevo Cliente
                 </Button>
+                <Box sx={{ width: '100%' }}>
+                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
+                        <Grid item xs={6} >
+                            <Card sx={{}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        Word of the Day
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        benevolent
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        adjective
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        well meaning and kindly.
+                                        <br />
+                                        {'"a benevolent smile"'}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small">Learn More</Button>
+                                </CardActions>
+                            </Card>
+                        </Grid>
+
+                        {/* <Grid item xs={6}>
+                            <Item>2</Item>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Item>1</Item>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Item>2</Item>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Item>1</Item>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Item>2</Item>
+                        </Grid> */}
+                    </Grid>
+
+                </Box>
             </Box>
 
         </Fragment >
