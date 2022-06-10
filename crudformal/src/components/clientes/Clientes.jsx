@@ -59,7 +59,16 @@ function Clientes() {
     return (
         <Fragment>
             {/* <h2>Clientes</h2> */}
-            <Typography variant="h5" gutterBottom component="h2">
+            <Typography variant="h4" gutterBottom component="h2"
+                sx={{
+                    mr: 2,
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: 'white',
+                    paddingTop: '2rem',
+                    paddingBottom: '1rem'
+                }}
+            >
                 Clientes
             </Typography>
 

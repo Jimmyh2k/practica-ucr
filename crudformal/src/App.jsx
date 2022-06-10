@@ -14,6 +14,7 @@ import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
 import Reservacion from "./components/reservación/Reservacion";
 import Usuarios from "./components/usuarios/Usuarios";
+import { CssBaseline } from "@mui/material";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 
 import Login from "./components/auth/Login";
@@ -25,12 +26,14 @@ function App() {
   const [auth, guardarAuth] = useContext(CRMContext);
 
   return (
+
     <Router>
+      <CssBaseline />
       <div className="App">
         <CRMProvider value={[auth, guardarAuth]}>
           {/* <Header></Header> */}
           <div className="grid contenedor contenido-principal">
-            {/* <Navegacion></Navegacion> */}
+            <Navegacion></Navegacion>
 
             <main className="caja-contenido col-9">
               <Routes>
