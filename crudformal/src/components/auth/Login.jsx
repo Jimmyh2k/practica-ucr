@@ -58,7 +58,7 @@ function Login() {
             [e.target.name]: e.target.value
         })
     }
-    useEffect(() => console.log(credenciales), [credenciales]);
+    // useEffect(() => console.log(credenciales), [credenciales]);
 
 
     return (

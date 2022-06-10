@@ -68,7 +68,68 @@ function Clientes() {
 
     return (
         <Fragment>
-            {/* <h2>Clientes</h2> */}
+            {/*
+            Versión de móvil
+            se usan cards
+            */}
+            <Box pl={1} pr={1} sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                <Typography variant="h4" gutterBottom component="h2"
+                    sx={{
+                        mr: 2,
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'white',
+                        paddingTop: '2rem',
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    Clientes
+                </Typography>
+
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                    Nuevo Cliente
+                </Button>
+                <Box sx={{ width: '100%' }}>
+                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
+                        {clientes.map(cliente => (
+                            <Cliente
+
+                                key={cliente.idCliente}
+                                cliente={cliente}
+                                card={true}
+                            />
+                        ))}
+                        {/* <Grid item xs={6} >
+                            <Card sx={{}}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        Word of the Day
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        benevolent
+                                    </Typography>
+                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                                        adjective
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        well meaning and kindly.
+                                        <br />
+                                        {'"a benevolent smile"'}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button size="small">Learn More</Button>
+                                </CardActions>
+                            </Card>
+                        </Grid> */}
+                    </Grid>
+
+                </Box>
+            </Box>
+            {/*
+            Versión de PC
+            Se usa table
+            */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
@@ -131,68 +192,8 @@ function Clientes() {
                     </Table>
                 </TableContainer>
             </Box>
-            <Box pl={1} pr={1} sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
-                <Typography variant="h4" gutterBottom component="h2"
-                    sx={{
-                        mr: 2,
-                        fontWeight: 700,
-                        letterSpacing: '.3rem',
-                        color: 'white',
-                        paddingTop: '2rem',
-                        paddingBottom: '1rem'
-                    }}
-                >
-                    Clientes
-                </Typography>
 
-                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
-                    Nuevo Cliente
-                </Button>
-                <Box sx={{ width: '100%' }}>
-                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
-                        <Grid item xs={6} >
-                            <Card sx={{}}>
-                                <CardContent>
-                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                        Word of the Day
-                                    </Typography>
-                                    <Typography variant="h5" component="div">
-                                        benevolent
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        adjective
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Learn More</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid>
 
-                        {/* <Grid item xs={6}>
-                            <Item>2</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Item>1</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Item>2</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Item>1</Item>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Item>2</Item>
-                        </Grid> */}
-                    </Grid>
-
-                </Box>
-            </Box>
 
         </Fragment >
 

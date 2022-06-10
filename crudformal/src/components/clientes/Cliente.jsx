@@ -1,7 +1,7 @@
 import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
-import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell } from '@mui/material';
+import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -36,8 +36,43 @@ function Cliente(props) {
         })
     }
 
+    if (props.card) {
+        return (
+            <Grid item xs={6} >
+                <Card sx={{}}>
+                    <CardContent>
+                        <Typography variant="h6" component="h3">
+                            {nombre}
+                        </Typography>
+                        <Typography variant="subtitle1" component="p" gutterBottom>
+                            {correo}
+                        </Typography>
+                        <Typography variant="subtitle1" component="p" gutterBottom>
+                            {numeroTelefonico}
+                        </Typography>
+                        <Typography variant="subtitle1" component="p" gutterBottom>
+                            {cedula}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" sx={{ marginRight: 1 }}>
+                            Editar
+                        </Button>
+                        <Button size="small" onClick={() => eliminarCliente(idCliente)}>
+                            Eliminar
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+        )
+    }
+    // {!props.products.length
+    //     ? <p>No product matched the criteria</p> 
+    //     : props.products.map(product => {... whatever your code is })
+    //   }
     return (
-        <TableRow key={cedula}>
+
+        <TableRow sx={{ display: {} }} key={cedula}>
             <TableCell>
                 {nombre}
             </TableCell>
@@ -79,11 +114,13 @@ function Cliente(props) {
                     
                 </button> */}
             </TableCell>
-        </TableRow>
+        </TableRow >
 
+    )
+}
 
-
-        // <ListItem >
+export default Cliente;
+// <ListItem >
         //     <Box >
 
         //         <Card sx={{ width: 400, maxWidth: 450 }}>
@@ -129,7 +166,3 @@ function Cliente(props) {
         //         <Button size="small">Learn More</Button>
         //     </CardActions>
         // </ListItem>
-    )
-}
-
-export default Cliente;
