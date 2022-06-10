@@ -59,66 +59,68 @@ function Clientes() {
     return (
         <Fragment>
             {/* <h2>Clientes</h2> */}
-            <Typography variant="h4" gutterBottom component="h2"
-                sx={{
-                    mr: 2,
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'white',
-                    paddingTop: '2rem',
-                    paddingBottom: '1rem'
-                }}
-            >
-                Clientes
-            </Typography>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+                <Typography variant="h4" gutterBottom component="h2"
+                    sx={{
+                        mr: 2,
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'white',
+                        paddingTop: '2rem',
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    Clientes
+                </Typography>
 
-            {/* <Link to={"/clientes/nuevo"} className="btn btn-verde nvo-cliente">
+                {/* <Link to={"/clientes/nuevo"} className="btn btn-verde nvo-cliente">
                 <i className="fas fa-plus-circle"></i>
                 Nuevo Cliente
             </Link> */}
-            <Button variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
-                Nuevo Cliente
-            </Button>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="tabla clientes">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>
-                                <Typography variant="h6" component="h2" gutterBottom>
-                                    Nombre
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="h6" component="h2" gutterBottom>
-                                    Correo
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="h6" component="h2" gutterBottom>
-                                    Telefono
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Typography variant="h6" component="h2" gutterBottom>
-                                    Cédula
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                    Nuevo Cliente
+                </Button>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="tabla clientes">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Nombre
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Correo
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Telefono
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Cédula
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
 
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody sx={{ width: "100%" }}>
-                        {clientes.map(cliente => (
-                            <Cliente
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ width: "100%" }}>
+                            {clientes.map(cliente => (
+                                <Cliente
 
-                                key={cliente.idCliente}
-                                cliente={cliente}
-                            />
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
+                                    key={cliente.idCliente}
+                                    cliente={cliente}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Box>
         </Fragment >
 
 

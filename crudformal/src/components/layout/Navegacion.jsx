@@ -113,13 +113,7 @@ const Navegacion = () => {
                                     <Typography textAlign="center">{page.name}</Typography>
                                 </MenuItem>
                             ))}
-                            {/* {
-                                routes.forEach((route) => {
-                                    <MenuItem key={route.name} onClick={handleCloseNavMenu} containerElement={<Link to={route.path} />}>
-                                        <Typography textAlign="center">{route.name}</Typography>
-                                    </MenuItem>
-                                })
-                            } */}
+
 
                         </Menu>
                     </Box>
@@ -135,12 +129,12 @@ const Navegacion = () => {
                             flexGrow: 1,
                             fontFamily: 'monospace',
                             fontWeight: 700,
-                            letterSpacing: '.3rem',
+                            letterSpacing: '.1rem',
                             color: 'inherit',
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        Administración
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
