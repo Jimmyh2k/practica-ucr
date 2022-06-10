@@ -121,6 +121,25 @@ function Clientes() {
                     </Table>
                 </TableContainer>
             </Box>
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                <Typography variant="h4" gutterBottom component="h2"
+                    sx={{
+                        mr: 2,
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'white',
+                        paddingTop: '2rem',
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    Clientes
+                </Typography>
+
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                    Nuevo Cliente
+                </Button>
+            </Box>
+
         </Fragment >
 
 
