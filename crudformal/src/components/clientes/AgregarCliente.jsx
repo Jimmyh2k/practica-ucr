@@ -69,8 +69,9 @@ function AgregarCliente() {
                     alignItems: 'left',
                     backgroundColor: '#ffffff',
                     padding: '30px',
+                    margin: { xs: '10px' },
                     borderRadius: '10px',
-                    width: "30%"
+                    width: { xs: '90%' },
                 }}
             >
                 <Typography variant="h4" component="h1">Agregar Cliente</Typography>
