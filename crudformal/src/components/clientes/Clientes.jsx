@@ -143,11 +143,7 @@ function Clientes() {
                 >
                     Clientes
                 </Typography>
-
-                {/* <Link to={"/clientes/nuevo"} className="btn btn-verde nvo-cliente">
-                <i className="fas fa-plus-circle"></i>
-                Nuevo Cliente
-            </Link> */}
+                
                 <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                     Nuevo Cliente
                 </Button>

@@ -2,6 +2,7 @@ import React, {Fragment, useState} from "react";
 import clienteAxios from "../../config/axios";
 import {useNavigate} from 'react-router-dom'
 import Swal from "sweetalert2";
+import { Typography, Box, TextField, Button } from '@mui/material'
 
 function AgregarHabitacion(){
 
@@ -55,77 +56,106 @@ function AgregarHabitacion(){
         navigate('/habitacion');
     }
 
-
-    return(
+    return (
         <Fragment>
-            <h2>Agregar Habitacion</h2>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        alignItems: 'left',
+                        backgroundColor: '#ffffff',
+                        padding: '30px',
+                        margin: { xs: '10px' },
+                        borderRadius: '10px',
+                        width: { xs: '90%', md: '70%', lg: '50%' },
+                    }}
+                >
+                    <Typography variant="h4" component="h1">Agregar Habitacion</Typography>
+                    <form onSubmit={GuardarHabitacion}>
+                        <Typography variant="h6" component="h2">Llena todos los campos</Typography>
 
-            <form onSubmit={GuardarHabitacion}>
-                <legend>Llena todos los campos</legend>
-
-                <div className="campo">
-                    <label>Numero de Hab.:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese el nombre" 
-                        name="numero"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Camas Individuales:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese el correo" 
-                        name="camasIndividuales"
-                        onChange={actualizarState}
-                    />
-                </div>
-            
-                <div className="campo">
-                    <label>Camas dobles</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese el telefono" 
-                        name="camasDobles"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Precio Nacionales:</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese el precio para nacionales" 
-                        name="recomendacionPrecioNacional"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Precio Extranjeros</label>
-                    <input 
-                        type="number" 
-                        placeholder="Ingrese el precio para extranjeros" 
-                        name="recomendacionPrecioExtranjero"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="enviar">
-                        <input 
-                            type="submit" 
-                            className="btn btn-azul" 
-                            value="Agregar Habitacion"
-                            disabled={ValidarHabitacion()}
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="numero"
+                            label="Numero de Hab."
+                            placeholder="Ingrese la cantidad"
+                            type="text"
+                            id="numero"
+                            onChange={actualizarState}
                         />
-                </div>
+                      <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="camasIndividuales"
+                            label="Camas Individuales"
+                            placeholder="Ingrese la cantidad"
+                            type="number"
+                            id="camasIndividuales"
+                            onChange={actualizarState}
+                        />
 
-            </form>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="camasDobles"
+                            label="Camas dobles"
+                            placeholder="Ingrese la cantidad"
+                            type="number"
+                            id="camasDobles"
+                            onChange={actualizarState}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="recomendacionPrecioNacional"
+                            label="Precio Nacionales"
+                            placeholder="Ingrese la Cédula"
+                            type="number"
+                            id="recomendacionPrecioNacional"
+                            onChange={actualizarState}
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="recomendacionPrecioExtranjero"
+                            label="Precio Extranjeros"
+                            placeholder="Tipo Cedula"
+                            type="number"
+                            id="recomendacionPrecioExtranjero"
+                            onChange={actualizarState}
+                        />
+                        <div className="enviar">
+                            <Button
+                                type="submit"
+                                disabled={ValidarHabitacion()}
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Agregar Cliente
+                            </Button>
+                        </div>
+
+                    </form>
+                </Box>
+            </Box>
 
         </Fragment>
     )
+
+    
+    
 }
 
 export default AgregarHabitacion;
