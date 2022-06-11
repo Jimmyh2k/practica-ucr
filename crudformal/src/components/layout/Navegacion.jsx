@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { CRMContext } from '../../context/CRMContext';
 import { Link } from 'react-router-dom'
 
+import Header from './Header.jsx'
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -34,22 +36,22 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navegacion = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+    // const handleOpenUserMenu = (event) => {
+    //     setAnchorElUser(event.currentTarget);
+    // };
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+    // const handleCloseUserMenu = () => {
+    //     setAnchorElUser(null);
+    // };
 
     const [auth, guardarAuth] = useContext(CRMContext);
 
@@ -78,7 +80,6 @@ const Navegacion = () => {
                     >
                         Administración
                     </Typography>
-
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"
@@ -148,7 +149,7 @@ const Navegacion = () => {
                             </Button>
                         ))}
                     </Box>
-
+                    <Header />
                     {/* <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

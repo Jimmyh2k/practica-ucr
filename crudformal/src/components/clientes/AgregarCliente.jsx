@@ -60,36 +60,41 @@ function AgregarCliente() {
 
     return (
         <Fragment>
-            <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '10px',
-                    alignItems: 'left',
-                    backgroundColor: '#ffffff',
-                    padding: '30px',
-                    margin: { xs: '10px' },
-                    borderRadius: '10px',
-                    width: { xs: '90%' },
-                }}
-            >
-                <Typography variant="h4" component="h1">Agregar Cliente</Typography>
-                <form onSubmit={GuardarCliente}>
-                    <Typography variant="h6" component="h2">Llena todos los campos</Typography>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        alignItems: 'left',
+                        backgroundColor: '#ffffff',
+                        padding: '30px',
+                        margin: { xs: '10px' },
+                        borderRadius: '10px',
+                        width: { xs: '90%', md: '70%', lg: '50%' },
+                    }}
+                >
+                    <Typography variant="h4" component="h1">Agregar Cliente</Typography>
+                    <form onSubmit={GuardarCliente}>
+                        <Typography variant="h6" component="h2">Llena todos los campos</Typography>
 
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="nombre"
-                        label="Nombre"
-                        placeholder="Ingrese el nombre"
-                        type="text"
-                        id="nombre"
-                        onChange={actualizarState}
-                    />
-                    {/* <div className="campo">
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="nombre"
+                            label="Nombre"
+                            placeholder="Ingrese el nombre"
+                            type="text"
+                            id="nombre"
+                            onChange={actualizarState}
+                        />
+                        {/* <div className="campo">
                         <label>Nombre:</label>
                         <input
                             type="text"
@@ -99,18 +104,19 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="correo"
-                        label="Correo Electronico"
-                        placeholder="Ingrese el correo"
-                        type="email"
-                        id="correo"
-                        onChange={actualizarState}
-                    />
-                    {/* <div className="campo">
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="correo"
+                            label="Correo Electronico"
+                            placeholder="Ingrese el correo"
+                            type="email"
+                            id="correo"
+                            onChange={actualizarState}
+                        />
+                        {/* <div className="campo">
                         <label>Correo Electronico:</label>
                         <input
                             type="email"
@@ -120,18 +126,19 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="numeroTelefonico"
-                        label="Numero Telefonico"
-                        placeholder="Ingrese el telefono"
-                        type="number"
-                        id="numeroTelefonico"
-                        onChange={actualizarState}
-                    />
-                    {/* <div className="campo">
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="numeroTelefonico"
+                            label="Numero Telefonico"
+                            placeholder="Ingrese el telefono"
+                            type="number"
+                            id="numeroTelefonico"
+                            onChange={actualizarState}
+                        />
+                        {/* <div className="campo">
                         <label>Numero Telefonico</label>
                         <input
                             type="number"
@@ -141,18 +148,19 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="cedula"
-                        label="Cédula"
-                        placeholder="Ingrese la Cédula"
-                        type="number"
-                        id="cedula"
-                        onChange={actualizarState}
-                    />
-                    {/* <div className="campo">
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="cedula"
+                            label="Cédula"
+                            placeholder="Ingrese la Cédula"
+                            type="number"
+                            id="cedula"
+                            onChange={actualizarState}
+                        />
+                        {/* <div className="campo">
                         <label>Cédula:</label>
                         <input
                             type="number"
@@ -162,19 +170,20 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="tipoCedula"
-                        label="Ingrese el tipo cédula"
-                        placeholder="Tipo Cedula"
-                        type="text"
-                        id="tipoCedula"
-                        onChange={actualizarState}
-                    />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
 
-                    {/* <div className="campo">
+                            name="tipoCedula"
+                            label="Ingrese el tipo cédula"
+                            placeholder="Tipo Cedula"
+                            type="text"
+                            id="tipoCedula"
+                            onChange={actualizarState}
+                        />
+
+                        {/* <div className="campo">
                         <label>Tipo Cedula:</label>
                         <input
                             type="text"
@@ -184,24 +193,25 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                    <div className="enviar">
-                        {/* <input
+                        <div className="enviar">
+                            {/* <input
                             type="submit"
                             className="btn btn-azul"
                             value="Agregar Cliente"
                             
                         /> */}
-                        <Button
-                            type="submit"
-                            disabled={ValidarCliente()}
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Agregar Cliente
-                        </Button>
-                    </div>
+                            <Button
+                                type="submit"
+                                disabled={ValidarCliente()}
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Agregar Cliente
+                            </Button>
+                        </div>
 
-                </form>
+                    </form>
+                </Box>
             </Box>
 
         </Fragment>
