@@ -2,6 +2,8 @@ import React,{useEffect, useState, Fragment, useContext} from "react";
 import clienteAxios from '../../config/axios';
 import Usuario from "./Usuario";
 import {Link, useNavigate} from 'react-router-dom';
+import { Typography,  Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
@@ -51,26 +53,108 @@ function Usuarios(){
         if(!auth.auth) {
             navigate('/iniciar-sesion'); //REVISAR
         }
-
-    return(
-        <Fragment>
-            <h2>Usuarios</h2>
-
-            <Link to={"/usuario/nuevo"} className="btn btn-verde nvo-cliente"> 
-                <i className="fas fa-plus-circle"></i>
-                Nuevo Usuario
-            </Link>
-
-            <ul className="listado-clientes">
-                {usuarios.map(usuario => (
-                    <Usuario 
-                        key={usuario.idUsuario}
-                        usuario={usuario}
-                    />
-                ) )}
-            </ul>
-        </Fragment>
-    )
+    
+        return (
+            <Fragment>
+                {/*
+                Versión de móvil
+                se usan cards
+                */}
+                <Box pl={1} pr={1} sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                    <Typography variant="h4" gutterBottom component="h2"
+                        sx={{
+                            mr: 2,
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'white',
+                            paddingTop: '2rem',
+                            paddingBottom: '1rem'
+                        }}
+                    >
+                        Usuarios
+                    </Typography>
+    
+                    <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/usuarios/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                        Nuevo Usuario
+                    </Button>
+                    <Box sx={{ width: '100%' }}>
+                        <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
+                            {usuarios.map(usuario => (
+                                <Usuario
+                                    key={usuario.idUsuario}
+                                    usuario={usuario}
+                                    card={true}
+                                />
+                            ))}
+                            
+                        </Grid>
+    
+                    </Box>
+                </Box>
+                {/*
+                Versión de PC
+                Se usa table
+                */}
+                <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+                    <Typography variant="h4" gutterBottom component="h2"
+                        sx={{
+                            mr: 2,
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'white',
+                            paddingTop: '2rem',
+                            paddingBottom: '1rem'
+                        }}
+                    >
+                        Usuarios
+                    </Typography>
+                    
+                    <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/usuarios/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                        Nuevo Usuario
+                    </Button>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="tabla usuarios">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>
+                                        <Typography variant="h6" component="h2" gutterBottom>
+                                            ID
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Typography variant="h6" component="h2" gutterBottom>
+                                            Nombre
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Typography variant="h6" component="h2" gutterBottom>
+                                            Correo
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Typography variant="h6" component="h2" gutterBottom>
+                                            Rol
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell align="right">
+    
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody sx={{ width: "100%" }}>
+                                {usuarios.map(usuario => (
+                                    <Usuario
+                                        key={usuario.idUsuario}
+                                        usuario={usuario}
+                                    />
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+            </Fragment >
+        )
+     
 }
 
 export default Usuarios;

@@ -1,6 +1,9 @@
 import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Usuario(props){
 //console.log(props.usuario.nombre); Consultar por manera mas sencilla de usar props
@@ -32,31 +35,74 @@ function Usuario(props){
             }
           })
     }
+    if (props.card) {
+        return (
+            <Grid item xs={6} >
+                <Card sx={{}}>
+                    <CardContent>
+                        <Typography variant="h6" component="h3">
+                            {idUsuario}
+                        </Typography>
+                    </CardContent>
+                    <CardContent>
+                        <Typography variant="h6" component="h3">
+                            {nombre}
+                        </Typography>
+                    </CardContent>
+                    <CardContent>
+                        <Typography variant="h6" component="h3">
+                            {correo}
+                        </Typography>
+                    </CardContent>
+                    <CardContent>
+                        <Typography variant="h6" component="h3">
+                            {rol}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button size="small" sx={{ marginRight: 1 }}>
+                            Editar
+                        </Button>
+                        <Button size="small" onClick={() => eliminarUsuario(idUsuario)}>
+                            Eliminar
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+        )
+    }
+    return (
+        <TableRow sx={{ display: {} }} key={idUsuario}>
+            <TableCell>
+                {idUsuario}
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {nombre}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {correo}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {rol}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                    Editar
+                </Button>
+                <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarUsuario(idUsuario)}>
+                    Eliminar
+                </Button>
+            </TableCell>
+        </TableRow >
 
-    return(
-        <li className="cliente">
-                    <div className="info-cliente">
-                        <p className="nombre">Nombre: {nombre}</p>
-                        <p className="empresa">Correo: {correo}</p>
-                        <p className="empresa">rol:{rol}</p>
-                    </div>
-                    <div className="acciones">
-                        <a href="#" className="btn btn-azul">
-                            <i className="fas fa-pen-alt"></i>
-                            Editar Usuario
-                        </a>
-
-                        <button 
-                            type="button" 
-                            className="btn btn-rojo btn-eliminar"
-                            onClick={ () => eliminarUsuario(idUsuario)}>
-                                
-                            <i className="fas fa-times"></i>
-                            Eliminar Usuario
-                        </button>
-                    </div>
-                </li>
     )
+    
 }
 
 export default Usuario;
