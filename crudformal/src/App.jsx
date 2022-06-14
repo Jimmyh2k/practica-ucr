@@ -60,10 +60,10 @@ function App() {
 
                 <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
 
+                <Route exact path="/usuario" element={<Usuarios />} />
               </Routes >
             </main >
           </div >
-          <Route exact path="/usuario" element={<Usuarios />} />
 
 
 
