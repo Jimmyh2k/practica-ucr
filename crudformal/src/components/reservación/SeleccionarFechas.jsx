@@ -10,7 +10,7 @@ function SeleccionarFechas() {
     const [checkOut, setCheckOut] = useState(new Date());
     const [fechasCorrectas, setFechasCorrectas] = useState(true);
     return (
-        <Box sx={{ display: 'flex', flexDirection: { ms: 'column', md: 'row' }, justifyContent: 'space-between' }}>
+        <Box sx={{ display: 'flex', flexDirection: { ms: 'column', md: 'row' }, justifyContent: 'space-around' }}>
             <div>
                 <h2>Seleccionar Check In</h2>
                 <Calendar onChange={setCheckIn} value={checkIn} />

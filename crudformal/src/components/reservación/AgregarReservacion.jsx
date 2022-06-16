@@ -55,7 +55,7 @@ function AgregarReservacion() {
     };
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ width: '90%', pt: 10 }}>
+            <Box sx={{ width: '70%', pt: 10 }}>
                 <Stepper nonLinear activeStep={activeStep}>
                     {steps.map((label, index) => (
                         <Step key={label} completed={completed[index]}>
@@ -78,8 +78,20 @@ function AgregarReservacion() {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-                            <SeleccionarFechas />
+                            <Typography sx={{ mt: 2, mb: 1 }}>Paso {activeStep + 1}</Typography>
+                            {
+                                activeStep + 1 == 1 ? (
+                                    <SeleccionarFechas />
+                                ) : (
+                                    activeStep + 1 == 2 ? (
+                                        <p>Prueba step 2</p>
+                                    ) : (
+                                        <p>Prueba step 3</p>
+                                    )
+                                )
+                            }
+
+
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Button
                                     color="inherit"
