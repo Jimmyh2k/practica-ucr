@@ -1,6 +1,9 @@
 import React from "react";
 import { Button, Typography, Box, Step, Stepper, StepButton } from '@mui/material';
 import SeleccionarFechas from "./SeleccionarFechas";
+import SeleccionarCliente from "./SeleccionarCliente";
+import SeleccionarHabitacion from "./SeleccionarHabitacion";
+
 function AgregarReservacion() {
     const steps = ['Fechas de hospedaje', 'Cliente', 'Habitación'];
 
@@ -80,13 +83,13 @@ function AgregarReservacion() {
                         <React.Fragment>
                             <Typography sx={{ mt: 2, mb: 1 }}>Paso {activeStep + 1}</Typography>
                             {
-                                activeStep + 1 == 1 ? (
+                                activeStep + 1 === 1 ? (
                                     <SeleccionarFechas />
                                 ) : (
-                                    activeStep + 1 == 2 ? (
-                                        <p>Prueba step 2</p>
+                                    activeStep + 1 === 2 ? (
+                                        <SeleccionarCliente />
                                     ) : (
-                                        <p>Prueba step 3</p>
+                                        <SeleccionarHabitacion />
                                     )
                                 )
                             }
@@ -99,22 +102,22 @@ function AgregarReservacion() {
                                     onClick={handleBack}
                                     sx={{ mr: 1 }}
                                 >
-                                    Back
+                                    Regresar
                                 </Button>
                                 <Box sx={{ flex: '1 1 auto' }} />
                                 <Button onClick={handleNext} sx={{ mr: 1 }}>
-                                    Next
+                                    Siguiente
                                 </Button>
                                 {activeStep !== steps.length &&
                                     (completed[activeStep] ? (
                                         <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                                            Step {activeStep + 1} already completed
+                                            Paso {activeStep + 1} ya completado
                                         </Typography>
                                     ) : (
                                         <Button onClick={handleComplete}>
                                             {completedSteps() === totalSteps() - 1
-                                                ? 'Finish'
-                                                : 'Complete Step'}
+                                                ? 'Finalizar'
+                                                : 'Completar paso'}
                                         </Button>
                                     ))}
                             </Box>
