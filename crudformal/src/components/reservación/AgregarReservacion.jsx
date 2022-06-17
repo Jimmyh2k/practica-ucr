@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Typography, Box, Step, Stepper, StepButton } from '@mui/material';
+import { Button, Typography, Box, Step, Stepper, StepButton, Paper } from '@mui/material';
 import SeleccionarFechas from "./SeleccionarFechas";
 import SeleccionarCliente from "./SeleccionarCliente";
 import SeleccionarHabitacion from "./SeleccionarHabitacion";
@@ -82,22 +82,23 @@ function AgregarReservacion() {
                     ) : (
                         <React.Fragment>
                             <Typography sx={{ mt: 2, mb: 1 }}>Paso {activeStep + 1}</Typography>
-                            {
-                                activeStep + 1 === 1 ? (
-                                    <SeleccionarFechas />
-                                ) : (
-                                    activeStep + 1 === 2 ? (
-                                        <SeleccionarCliente />
+                            <Box sx={{ width: '100%', height: { sx: '30rem', md: '45rem' } }}>
+                                {
+                                    activeStep + 1 === 1 ? (
+                                        <SeleccionarFechas />
                                     ) : (
-                                        <SeleccionarHabitacion />
+                                        activeStep + 1 === 2 ? (
+                                            <SeleccionarCliente />
+                                        ) : (
+                                            <SeleccionarHabitacion />
+                                        )
                                     )
-                                )
-                            }
-
-
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                }
+                            </Box>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb: 1 }}>
                                 <Button
                                     color="inherit"
+                                    variant="contained" size="small"
                                     disabled={activeStep === 0}
                                     onClick={handleBack}
                                     sx={{ mr: 1 }}
@@ -105,7 +106,7 @@ function AgregarReservacion() {
                                     Regresar
                                 </Button>
                                 <Box sx={{ flex: '1 1 auto' }} />
-                                <Button onClick={handleNext} sx={{ mr: 1 }}>
+                                <Button variant="contained" size="small" onClick={handleNext} sx={{ mr: 1 }}>
                                     Siguiente
                                 </Button>
                                 {activeStep !== steps.length &&
@@ -114,7 +115,7 @@ function AgregarReservacion() {
                                             Paso {activeStep + 1} ya completado
                                         </Typography>
                                     ) : (
-                                        <Button onClick={handleComplete}>
+                                        <Button variant="contained" size="small" onClick={handleComplete}>
                                             {completedSteps() === totalSteps() - 1
                                                 ? 'Finalizar'
                                                 : 'Completar paso'}

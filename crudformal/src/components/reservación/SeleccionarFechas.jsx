@@ -10,16 +10,18 @@ function SeleccionarFechas() {
     const [checkOut, setCheckOut] = useState(new Date());
     const [fechasCorrectas, setFechasCorrectas] = useState(true);
     return (
-        <Paper sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row', width: '100%', height: { xs: '100%', md: '30rem' } }, justifyContent: 'center' }}>
-            <Box sx={{ pr: { md: 1 } }}>
-                <h2>Seleccionar Check In</h2>
+        <Box sx={{
+            display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center',
+        }}>
+            <Box sx={{}}>
+                <Typography variant="h5" component="h2">Seleccione el Check In</Typography>
                 <Calendar onChange={setCheckIn} value={checkIn} />
             </Box>
-            <Box sx={{ pl: { md: 1 } }}>
-                <h2>Seleccionar Check Out</h2>
+            <Box sx={{}}>
+                <Typography variant="h5" component="h2">Seleccione el Check Out</Typography>
                 <Calendar onChange={setCheckOut} value={checkOut} />
             </Box>
-        </Paper>
+        </Box>
     )
 }
 export default SeleccionarFechas;

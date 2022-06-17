@@ -27,10 +27,13 @@ function SeleccionarCliente() {
         { id: 6, nombre: '- Melisandre', cedula: 123459789 },
         { id: 7, nombre: 'Ferrara Clifford', cedula: 103456789 },
         { id: 8, nombre: 'Rossini Frances', cedula: 122456789 },
-        { id: 9, nombre: 'Harvey Roxie', cedula: 123458789 }
+        { id: 9, nombre: 'Harvey Roxie', cedula: 123458789 },
+        { id: 10, nombre: 'Harvey Roxie', cedula: 123358789 },
+        { id: 11, nombre: 'Harvey Roxie', cedula: 129458789 },
+        { id: 12, nombre: 'Harvey Roxie', cedula: 12358789 },
     ];
     return (
-        <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '30rem' }}>
+        <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeCliente ? (
                     <p>Cliente: {selectedRow.nombre}</p>
@@ -38,13 +41,13 @@ function SeleccionarCliente() {
                     <p>Seleccione el cliente</p>
                 )}
             </Box>
-            <TableContainer sx={{ width: '70%' }}>
-                <Table aria-label="table clientes" sx={{ border: '1px solid #bdbdbd' }}>
+            <TableContainer sx={{ width: '100%', height: '100%' }}>
+                <Table stickyHeader aria-label="table-clientes" sx={{}}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Dessert (100g serving)</TableCell>
-                            <TableCell align="left">Calories</TableCell>
-                            <TableCell align="rigt"></TableCell>
+                            <TableCell>Nombre</TableCell>
+                            <TableCell align="left">Cedula</TableCell>
+                            <TableCell align="right"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -57,7 +60,7 @@ function SeleccionarCliente() {
                                     {row.nombre}
                                 </TableCell>
                                 <TableCell align="left">{row.cedula}</TableCell>
-                                <TableCell align="rigt">
+                                <TableCell align="right">
                                     <Button variant="outlined" size="small" onClick={() => setSelectedRow(row)}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
