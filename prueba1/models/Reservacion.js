@@ -25,6 +25,9 @@ const Reservacion = db.define('reservacion',{
 
     idCliente: {
         type: Sequelize.INTEGER
+    },
+    idHabitacion: {
+        type: Sequelize.INTEGER
     }
 });
 

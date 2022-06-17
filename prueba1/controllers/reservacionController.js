@@ -1,5 +1,6 @@
 const Clientes = require('../models/Clientes');
 const Reservacion = require('../models/Reservacion');
+const Habitacion = require('../models/Habitacion');
 
 //agregar nuevo cliente
 exports.agregarReservacion = async (req, res, next) => {
@@ -21,9 +22,10 @@ exports.agregarReservacion = async (req, res, next) => {
 exports.mostrarReservacion = async (req, res, next) => {
     try {
         const reservacion = await Reservacion.findAll({
-            include:{
-                model: Clientes
-            }
+            include:[
+                {model: Habitacion},
+                {model: Clientes}
+            ]
         });
         res.json(reservacion);
     } catch (error) {

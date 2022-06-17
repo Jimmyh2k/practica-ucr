@@ -14,7 +14,8 @@ function AgregarReservacion(){
         checkIn: new Date(), 
         checkOut: new Date(),
         comentarios:'',
-        idCliente:0
+        idCliente:0,
+        idHabitacion:0
     });
 
     //Leer los datos del formulario
@@ -30,7 +31,7 @@ function AgregarReservacion(){
     //validar el formulario
     const ValidarReservacion = () => {
         //Destructuring
-        const {idReservacion, cantidadDePersonas, checkIn, checkOut,comentarios, idCliente} = reservacion;
+        const {idReservacion, cantidadDePersonas, checkIn, checkOut,comentarios, idCliente, idHabitacion} = reservacion;
 
         //Revisa que no haya campos vacíos
         let valido =  !comentarios.length;
@@ -108,6 +109,15 @@ function AgregarReservacion(){
                         type="number" 
                         placeholder="Ingrese el client" 
                         name="idCliente"
+                        onChange={actualizarState}
+                    />
+                </div>
+                <div className="campo">
+                    <label>idHabitacion:</label>
+                    <input 
+                        type="number" 
+                        placeholder="Ingrese la habi" 
+                        name="idHabitacion"
                         onChange={actualizarState}
                     />
                 </div>

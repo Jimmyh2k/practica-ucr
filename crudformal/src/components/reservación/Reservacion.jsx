@@ -6,10 +6,10 @@ import {Link} from 'react-router-dom'
 function Reservacion(props){
 //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
-    const {idReservacion, cantidadDePersonas, checkIn, checkOut,comentarios, idCliente, cliente} = props.reservacion;
-    console.log(props.reservacion);
-    console.log(props.reservacion.cliente.nombre);
-
+    const {idReservacion, cantidadDePersonas, checkIn, checkOut,comentarios, idCliente, idHabitacion, cliente, habitacion} = props.reservacion;
+    console.log(props.reservacion)
+    console.log(cliente);
+    console.log(habitacion);
     //Eliminar Reservacion
     const eliminarReservacion = (id) => {
         
@@ -45,6 +45,8 @@ function Reservacion(props){
                         <p className="empresa">Comentarios: {comentarios}</p>
                         <p className="empresa">IdCliente:{idCliente}</p>
                         <p className="empresa">Cliente:{cliente.nombre}</p>
+                        <p className="empresa">IdHabitacion:{idHabitacion}</p>
+                        <p className="empresa">Habitacion escojida:{habitacion.numero}</p>
                     </div>
                     <div className="acciones">
                         <Link to={`/reservacion/editar/${idReservacion}`} className="btn btn-azul">
