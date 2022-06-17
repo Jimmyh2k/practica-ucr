@@ -14,7 +14,8 @@ import EditarCliente from "./components/clientes/EditarClientes";
 import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
 import EditarHabitacion from "./components/habitación/EditarHabitacion";
-import Reservacion from "./components/reservación/Reservacion";
+import Reservaciones from "./components/reservación/Reservaciones";
+import AgregarReservacion from "./components/reservación/AgregarReservacion";
 import Usuarios from "./components/usuarios/Usuarios";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 import EditarUsuario from "./components/usuarios/EditarUsuario";
@@ -49,7 +50,9 @@ function App() {
 
               <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion/>}/>
 
-              <Route exact path="/Reservacion" element={<Reservacion/>}/>
+              <Route exact path="/reservacion" element={<Reservaciones/>}/>
+
+              <Route exact path="/reservacion/nuevo" element={<AgregarReservacion/>}/>
 
               <Route exact path="/iniciar-sesion" element={<Login/>}/>
 
