@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,16 +8,20 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button } from '@mui/material';
+import { FacturaContext } from '../../context/FacturaContext';
+
 
 
 function SeleccionarCliente() {
-    const [selectedRow, setSelectedRow] = useState({});
-    const [seleccionDeCliente, setSeleccionDeCliente] = useState(false);
 
-    useEffect(() => {
-        if (seleccionDeCliente === false) { setSeleccionDeCliente(true) };
-        console.log(selectedRow, seleccionDeCliente);
-    }, [selectedRow, seleccionDeCliente]);
+
+    const { clienteReservacion, setClienteReservacion, seleccionDeCliente, setSeleccionDeCliente } = useContext(FacturaContext);
+
+
+    // useEffect(() => {
+
+    //     console.log(clienteReservacion, seleccionDeCliente);
+    // }, [clienteReservacion, seleccionDeCliente]);
     const rows = [
         { id: 1, nombre: 'Jon Snow', cedula: 604560017 },
         { id: 2, nombre: 'Cersei Lannister', cedula: 123446789 },
@@ -36,7 +40,7 @@ function SeleccionarCliente() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeCliente ? (
-                    <p>Cliente: {selectedRow.nombre}</p>
+                    <p>Cliente: {clienteReservacion.nombre}</p>
                 ) : (
                     <p>Seleccione el cliente</p>
                 )}
@@ -47,7 +51,7 @@ function SeleccionarCliente() {
                         <TableRow>
                             <TableCell>Nombre</TableCell>
                             <TableCell align="left">Cedula</TableCell>
-                            <TableCell align="right"></TableCell>
+                            <TableCell align="left"></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -60,8 +64,8 @@ function SeleccionarCliente() {
                                     {row.nombre}
                                 </TableCell>
                                 <TableCell align="left">{row.cedula}</TableCell>
-                                <TableCell align="right">
-                                    <Button variant="outlined" size="small" onClick={() => setSelectedRow(row)}>Seleccionar</Button>
+                                <TableCell align="left">
+                                    <Button variant="outlined" size="small" onClick={() => setClienteReservacion(row)}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

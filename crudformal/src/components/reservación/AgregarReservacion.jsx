@@ -3,6 +3,7 @@ import { Button, Typography, Box, Step, Stepper, StepButton, Paper } from '@mui/
 import SeleccionarFechas from "./SeleccionarFechas";
 import SeleccionarCliente from "./SeleccionarCliente";
 import SeleccionarHabitacion from "./SeleccionarHabitacion";
+import { FacturaProvider } from '../../context/FacturaContext';
 
 function AgregarReservacion() {
     const steps = ['Fechas de hospedaje', 'Cliente', 'Habitación'];
@@ -57,76 +58,78 @@ function AgregarReservacion() {
         setCompleted({});
     };
     return (
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Box sx={{ width: '70%', pt: 10 }}>
-                <Stepper nonLinear activeStep={activeStep}>
-                    {steps.map((label, index) => (
-                        <Step key={label} completed={completed[index]}>
-                            <StepButton color="inherit" onClick={handleStep(index)}>
-                                {label}
-                            </StepButton>
-                        </Step>
-                    ))}
-                </Stepper>
-                <div>
-                    {allStepsCompleted() ? (
-                        <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>
-                                All steps completed - you&apos;re finished
-                            </Typography>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                                <Box sx={{ flex: '1 1 auto' }} />
-                                <Button onClick={handleReset}>Reset</Button>
-                            </Box>
-                        </React.Fragment>
-                    ) : (
-                        <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>Paso {activeStep + 1}</Typography>
-                            <Box sx={{ width: '100%', height: { sx: '30rem', md: '45rem' } }}>
-                                {
-                                    activeStep + 1 === 1 ? (
-                                        <SeleccionarFechas />
-                                    ) : (
-                                        activeStep + 1 === 2 ? (
-                                            <SeleccionarCliente />
+        <FacturaProvider>
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                <Box sx={{ width: { xs: '95%', sm: '70%', md: '50%' }, pt: 10 }}>
+                    <Stepper nonLinear activeStep={activeStep}>
+                        {steps.map((label, index) => (
+                            <Step key={label} completed={completed[index]}>
+                                <StepButton color="inherit" onClick={handleStep(index)}>
+                                    {label}
+                                </StepButton>
+                            </Step>
+                        ))}
+                    </Stepper>
+                    <div>
+                        {allStepsCompleted() ? (
+                            <React.Fragment>
+                                <Typography sx={{ mt: 2, mb: 1 }}>
+                                    All steps completed - you&apos;re finished
+                                </Typography>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                    <Box sx={{ flex: '1 1 auto' }} />
+                                    <Button onClick={handleReset}>Reset</Button>
+                                </Box>
+                            </React.Fragment>
+                        ) : (
+                            <React.Fragment>
+                                <Typography sx={{ mt: 2, mb: 1 }}>Paso {activeStep + 1}</Typography>
+                                <Box sx={{ width: '100%', height: '40rem' }}>
+                                    {
+                                        activeStep + 1 === 1 ? (
+                                            <SeleccionarFechas />
                                         ) : (
-                                            <SeleccionarHabitacion />
+                                            activeStep + 1 === 2 ? (
+                                                <SeleccionarCliente />
+                                            ) : (
+                                                <SeleccionarHabitacion />
+                                            )
                                         )
-                                    )
-                                }
-                            </Box>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb: 1 }}>
-                                <Button
-                                    color="inherit"
-                                    variant="contained" size="small"
-                                    disabled={activeStep === 0}
-                                    onClick={handleBack}
-                                    sx={{ mr: 1 }}
-                                >
-                                    Regresar
-                                </Button>
-                                <Box sx={{ flex: '1 1 auto' }} />
-                                <Button variant="contained" size="small" onClick={handleNext} sx={{ mr: 1 }}>
-                                    Siguiente
-                                </Button>
-                                {activeStep !== steps.length &&
-                                    (completed[activeStep] ? (
-                                        <Typography variant="caption" sx={{ display: 'inline-block' }}>
-                                            Paso {activeStep + 1} ya completado
-                                        </Typography>
-                                    ) : (
-                                        <Button variant="contained" size="small" onClick={handleComplete}>
-                                            {completedSteps() === totalSteps() - 1
-                                                ? 'Finalizar'
-                                                : 'Completar paso'}
-                                        </Button>
-                                    ))}
-                            </Box>
-                        </React.Fragment>
-                    )}
-                </div>
+                                    }
+                                </Box>
+                                <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1, pb: 1 }}>
+                                    <Button
+                                        color="inherit"
+                                        variant="contained" size="small"
+                                        disabled={activeStep === 0}
+                                        onClick={handleBack}
+                                        sx={{ mr: 1 }}
+                                    >
+                                        Regresar
+                                    </Button>
+                                    <Box sx={{ flex: '1 1 auto' }} />
+                                    <Button variant="contained" size="small" onClick={handleNext} sx={{ mr: 1 }}>
+                                        Siguiente
+                                    </Button>
+                                    {activeStep !== steps.length &&
+                                        (completed[activeStep] ? (
+                                            <Typography variant="caption" sx={{ display: 'inline-block' }}>
+                                                Paso {activeStep + 1} ya completado
+                                            </Typography>
+                                        ) : (
+                                            <Button variant="contained" size="small" onClick={handleComplete}>
+                                                {completedSteps() === totalSteps() - 1
+                                                    ? 'Finalizar'
+                                                    : 'Completar paso'}
+                                            </Button>
+                                        ))}
+                                </Box>
+                            </React.Fragment>
+                        )}
+                    </div>
+                </Box>
             </Box>
-        </Box>
+        </FacturaProvider>
     )
 }
 

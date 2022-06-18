@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,15 +7,19 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button } from '@mui/material';
+import { FacturaContext } from '../../context/FacturaContext';
+
 
 function SeleccionarHabitacion() {
-    const [selectedRow, setSelectedRow] = useState({});
-    const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
 
-    useEffect(() => {
-        if (seleccionDeHabitacion === false) { setSeleccionDeHabitacion(true) };
-        console.log(selectedRow, seleccionDeHabitacion);
-    }, [selectedRow, seleccionDeHabitacion]);
+    // const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
+    const { habitacionReservacion, setHabitacionReservacion, seleccionDeHabitacion } = useContext(FacturaContext);
+
+    // useEffect(() => {
+    //     Object.keys(habitacionReservacion).length == 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
+
+
+    // }, [habitacionReservacion, seleccionDeHabitacion]);
 
     const rows = [
         { id: 1, numero: 1, camasDobles: 1, camasIndividuales: 2 },
@@ -35,7 +39,7 @@ function SeleccionarHabitacion() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeHabitacion ? (
-                    <p>Habitación: {selectedRow.numero}</p>
+                    <p>Habitación: {habitacionReservacion.numero}</p>
                 ) : (
                     <p>Seleccione la habitación</p>
                 )}
@@ -62,7 +66,7 @@ function SeleccionarHabitacion() {
                                 <TableCell align="left">{row.camasDobles}</TableCell>
                                 <TableCell align="left">{row.camasIndividuales}</TableCell>
                                 <TableCell align="right">
-                                    <Button variant="outlined" size="small" onClick={() => setSelectedRow(row)}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => setHabitacionReservacion(row)}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
