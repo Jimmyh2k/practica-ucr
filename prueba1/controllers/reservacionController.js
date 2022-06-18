@@ -1,4 +1,6 @@
+const Clientes = require('../models/Clientes');
 const Reservacion = require('../models/Reservacion');
+const Habitacion = require('../models/Habitacion');
 
 //agregar nuevo cliente
 exports.agregarReservacion = async (req, res, next) => {
@@ -19,7 +21,12 @@ exports.agregarReservacion = async (req, res, next) => {
 //Mostrar reservaciones
 exports.mostrarReservacion = async (req, res, next) => {
     try {
-        const reservacion = await Reservacion.findAll();
+        const reservacion = await Reservacion.findAll({
+            include:[
+                {model: Habitacion},
+                {model: Clientes}
+            ]
+        });
         res.json(reservacion);
     } catch (error) {
         console.log(error);
@@ -40,5 +47,5 @@ exports.detallesReservacion = async (req, res, next) => {
         next()
     }
     // Mostrar la reservacion
-    res.json(cliente);
+    res.json(reservacion);
 }
