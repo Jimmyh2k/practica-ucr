@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import LogoIcon from '../../imagenes/logo';
 
 const pages = [
     { path: '/', name: 'Clientes', key: 'clientes' },
@@ -31,6 +32,7 @@ const routes = [
     { path: '/habitacion', name: 'Habitación', key: 'habitacion' },
     { path: '/reservacion', name: 'Reservación', key: 'reservacion' }
 ]
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const Navegacion = () => {
@@ -62,7 +64,10 @@ const Navegacion = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+                        <LogoIcon width='50' height='50' />
+                    </Box>
                     <Typography
                         variant="h6"
                         noWrap
@@ -118,7 +123,10 @@ const Navegacion = () => {
 
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+                    <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
+                        <LogoIcon width='50' height='50' />
+                    </Box>
                     <Typography
                         variant="h5"
                         noWrap
