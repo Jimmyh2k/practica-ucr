@@ -30,8 +30,8 @@ export const FacturaProvider = ({ children }) => {
     const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
     const [datosLlenados, setDatosLlenados] = useState({});
     useEffect(() => {
-        Object.keys(clienteReservacion).length == 0 ? setSeleccionDeCliente(false) : setSeleccionDeCliente(true);
-        Object.keys(habitacionReservacion).length == 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
+        Object.keys(clienteReservacion).length === 0 ? setSeleccionDeCliente(false) : setSeleccionDeCliente(true);
+        Object.keys(habitacionReservacion).length === 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
 
         console.log(cantidadDePersonas, seleccionDeCliente);
         console.log(checkIn);

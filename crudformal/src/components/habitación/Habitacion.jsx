@@ -56,7 +56,7 @@ function Habitacion(props) {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" sx={{ marginRight: 1 }}>
+                        <Button component={Link} to={`/habitacion/editar/${idHabitacion}`} size="small" sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
                         <Button size="small" onClick={() => eliminarHabitacion(idHabitacion)}>
@@ -91,10 +91,8 @@ function Habitacion(props) {
                 {recomendacionPrecioExtranjero}
             </TableCell>
             <TableCell align="right">
-                <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-
+                <Button variant="outlined" component={Link} to={`/habitacion/editar/${idHabitacion}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
                     Editar
-
                 </Button>
                 <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarHabitacion(idHabitacion)}>
                     Eliminar

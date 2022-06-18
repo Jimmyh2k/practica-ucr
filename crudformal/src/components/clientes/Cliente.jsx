@@ -57,9 +57,13 @@ function Cliente(props) {
                         </Typography>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" sx={{ marginRight: 1 }}>
+                        <Button size="small" component={Link} to={`/clientes/editar/${idCliente}`} sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
+                        {/* <Link to={`/clientes/editar/${idCliente}`} className="btn btn-azul">
+                            <i className="fas fa-pen-alt"></i>
+                            Editar Cliente
+                        </Link> */}
                         <Button size="small" onClick={() => eliminarCliente(idCliente)}>
                             Eliminar
                         </Button>
@@ -88,11 +92,13 @@ function Cliente(props) {
             </TableCell>
 
             <TableCell align="right">
-                <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-
+                <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
                     Editar
-
                 </Button>
+                {/* <Link to={`/clientes/editar/${idCliente}`} className="btn btn-azul">
+                    <i className="fas fa-pen-alt"></i>
+                    Editar Cliente
+                </Link> */}
                 <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
                     Eliminar
                 </Button>

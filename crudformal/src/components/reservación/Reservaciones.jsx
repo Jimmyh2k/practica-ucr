@@ -1,17 +1,16 @@
-import React from "react";
+import React, { useEffect, useState, Fragment, useContext } from "react";
 import { Button, Typography, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import React, { useEffect, useState, Fragment, useContext } from "react";
 import clienteAxios from '../../config/axios';
 import Reservacion from "./Reservacion";
-import { Link, useNavigate } from 'react-router-dom';
+// import el Context
+import { CRMContext } from '../../context/CRMContext';
+
 
 function Reservaciones() {
 
 
-    // import el Context
-    import { CRMContext } from '../../context/CRMContext';
 
     const navigate = useNavigate();
 
