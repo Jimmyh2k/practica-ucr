@@ -15,7 +15,7 @@ function SeleccionarHabitacion() {
     const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
     const rows = [
-        { id: 1, numero: 1, camasDobles: 1, camasIndividuales: 2 },
+        { id: 0, numero: 1, camasDobles: 1, camasIndividuales: 2 },
         { id: 2, numero: 2, camasDobles: 1, camasIndividuales: 2 },
         { id: 3, numero: 3, camasDobles: 1, camasIndividuales: 2 },
         { id: 4, numero: 4, camasDobles: 1, camasIndividuales: 2 },

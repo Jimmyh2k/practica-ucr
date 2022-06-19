@@ -17,7 +17,7 @@ function SeleccionarCliente() {
     const { seleccionDeCliente, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
     const rows = [
-        { id: 1, nombre: 'Jon Snow', cedula: 604560017 },
+        { id: 0, nombre: 'Jon Snow', cedula: 604560017 },
         { id: 2, nombre: 'Cersei Lannister', cedula: 123446789 },
         { id: 3, nombre: 'Jaime Lannister', cedula: 123455789 },
         { id: 4, nombre: 'Arya Stark', cedula: 123456779 },
