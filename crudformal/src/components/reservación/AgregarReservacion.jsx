@@ -7,6 +7,7 @@ import { FacturaProvider } from '../../context/FacturaContext';
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
+import AceptarNuevaReservacion from './AceptarNuevaReservacion'
 
 function AgregarReservacion() {
     const steps = ['Fechas de hospedaje', 'Cliente', 'Habitación'];
@@ -77,9 +78,9 @@ function AgregarReservacion() {
                         <div>
                             {allStepsCompleted() ? (
                                 <React.Fragment>
-                                    <Typography sx={{ mt: 2, mb: 1 }}>
-                                        All steps completed - you&apos;re finished
-                                    </Typography>
+                                    <Box>
+                                        <AceptarNuevaReservacion />
+                                    </Box>
                                     <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                         <Box sx={{ flex: '1 1 auto' }} />
                                         <Button onClick={handleReset}>Reset</Button>
