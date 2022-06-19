@@ -11,7 +11,7 @@ import DatePicker from 'react-date-picker';
 function SeleccionarFechas() {
 
     const [fechasCorrectas, setFechasCorrectas] = useState(true);
-    const { cantidadDePersonas, setCantidadDePersonas, checkIn, setCheckIn, checkOut, setCheckOut } = useContext(FacturaContext);
+    const { cantidadDePersonas, setCantidadDePersonas, checkIn, setCheckIn, checkOut, setCheckOut, actualizarReservacion } = useContext(FacturaContext);
     return (
         <Paper sx={{
             display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center', height: '100%'
@@ -23,7 +23,7 @@ function SeleccionarFechas() {
                 label="Cantidad de personas"
                 type="text"
                 id="cantidadDePersonas"
-                onChange={e => setCantidadDePersonas(e.target.value)}
+                onChange={e => actualizarReservacion({ name: e.target.name, value: e.target.value })}
             />
 
             <Box sx={{ display: { xs: 'none', lg: 'flex' }, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>

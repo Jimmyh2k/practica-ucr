@@ -4,23 +4,24 @@ export const FacturaContext = createContext();
 
 export const FacturaProvider = ({ children }) => {
 
-    // const [cliente, guardarCliente] = useState({
-    //     nombre: '',
-    //     correo: '',
-    //     numeroTelefonico: '',
-    //     cedula: '',
-    //     tipoCedula: ''
-    // });
+    const [reservacion, setReservacion] = useState({
+        cantidadDePersonas: 0,
+        checkIn: new Date(),
+        checkOut: new Date(),
+        comentarios: '',
+        idCliente: 0,
+        idHabitacion: 0
+    });
 
-    // //Leer los datos del formulario
-    // const actualizarState = e => {
-    //     //Almacena lo que el usuario escribe en el state
-    //     guardarCliente({
-    //         ...cliente,
-    //         [e.target.name]: e.target.value
-    //     })
+    //Leer los datos del formulario
+    const actualizarReservacion = e => {
+        //Almacena lo que el usuario escribe en el state
+        setReservacion({
+            ...reservacion,
+            [e.name]: e.value
+        })
 
-    // }
+    }
     const [cantidadDePersonas, setCantidadDePersonas] = useState(0);
     const [checkIn, setCheckIn] = useState(new Date());
     const [checkOut, setCheckOut] = useState(new Date());
@@ -33,13 +34,15 @@ export const FacturaProvider = ({ children }) => {
         Object.keys(clienteReservacion).length === 0 ? setSeleccionDeCliente(false) : setSeleccionDeCliente(true);
         Object.keys(habitacionReservacion).length === 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
 
-        console.log(cantidadDePersonas, seleccionDeCliente);
-        console.log(checkIn);
-        console.log(checkOut);
-        console.log(clienteReservacion);
+        // console.log(cantidadDePersonas, seleccionDeCliente);
+        // console.log(checkIn);
+        // console.log(checkOut);
+        // console.log(clienteReservacion);
+        // console.log(habitacionReservacion);
+        console.log(reservacion);
 
     },
-        [clienteReservacion, cantidadDePersonas, checkIn, checkOut]);
+        [reservacion]);
     return (
         <FacturaContext.Provider value={{
             cantidadDePersonas,
@@ -51,7 +54,8 @@ export const FacturaProvider = ({ children }) => {
             clienteReservacion, setClienteReservacion,
             habitacionReservacion, setHabitacionReservacion,
             seleccionDeCliente, setSeleccionDeCliente,
-            seleccionDeHabitacion, setSeleccionDeHabitacion
+            seleccionDeHabitacion, setSeleccionDeHabitacion,
+            actualizarReservacion
         }}>
             {children}
         </FacturaContext.Provider>

@@ -15,7 +15,7 @@ import { FacturaContext } from '../../context/FacturaContext';
 function SeleccionarCliente() {
 
 
-    const { clienteReservacion, setClienteReservacion, seleccionDeCliente, setSeleccionDeCliente } = useContext(FacturaContext);
+    const { clienteReservacion, setClienteReservacion, seleccionDeCliente, setSeleccionDeCliente, actualizarReservacion } = useContext(FacturaContext);
 
 
     // useEffect(() => {
@@ -65,7 +65,7 @@ function SeleccionarCliente() {
                                 </TableCell>
                                 <TableCell align="left">{row.cedula}</TableCell>
                                 <TableCell align="left">
-                                    <Button variant="outlined" size="small" onClick={() => setClienteReservacion(row)}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => actualizarReservacion({ name: 'idCliente', value: row.id })}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

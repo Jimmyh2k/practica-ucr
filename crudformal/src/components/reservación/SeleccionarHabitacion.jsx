@@ -13,7 +13,7 @@ import { FacturaContext } from '../../context/FacturaContext';
 function SeleccionarHabitacion() {
 
     // const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
-    const { habitacionReservacion, setHabitacionReservacion, seleccionDeHabitacion } = useContext(FacturaContext);
+    const { habitacionReservacion, setHabitacionReservacion, seleccionDeHabitacion, actualizarReservacion } = useContext(FacturaContext);
 
     // useEffect(() => {
     //     Object.keys(habitacionReservacion).length == 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
@@ -66,7 +66,7 @@ function SeleccionarHabitacion() {
                                 <TableCell align="left">{row.camasDobles}</TableCell>
                                 <TableCell align="left">{row.camasIndividuales}</TableCell>
                                 <TableCell align="right">
-                                    <Button variant="outlined" size="small" onClick={() => setHabitacionReservacion(row)}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => (actualizarReservacion({ name: 'idHabitacion', value: row.id }))}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
