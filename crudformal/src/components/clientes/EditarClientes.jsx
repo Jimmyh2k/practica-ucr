@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import { useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
-import { Typography, Box, TextField, Button } from '@mui/material'
+import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
 function EditarCliente(props) {
 
@@ -87,80 +87,6 @@ function EditarCliente(props) {
 
 
     return (
-        // <Fragment>
-        //     <h2>Editar Cliente</h2>
-
-        //     <form onSubmit={actualizarCliente}>
-
-        //         <legend>Llena todos los campos</legend>
-
-        //         <div className="campo">
-        //             <label>Nombre:</label>
-        //             <input
-        //                 type="text"
-        //                 placeholder="Ingrese el nombre"
-        //                 name="nombre"
-        //                 onChange={actualizarState}
-        //                 value={cliente.nombre}
-        //             />
-        //         </div>
-
-        //         <div className="campo">
-        //             <label>Correo Electronico:</label>
-        //             <input
-        //                 type="email"
-        //                 placeholder="Ingrese el correo"
-        //                 name="correo"
-        //                 onChange={actualizarState}
-        //                 value={cliente.correo}
-        //             />
-        //         </div>
-
-        //         <div className="campo">
-        //             <label>Numero Telefonico</label>
-        //             <input
-        //                 type="number"
-        //                 placeholder="Ingrese el telefono"
-        //                 name="numeroTelefonico"
-        //                 onChange={actualizarState}
-        //                 value={cliente.numeroTelefonico}
-        //             />
-        //         </div>
-
-        //         <div className="campo">
-        //             <label>Cédula:</label>
-        //             <input
-        //                 type="number"
-        //                 placeholder="Ingrese la Cédula"
-        //                 name="cedula"
-        //                 onChange={actualizarState}
-        //                 value={cliente.cedula}
-        //             />
-        //         </div>
-
-        //         <div className="campo">
-        //             <label>Tipo Cedula:</label>
-        //             <input
-        //                 type="text"
-        //                 placeholder="Ingrese el tipo cédula"
-        //                 name="tipoCedula"
-        //                 onChange={actualizarState}
-        //                 value={cliente.tipoCedula}
-        //             />
-        //         </div>
-
-        //         <div className="enviar">
-        //             <input
-        //                 type="submit"
-        //                 className="btn btn-azul"
-        //                 value="Guardar Cambios"
-        //                 disabled={ValidarCliente()}
-        //             />
-        //         </div>
-
-        //     </form>
-
-        // </Fragment >
         <Fragment>
             <Box sx={{
                 display: 'flex',
@@ -233,7 +159,7 @@ function EditarCliente(props) {
                             onChange={actualizarState}
                             value={cliente.cedula}
                         />
-                        <TextField
+                        {/* <TextField
                             margin="normal"
                             required
                             fullWidth
@@ -245,7 +171,23 @@ function EditarCliente(props) {
                             id="tipoCedula"
                             onChange={actualizarState}
                             value={cliente.tipoCedula}
-                        />
+                        /> */}
+                        <FormControl fullWidth margin="normal">
+                            <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
+                            <Select
+                                labelId="tipoCedula-label"
+                                id="tipoCedula"
+                                value={cliente.tipoCedula}
+                                label="Ingrese el tipo de cédula"
+                                name="tipoCedula"
+                                onChange={actualizarState}
+                            >
+                                <MenuItem value={'01'}>Cédula Física</MenuItem>
+                                <MenuItem value={'02'}>Cédula Jurídica</MenuItem>
+                                <MenuItem value={'03'}>DIMEX</MenuItem>
+                                <MenuItem value={'04'}>NITE</MenuItem>
+                            </Select>
+                        </FormControl>
                         <div className="enviar">
                             <Button
                                 type="submit"

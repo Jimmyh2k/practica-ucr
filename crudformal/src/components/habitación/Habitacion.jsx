@@ -43,17 +43,25 @@ function Habitacion(props) {
                 <Card sx={{}}>
                     <CardContent>
                         <Typography variant="h6" component="h3">
-                            {idHabitacion}
+                            Número de habitación: {numero}
                         </Typography>
                         <Typography variant="subtitle1" component="p" gutterBottom>
-                            {numero}
+                            Camas Individuales: {camasIndividuales}
                         </Typography>
                         <Typography variant="subtitle1" component="p" gutterBottom>
-                            {camasIndividuales}
+                            Camas dobles: {camasDobles}
                         </Typography>
                         <Typography variant="subtitle1" component="p" gutterBottom>
-                            {camasDobles}
+                            Precios recomendasos:
                         </Typography>
+                        <Box>
+                            <Typography variant="body2" component="p" gutterBottom>
+                                Nacionales {recomendacionPrecioNacional}
+                            </Typography>
+                            <Typography variant="body2" component="p" gutterBottom>
+                                Extraer {recomendacionPrecioExtranjero}
+                            </Typography>
+                        </Box>
                     </CardContent>
                     <CardActions>
                         <Button component={Link} to={`/habitacion/editar/${idHabitacion}`} size="small" sx={{ marginRight: 1 }}>
