@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -12,14 +12,7 @@ import { FacturaContext } from '../../context/FacturaContext';
 
 function SeleccionarHabitacion() {
 
-    // const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
-    const { seleccionDeHabitacion, reservacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
-
-    // useEffect(() => {
-    //     Object.keys(habitacionReservacion).length == 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
-
-
-    // }, [habitacionReservacion, seleccionDeHabitacion]);
+    const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
     const rows = [
         { id: 1, numero: 1, camasDobles: 1, camasIndividuales: 2 },

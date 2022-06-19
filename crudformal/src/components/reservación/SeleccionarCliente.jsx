@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useContext } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,13 +14,8 @@ import { FacturaContext } from '../../context/FacturaContext';
 function SeleccionarCliente() {
 
 
-    const { seleccionDeCliente, setSeleccionDeCliente, reservacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
+    const { seleccionDeCliente, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
-
-    // useEffect(() => {
-
-    //     console.log(clienteReservacion, seleccionDeCliente);
-    // }, [clienteReservacion, seleccionDeCliente]);
     const rows = [
         { id: 1, nombre: 'Jon Snow', cedula: 604560017 },
         { id: 2, nombre: 'Cersei Lannister', cedula: 123446789 },
