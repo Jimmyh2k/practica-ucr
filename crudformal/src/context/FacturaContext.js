@@ -10,52 +10,60 @@ export const FacturaProvider = ({ children }) => {
         checkOut: new Date(),
         comentarios: '',
         idCliente: 0,
-        idHabitacion: 0
+        idHabitacion: 0,
     });
+    const [dataForUI, setDataForUI] = useState({
+        datosDelCliente: {},
+        datosDeHabitacion: {}
+    })
 
     //Leer los datos del formulario
     const actualizarReservacion = e => {
         //Almacena lo que el usuario escribe en el state
+        if (e.dataForUI) {
+            setDataForUI({
+                ...dataForUI,
+                [e.dataForUI.name]: e.dataForUI.value
+            })
+        }
         setReservacion({
             ...reservacion,
             [e.name]: e.value
         })
 
     }
-    const [cantidadDePersonas, setCantidadDePersonas] = useState(0);
+
     const [checkIn, setCheckIn] = useState(new Date());
     const [checkOut, setCheckOut] = useState(new Date());
-    const [clienteReservacion, setClienteReservacion] = useState({});
-    const [habitacionReservacion, setHabitacionReservacion] = useState({});
-    const [seleccionDeCliente, setSeleccionDeCliente] = useState(false);
-    const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
-    const [datosLlenados, setDatosLlenados] = useState({});
-    useEffect(() => {
-        Object.keys(clienteReservacion).length === 0 ? setSeleccionDeCliente(false) : setSeleccionDeCliente(true);
-        Object.keys(habitacionReservacion).length === 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
 
-        // console.log(cantidadDePersonas, seleccionDeCliente);
-        // console.log(checkIn);
-        // console.log(checkOut);
-        // console.log(clienteReservacion);
-        // console.log(habitacionReservacion);
+
+    const [seleccionDeCliente, setSeleccionDeCliente] = useState(false);
+
+    const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
+    useEffect(() => {
+        if (Object.keys(dataForUI.datosDelCliente).length !== 0) setSeleccionDeCliente(true);
+        if (Object.keys(dataForUI.datosDeHabitacion).length !== 0) setSeleccionDeHabitacion(true);
+        // Object.keys(dataForUI.datosDeHabitacion).length === 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
+
+        console.log(seleccionDeCliente, seleccionDeHabitacion);
         console.log(reservacion);
+        console.log(dataForUI);
 
     },
-        [reservacion]);
+        [reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);
     return (
         <FacturaContext.Provider value={{
-            cantidadDePersonas,
-            setCantidadDePersonas,
+
             checkIn,
             setCheckIn,
             checkOut,
             setCheckOut,
-            clienteReservacion, setClienteReservacion,
-            habitacionReservacion, setHabitacionReservacion,
+
             seleccionDeCliente, setSeleccionDeCliente,
             seleccionDeHabitacion, setSeleccionDeHabitacion,
-            actualizarReservacion
+            reservacion,
+            actualizarReservacion,
+            dataForUI
         }}>
             {children}
         </FacturaContext.Provider>

@@ -10,8 +10,7 @@ import DatePicker from 'react-date-picker';
 
 function SeleccionarFechas() {
 
-    const [fechasCorrectas, setFechasCorrectas] = useState(true);
-    const { cantidadDePersonas, setCantidadDePersonas, checkIn, setCheckIn, checkOut, setCheckOut, actualizarReservacion } = useContext(FacturaContext);
+    const { checkIn, setCheckIn, checkOut, setCheckOut, actualizarReservacion } = useContext(FacturaContext);
     return (
         <Paper sx={{
             display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center', height: '100%'

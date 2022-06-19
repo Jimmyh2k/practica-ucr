@@ -13,7 +13,7 @@ import { FacturaContext } from '../../context/FacturaContext';
 function SeleccionarHabitacion() {
 
     // const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
-    const { habitacionReservacion, setHabitacionReservacion, seleccionDeHabitacion, actualizarReservacion } = useContext(FacturaContext);
+    const { seleccionDeHabitacion, reservacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
     // useEffect(() => {
     //     Object.keys(habitacionReservacion).length == 0 ? setSeleccionDeHabitacion(false) : setSeleccionDeHabitacion(true);
@@ -39,7 +39,7 @@ function SeleccionarHabitacion() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeHabitacion ? (
-                    <p>Habitación: {habitacionReservacion.numero}</p>
+                    <p>Habitación: {dataForUI.datosDeHabitacion.numero}</p>
                 ) : (
                     <p>Seleccione la habitación</p>
                 )}
@@ -66,7 +66,7 @@ function SeleccionarHabitacion() {
                                 <TableCell align="left">{row.camasDobles}</TableCell>
                                 <TableCell align="left">{row.camasIndividuales}</TableCell>
                                 <TableCell align="right">
-                                    <Button variant="outlined" size="small" onClick={() => (actualizarReservacion({ name: 'idHabitacion', value: row.id }))}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => (actualizarReservacion({ name: 'idHabitacion', value: row.id, dataForUI: { name: "datosDeHabitacion", value: row } }))}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

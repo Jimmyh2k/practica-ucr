@@ -15,7 +15,7 @@ import { FacturaContext } from '../../context/FacturaContext';
 function SeleccionarCliente() {
 
 
-    const { clienteReservacion, setClienteReservacion, seleccionDeCliente, setSeleccionDeCliente, actualizarReservacion } = useContext(FacturaContext);
+    const { seleccionDeCliente, setSeleccionDeCliente, reservacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
 
 
     // useEffect(() => {
@@ -40,7 +40,7 @@ function SeleccionarCliente() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeCliente ? (
-                    <p>Cliente: {clienteReservacion.nombre}</p>
+                    <p>Cliente: {dataForUI.datosDelCliente.nombre}</p>
                 ) : (
                     <p>Seleccione el cliente</p>
                 )}
@@ -65,7 +65,7 @@ function SeleccionarCliente() {
                                 </TableCell>
                                 <TableCell align="left">{row.cedula}</TableCell>
                                 <TableCell align="left">
-                                    <Button variant="outlined" size="small" onClick={() => actualizarReservacion({ name: 'idCliente', value: row.id })}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => actualizarReservacion({ name: 'idCliente', value: row.id, dataForUI: { name: "datosDelCliente", value: row } })}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
