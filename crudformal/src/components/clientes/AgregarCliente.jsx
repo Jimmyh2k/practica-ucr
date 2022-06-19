@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
-import { Typography, Box, TextField, Button } from '@mui/material'
+import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
 function AgregarCliente() {
 
@@ -14,7 +14,7 @@ function AgregarCliente() {
         correo: '',
         numeroTelefonico: '',
         cedula: '',
-        tipoCedula: ''
+        tipoCedula: '01'
     });
 
     //Leer los datos del formulario
@@ -170,8 +170,8 @@ function AgregarCliente() {
                         />
                     </div> */}
 
-                        <TextField
-                            margin="normal"
+                        {/* <TextField
+                            
                             required
                             fullWidth
 
@@ -180,8 +180,24 @@ function AgregarCliente() {
                             placeholder="Tipo Cedula"
                             type="text"
                             id="tipoCedula"
-                            onChange={actualizarState}
-                        />
+                            onChange={actualizarState} 
+                        />*/}
+                        <FormControl fullWidth margin="normal">
+                            <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
+                            <Select
+                                labelId="tipoCedula-label"
+                                id="tipoCedula"
+                                value={cliente.tipoCedula}
+                                label="Ingrese el tipo de cédula"
+                                name="tipoCedula"
+                                onChange={actualizarState}
+                            >
+                                <MenuItem value={'01'}>Cédula Física</MenuItem>
+                                <MenuItem value={'02'}>Cédula Jurídica</MenuItem>
+                                <MenuItem value={'03'}>DIMEX</MenuItem>
+                                <MenuItem value={'04'}>NITE</MenuItem>
+                            </Select>
+                        </FormControl>
 
                         {/* <div className="campo">
                         <label>Tipo Cedula:</label>
