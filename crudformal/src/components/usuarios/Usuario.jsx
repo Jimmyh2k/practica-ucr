@@ -68,7 +68,7 @@ function Usuario(props) {
                         </Box>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" sx={{ marginRight: 1 }}>
+                        <Button component={Link} to={`/usuario/editar/${idUsuario}`} size="small" sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
                         <Button size="small" onClick={() => eliminarUsuario(idUsuario)}>
@@ -98,7 +98,7 @@ function Usuario(props) {
             </TableCell>
             <TableCell align="right">
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                    <Button component={Link} to={`/usuario/editar/${idUsuario}`} variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
                         Editar
                     </Button>
                     <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarUsuario(idUsuario)}>

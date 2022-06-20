@@ -74,7 +74,7 @@ function Usuarios() {
                     Usuarios
                 </Typography>
 
-                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/usuarios/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/usuario/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                     Nuevo Usuario
                 </Button>
                 <Box sx={{ width: '100%' }}>
