@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom'
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 function Cliente(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
@@ -43,27 +47,37 @@ function Cliente(props) {
             <Grid item xs={6} >
                 <Card sx={{}}>
                     <CardContent>
-                        <Typography variant="h6" component="h3">
-                            {nombre}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {correo}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {numeroTelefonico}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {cedula}
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <PersonIcon />
+                            <Typography variant="h6" component="h3">
+                                {nombre}
+                            </Typography>
+                        </Box>
+
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+
+                            <EmailIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {correo}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <LocalPhoneIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {numeroTelefonico}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <CreditCardIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {cedula}
+                            </Typography>
+                        </Box>
                     </CardContent>
                     <CardActions>
                         <Button size="small" component={Link} to={`/clientes/editar/${idCliente}`} sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
-                        {/* <Link to={`/clientes/editar/${idCliente}`} className="btn btn-azul">
-                            <i className="fas fa-pen-alt"></i>
-                            Editar Cliente
-                        </Link> */}
                         <Button size="small" onClick={() => eliminarCliente(idCliente)}>
                             Eliminar
                         </Button>

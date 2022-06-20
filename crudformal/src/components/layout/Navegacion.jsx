@@ -152,7 +152,7 @@ const Navegacion = () => {
                                 component={Link} to={page.path}
                                 startIcon={page.icon}
                                 size="small"
-                                sx={{ my: 2, mx: 4, color: 'white' }}
+                                sx={{ my: 2, mx: 2, color: 'white' }}
                             >
                                 {page.name}
                             </Button>
