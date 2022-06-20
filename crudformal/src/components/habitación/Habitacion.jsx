@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom'
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import SingleBedIcon from '@mui/icons-material/SingleBed';
+import BedIcon from '@mui/icons-material/Bed';
+import NumbersIcon from '@mui/icons-material/Numbers';
 
 function Habitacion(props) {
     //console.log(props.habitacion.nombre); //Consultar por manera mas sencilla de usar props
@@ -42,24 +45,36 @@ function Habitacion(props) {
             <Grid item xs={6} >
                 <Card sx={{}}>
                     <CardContent>
-                        <Typography variant="h6" component="h3">
-                            Número de habitación: {numero}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            Camas Individuales: {camasIndividuales}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            Camas dobles: {camasDobles}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            Precios recomendasos:
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <NumbersIcon />
+                            <Typography variant="h6" component="h3">
+                                Número de habitación: {numero}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <SingleBedIcon />
+                            <Typography variant="subtitle1" component="p" gutterBottom>
+                                Camas Individuales: {camasIndividuales}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <BedIcon />
+                            <Typography variant="subtitle1" component="p" gutterBottom>
+                                Camas dobles: {camasDobles}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+
+                            <Typography variant="subtitle1" component="p" gutterBottom>
+                                Precios recomendasos:
+                            </Typography>
+                        </Box>
                         <Box>
                             <Typography variant="body2" component="p" gutterBottom>
                                 Nacionales {recomendacionPrecioNacional}
                             </Typography>
                             <Typography variant="body2" component="p" gutterBottom>
-                                Extraer {recomendacionPrecioExtranjero}
+                                Extranjeros {recomendacionPrecioExtranjero}
                             </Typography>
                         </Box>
                     </CardContent>
