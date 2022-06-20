@@ -18,11 +18,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import LogoIcon from '../../imagenes/logo';
+import GroupsIcon from '@mui/icons-material/Groups';
+import HotelIcon from '@mui/icons-material/Hotel';
+import NightShelterIcon from '@mui/icons-material/NightShelter';
+import { ListItemIcon, ListItemText } from '@mui/material'
 
 const pages = [
-    { path: '/', name: 'Clientes', key: 'clientes' },
-    { path: '/habitacion', name: 'Habitación', key: 'habitacion' },
-    { path: '/reservacion', name: 'Reservación', key: 'reservacion' }
+    { path: '/', name: 'Clientes', key: 'clientes', icon: <GroupsIcon fontSize="small" /> },
+    { path: '/habitacion', name: 'Habitación', key: 'habitacion', icon: <HotelIcon fontSize="small" /> },
+    { path: '/reservacion', name: 'Reservación', key: 'reservacion', icon: <NightShelterIcon fontSize="small" /> }
 ]
 //         <Link to={"/"} className="clientes">Clientes</Link>
 //         <Link to="/habitacion" className="productos">Habitación</Link>
@@ -38,22 +42,16 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const Navegacion = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-    // const [anchorElUser, setAnchorElUser] = React.useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    // const handleOpenUserMenu = (event) => {
-    //     setAnchorElUser(event.currentTarget);
-    // };
+
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    // const handleCloseUserMenu = () => {
-    //     setAnchorElUser(null);
-    // };
 
     const [auth, guardarAuth] = useContext(CRMContext);
 
@@ -64,15 +62,13 @@ const Navegacion = () => {
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
                         <LogoIcon width='50' height='50' />
                     </Box>
                     <Typography
                         variant="h6"
                         noWrap
-                        component="a"
-                        href="/"
+                        component={Link} to={'/'}
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -116,22 +112,25 @@ const Navegacion = () => {
                         >
                             {pages.map((page) => (
                                 <MenuItem key={page.key} onClick={handleCloseNavMenu} component={Link} to={page.path}>
-                                    <Typography textAlign="center">{page.name}</Typography>
+                                    <Typography textAlign="center"></Typography>
+                                    <ListItemIcon>
+                                        {page.icon}
+                                    </ListItemIcon>
+                                    <ListItemText>{page.name}</ListItemText>
                                 </MenuItem>
                             ))}
 
 
                         </Menu>
                     </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+
                     <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-                        <LogoIcon width='50' height='50' />
+                        <LogoIcon width='40' height='40' />
                     </Box>
                     <Typography
                         variant="h5"
                         noWrap
-                        component="a"
-                        href=""
+                        component={Link} to={'/'}
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -151,55 +150,18 @@ const Navegacion = () => {
                                 key={page.key}
                                 onClick={handleCloseNavMenu}
                                 component={Link} to={page.path}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
+                                startIcon={page.icon}
+                                size="small"
+                                sx={{ my: 2, mx: 4, color: 'white' }}
                             >
                                 {page.name}
                             </Button>
                         ))}
                     </Box>
                     <Header />
-                    {/* <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Open settings">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                            </IconButton>
-                        </Tooltip>
-                        <Menu
-                            sx={{ mt: '45px' }}
-                            id="menu-appbar"
-                            anchorEl={anchorElUser}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={Boolean(anchorElUser)}
-                            onClose={handleCloseUserMenu}
-                        >
-                            {settings.map((setting) => (
-                                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center">{setting}</Typography>
-                                </MenuItem>
-                            ))}
-                        </Menu>
-                    </Box> */}
                 </Toolbar>
             </Container>
         </AppBar >
-
-        // <aside className="sidebar col-3">
-        //     <h2>Administración</h2>
-        //     <nav className="navegacion">
-        // <Link to={"/"} className="clientes">Clientes</Link>
-        // <Link to="/habitacion" className="productos">Habitación</Link>
-        // <Link to="/reservacion" className="pedidos">Reservación</Link>
-        //     </nav>
-        // </aside>
-
     );
 }
 export default Navegacion;
