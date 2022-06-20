@@ -64,7 +64,6 @@ function Habitacion(props) {
                             </Typography>
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
-
                             <Typography variant="subtitle1" component="p" gutterBottom>
                                 Precios recomendasos:
                             </Typography>
@@ -94,33 +93,42 @@ function Habitacion(props) {
 
         <TableRow sx={{ display: {} }} key={idHabitacion}>
             <TableCell>
-                {idHabitacion}
-            </TableCell>
-            <TableCell align="right">
-                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    <NumbersIcon />
                     {numero}
-                </Typography>
+                </Box>
             </TableCell>
             <TableCell align="right">
-                {camasIndividuales}
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    <SingleBedIcon />
+                    {camasIndividuales}
+                </Box>
             </TableCell>
             <TableCell align="right">
-                {camasDobles}
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    <BedIcon />
+                    {camasDobles}
+                </Box>
             </TableCell>
             <TableCell align="right">
-                {recomendacionPrecioNacional}
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    {recomendacionPrecioNacional}
+                </Box>
             </TableCell>
             <TableCell align="right">
-                {recomendacionPrecioExtranjero}
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                    {recomendacionPrecioExtranjero}
+                </Box>
             </TableCell>
             <TableCell align="right">
-                <Button variant="outlined" component={Link} to={`/habitacion/editar/${idHabitacion}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-                    Editar
-                </Button>
-                <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarHabitacion(idHabitacion)}>
-                    Eliminar
-                </Button>
-
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button variant="outlined" component={Link} to={`/habitacion/editar/${idHabitacion}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                        Editar
+                    </Button>
+                    <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarHabitacion(idHabitacion)}>
+                        Eliminar
+                    </Button>
+                </Box>
             </TableCell>
         </TableRow >
 

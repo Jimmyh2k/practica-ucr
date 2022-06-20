@@ -53,9 +53,7 @@ function Cliente(props) {
                                 {nombre}
                             </Typography>
                         </Box>
-
                         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
-
                             <EmailIcon />
                             <Typography variant="body" component="p" gutterBottom>
                                 {correo}
@@ -106,17 +104,14 @@ function Cliente(props) {
             </TableCell>
 
             <TableCell align="right">
-                <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-                    Editar
-                </Button>
-                {/* <Link to={`/clientes/editar/${idCliente}`} className="btn btn-azul">
-                    <i className="fas fa-pen-alt"></i>
-                    Editar Cliente
-                </Link> */}
-                <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
-                    Eliminar
-                </Button>
-
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                        Editar
+                    </Button>
+                    <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
+                        Eliminar
+                    </Button>
+                </Box>
             </TableCell>
         </TableRow >
 
