@@ -1,9 +1,10 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
-import {useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
+import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
-function EditarUsuario(){
+function EditarUsuario() {
 
     const navigate = useNavigate();
 
@@ -12,65 +13,65 @@ function EditarUsuario(){
 
 
     //Se guarda primero el usuario en el useState
-    const[usuario,datosUsuario] = useState({
+    const [usuario, datosUsuario] = useState({
         nombre: '',
         correo: '',
         contrasena: '',
         rol: ''
     });
 
-        //Query a la api
-        const consultarApi = async () => {
-            const clienteConsulta = await clienteAxios.get(`/usuarios/${id}`);
-            console.log(clienteConsulta.data);
-            datosUsuario(clienteConsulta.data);
-        }
+    //Query a la api
+    const consultarApi = async () => {
+        const clienteConsulta = await clienteAxios.get(`/usuarios/${id}`);
+        console.log(clienteConsulta.data);
+        datosUsuario(clienteConsulta.data);
+    }
 
-        useEffect( () => {
-            consultarApi();
-        }, []);
+    useEffect(() => {
+        consultarApi();
+    }, []);
 
     //Leer los datos del formulario
     const actualizarState = e => {
-            //Almacena lo que el usuario escribe en el state
-            datosUsuario({
-                ...usuario,
-                [e.target.name] : e.target.value
-            })
+        //Almacena lo que el usuario escribe en el state
+        datosUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        })
 
     }
 
-        // Envia una petición por axios para actualizar el usuario
-        const actualizarUsuario = e => {
-            e.preventDefault();
-    
-            // enviar petición por axios
-            clienteAxios.put(`/usuarios/${usuario.idUsuario}`, usuario) 
-                .then(res => {
-                    // validar si hay errores de mongo 
-                    if(res.data.code === 11000) {
-                        Swal.fire({
-                            type: 'error',
-                            title: 'Hubo un error',
-                            text: 'Ese usuario ya esta registrado'
-                        })
-                    } else {
-                        Swal.fire(
-                            'Correcto',
-                            'Se actualizó Correctamente',
-                            'success'
-                        )
-                    }
-    
-                    // redireccionar
-                    navigate('/usuario');
-                })
-        }
+    // Envia una petición por axios para actualizar el usuario
+    const actualizarUsuario = e => {
+        e.preventDefault();
+
+        // enviar petición por axios
+        clienteAxios.put(`/usuarios/${usuario.idUsuario}`, usuario)
+            .then(res => {
+                // validar si hay errores de mongo 
+                if (res.data.code === 11000) {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Hubo un error',
+                        text: 'Ese usuario ya esta registrado'
+                    })
+                } else {
+                    Swal.fire(
+                        'Correcto',
+                        'Se actualizó Correctamente',
+                        'success'
+                    )
+                }
+
+                // redireccionar
+                navigate('/usuario');
+            })
+    }
 
     //validar el formulario
     const ValidarUsuario = () => {
         //Destructuring
-        const {_idUsuario, nombre, correo, contrasena,rol} = usuario;
+        const { _idUsuario, nombre, correo, contrasena, rol } = usuario;
 
         //Revisa que no haya campos vacíos
         let valido = !nombre.length || !correo.length || !contrasena.length || !rol.length;
@@ -80,68 +81,89 @@ function EditarUsuario(){
     }
 
 
-    return(
+    return (
         <Fragment>
-            <h2>Editar Usuario</h2>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        alignItems: 'left',
+                        backgroundColor: '#ffffff',
+                        padding: '30px',
+                        margin: { xs: '10px' },
+                        borderRadius: '10px',
+                        width: { xs: '90%', md: '70%', lg: '50%' },
+                    }}
+                >
+                    <Typography variant="h4" component="h1">Editar Cliente</Typography>
+                    <form onSubmit={actualizarUsuario}>
+                        <Typography variant="h6" component="h2">Llena todos los campos</Typography>
 
-            <form onSubmit={actualizarUsuario}>
-
-                <legend>Llena todos los campos</legend>
-
-                <div className="campo">
-                    <label>Nombre:</label>
-                    <input 
-                        type="text" 
-                        placeholder="Ingrese el nombre" 
-                        name="nombre"
-                        onChange={actualizarState}
-                        value= {usuario.nombre}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Correo Electronico:</label>
-                    <input 
-                        type="email" 
-                        placeholder="Ingrese el correo" 
-                        name="correo"
-                        onChange={actualizarState}
-                        value= {usuario.correo}
-                    />
-                </div>
-            
-                <div className="campo">
-                    <label>Nueva contrasena:</label>
-                    <input 
-                        type="password" 
-                        placeholder="Ingrese la contraseña" 
-                        name="contrasena"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Rol:</label>
-                    <input 
-                        type="text" 
-                        placeholder="Ingrese el rol" 
-                        name="rol"
-                        onChange={actualizarState}
-                        value= {usuario.rol}
-                    />
-                </div>
-
-                <div className="enviar">
-                        <input 
-                            type="submit" 
-                            className="btn btn-azul" 
-                            value="Guardar Cambios"
-                            disabled={ValidarUsuario()}
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="nombre"
+                            label="Nombre"
+                            placeholder="Ingrese el nombre"
+                            type="text"
+                            id="nombre"
+                            onChange={actualizarState}
+                            value={usuario.nombre}
                         />
-                </div>
-
-            </form>
-
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="correo"
+                            label="Correo Electronico"
+                            placeholder="Ingrese el correo"
+                            type="email"
+                            id="correo"
+                            onChange={actualizarState}
+                            value={usuario.correo}
+                        />
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="contrasena"
+                            label="Nueva contraseña:"
+                            placeholder="Ingrese la contraseña"
+                            type="password"
+                            id="contrasena"
+                            onChange={actualizarState}
+                        />
+                        <FormControl fullWidth margin="normal">
+                            <InputLabel id="rol-label">Rol:</InputLabel>
+                            <Select
+                                labelId="rol-label"
+                                id="rol"
+                                value={usuario.rol}
+                                label="Rol:"
+                                name="rol"
+                                onChange={actualizarState}
+                            >
+                                <MenuItem value={'Administrativo'}>Administrativo</MenuItem>
+                                <MenuItem value={'Recepcionista'}>Recepcionista</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <Button
+                            type="submit"
+                            disabled={ValidarUsuario()}
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Agregar Cliente
+                        </Button>
+                    </form>
+                </Box>
+            </Box>
         </Fragment>
     )
 }

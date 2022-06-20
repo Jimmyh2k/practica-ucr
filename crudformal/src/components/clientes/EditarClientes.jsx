@@ -159,19 +159,6 @@ function EditarCliente(props) {
                             onChange={actualizarState}
                             value={cliente.cedula}
                         />
-                        {/* <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-
-                            name="tipoCedula"
-                            label="Ingrese el tipo cédula"
-                            placeholder="Tipo Cedula"
-                            type="text"
-                            id="tipoCedula"
-                            onChange={actualizarState}
-                            value={cliente.tipoCedula}
-                        /> */}
                         <FormControl fullWidth margin="normal">
                             <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
                             <Select
@@ -188,17 +175,14 @@ function EditarCliente(props) {
                                 <MenuItem value={'04'}>NITE</MenuItem>
                             </Select>
                         </FormControl>
-                        <div className="enviar">
-                            <Button
-                                type="submit"
-                                disabled={ValidarCliente()}
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Agregar Cliente
-                            </Button>
-                        </div>
-
+                        <Button
+                            type="submit"
+                            disabled={ValidarCliente()}
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Agregar Cliente
+                        </Button>
                     </form>
                 </Box>
             </Box>
