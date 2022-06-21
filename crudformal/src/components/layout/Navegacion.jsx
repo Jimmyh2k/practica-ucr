@@ -17,6 +17,7 @@ const Navegacion = ()=>{
                 <Link to={"/"} className="clientes">Clientes</Link>
                 <Link to="/habitacion" className="productos">Habitación</Link>
                 <Link to="/reservacion" className="pedidos">Reservación</Link>
+                <Link to="/factura" className="pedidos">Factura</Link>
             </nav>
         </aside>
 

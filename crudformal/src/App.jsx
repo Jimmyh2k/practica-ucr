@@ -19,6 +19,8 @@ import AgregarReservacion from "./components/reservación/AgregarReservacion";
 import Usuarios from "./components/usuarios/Usuarios";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 import EditarUsuario from "./components/usuarios/EditarUsuario";
+import Facturas from "./components/factura/Facturas";
+import AgregarFactura from "./components/factura/AgregarFactura";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider} from "./context/CRMContext";
@@ -61,6 +63,10 @@ function App() {
               <Route exact path="/usuario/nuevo" element={<AgregarUsuario/>}/>
 
               <Route exact path="/usuario/editar/:id" element={<EditarUsuario/>}/>
+
+              <Route exact path="/factura" element={<Facturas/>}/>
+
+              <Route exact path="/factura/nuevo" element={<AgregarFactura/>}/>
               
             </Routes>
           </main>
