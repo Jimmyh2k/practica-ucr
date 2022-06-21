@@ -1,35 +1,48 @@
-import React, { useContext } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Box, Button } from '@mui/material';
+import React, { useContext, useState, useEffect } from "react";
+import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { FacturaContext } from '../../context/FacturaContext';
-
-
+import clienteAxios from '../../config/axios';
+import { CRMContext } from '../../context/CRMContext';
+import { useNavigate } from 'react-router-dom';
 
 function SeleccionarCliente() {
 
 
-    const { seleccionDeCliente, actualizarReservacion, dataForUI } = useContext(FacturaContext);
+    const { seleccionDeCliente, actualizarReservacion, dataForUI, clientes, setClientes } = useContext(FacturaContext);
+    const navigate = useNavigate();
 
-    const rows = [
-        { id: 0, nombre: 'Jon Snow', cedula: 604560017 },
-        { id: 2, nombre: 'Cersei Lannister', cedula: 123446789 },
-        { id: 3, nombre: 'Jaime Lannister', cedula: 123455789 },
-        { id: 4, nombre: 'Arya Stark', cedula: 123456779 },
-        { id: 5, nombre: 'Daenerys Targaryen', cedula: 123456789 },
-        { id: 6, nombre: '- Melisandre', cedula: 123459789 },
-        { id: 7, nombre: 'Ferrara Clifford', cedula: 103456789 },
-        { id: 8, nombre: 'Rossini Frances', cedula: 122456789 },
-        { id: 9, nombre: 'Harvey Roxie', cedula: 123458789 },
-        { id: 10, nombre: 'Harvey Roxie', cedula: 123358789 },
-        { id: 11, nombre: 'Harvey Roxie', cedula: 129458789 },
-        { id: 12, nombre: 'Harvey Roxie', cedula: 12358789 },
-    ];
+    // utilizar valores del context
+    const [auth, guardarAuth] = useContext(CRMContext);
+
+    // use effect es similar a componentdidmount y willmount
+    useEffect(() => {
+
+        if (auth.token !== '') {
+            // Query a la API
+            const consultarAPI = async () => {
+                try {
+                    const clientesConsulta = await clienteAxios.get('/clientes', {
+                        headers: {
+                            Authorization: `Bearer ${auth.token}`
+                        }
+                    });
+
+                    // colocar el resultado en el state
+                    setClientes(clientesConsulta.data);
+
+                } catch (error) {
+                    console.error(error);
+                    // Error con authorizacion
+                    if (error.response.status === 500) {
+                        navigate('/reservacion');
+                    }
+                }
+            }
+            consultarAPI();
+        } else {
+            navigate('/reservacion');
+        }
+    }, []);
     return (
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
@@ -49,17 +62,17 @@ function SeleccionarCliente() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {clientes.map((cliente) => (
                             <TableRow
-                                key={row.cedula}
+                                key={cliente.cedula}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.nombre}
+                                    {cliente.nombre}
                                 </TableCell>
-                                <TableCell align="left">{row.cedula}</TableCell>
+                                <TableCell align="left">{cliente.cedula}</TableCell>
                                 <TableCell align="left">
-                                    <Button variant="outlined" size="small" onClick={() => actualizarReservacion({ name: 'idCliente', value: row.id, dataForUI: { name: "datosDelCliente", value: row } })}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => actualizarReservacion({ name: 'idCliente', value: cliente.idCliente, dataForUI: { name: "datosDelCliente", value: cliente } })}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}

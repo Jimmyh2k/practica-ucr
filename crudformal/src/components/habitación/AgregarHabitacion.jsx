@@ -1,58 +1,58 @@
-import React, {Fragment, useState} from "react";
+import React, { Fragment, useState } from "react";
 import clienteAxios from "../../config/axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
 import { Typography, Box, TextField, Button } from '@mui/material'
 
-function AgregarHabitacion(){
+function AgregarHabitacion() {
 
     const navigate = useNavigate();
 
     //Se guarda primero la habitacion en el useState
-    const[habitacion,guardarHabitacion] = useState({
+    const [habitacion, guardarHabitacion] = useState({
         numero: '',
         camasIndividuales: '',
         camasDobles: '',
-        recomendacionPrecioNacional:'',
-        recomendacionPrecioExtranjero:''
+        recomendacionPrecioNacional: '',
+        recomendacionPrecioExtranjero: ''
     });
 
     //Leer los datos del formulario
     const actualizarState = e => {
-            //Almacena lo que el usuario escribe en el state
-            guardarHabitacion({
-                ...habitacion,
-                [e.target.name] : e.target.value
-            })
+        //Almacena lo que el usuario escribe en el state
+        guardarHabitacion({
+            ...habitacion,
+            [e.target.name]: e.target.value
+        })
 
     }
 
     //validar el formulario
     const ValidarHabitacion = () => {
         //Destructuring
-        const {numero, camasIndividuales, camasDobles,recomendacionPrecioNacional, recomendacionPrecioExtranjero} = habitacion;
+        const { numero, camasIndividuales, camasDobles, recomendacionPrecioNacional, recomendacionPrecioExtranjero } = habitacion;
 
         //Revisa que no haya campos vacíos
         let valido = !numero.length || !camasIndividuales.length || !camasDobles.length || !recomendacionPrecioNacional.length
-         || !recomendacionPrecioExtranjero.length;
+            || !recomendacionPrecioExtranjero.length;
 
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
     }
 
     //Añade en la rest api una habitacion nueva
-    const GuardarHabitacion = e =>{
+    const GuardarHabitacion = e => {
         e.preventDefault();
 
         clienteAxios.post('/habitacion', habitacion)
-        .then(res => {
-            console.log(res)
-            Swal.fire(
-                'Se agregó la habitacion',
-                res.data.mensaje,
-                'success'
-            )
-        });
+            .then(res => {
+                console.log(res)
+                Swal.fire(
+                    'Se agregó la habitacion',
+                    res.data.mensaje,
+                    'success'
+                )
+            });
         navigate('/habitacion');
     }
 
@@ -91,7 +91,7 @@ function AgregarHabitacion(){
                             id="numero"
                             onChange={actualizarState}
                         />
-                      <TextField
+                        <TextField
                             margin="normal"
                             required
                             fullWidth
@@ -136,17 +136,14 @@ function AgregarHabitacion(){
                             id="recomendacionPrecioExtranjero"
                             onChange={actualizarState}
                         />
-                        <div className="enviar">
-                            <Button
-                                type="submit"
-                                disabled={ValidarHabitacion()}
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Agregar Cliente
-                            </Button>
-                        </div>
-
+                        <Button
+                            type="submit"
+                            disabled={ValidarHabitacion()}
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Agregar Habitación
+                        </Button>
                     </form>
                 </Box>
             </Box>
@@ -154,8 +151,8 @@ function AgregarHabitacion(){
         </Fragment>
     )
 
-    
-    
+
+
 }
 
 export default AgregarHabitacion;
