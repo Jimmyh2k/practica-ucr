@@ -22,6 +22,20 @@ function Clientes() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+    var XML = "HHHHHH";
+
+    
+    const downloadTxtFile = () => {
+        const element = document.createElement("a");
+        const file = new Blob([XML], {
+          type: "text/plain"
+        });
+        element.href = URL.createObjectURL(file);
+        element.download = "Factura.txt";
+        document.body.appendChild(element);
+        element.click();
+      };
+
 
     const navigate = useNavigate();
 
@@ -30,9 +44,11 @@ function Clientes() {
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
+    
 
     // use effect es similar a componentdidmount y willmount
     useEffect(() => {
+
 
         if (auth.token !== '') {
             // Query a la API
@@ -90,38 +106,20 @@ function Clientes() {
                     Nuevo Cliente
                 </Button>
                 <Box sx={{ width: '100%' }}>
-                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
+                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}  >
+                  
+
                         {clientes.map(cliente => (
+                            
                             <Cliente
 
                                 key={cliente.idCliente}
                                 cliente={cliente}
                                 card={true}
+                                
                             />
                         ))}
-                        {/* <Grid item xs={6} >
-                            <Card sx={{}}>
-                                <CardContent>
-                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                                        Word of the Day
-                                    </Typography>
-                                    <Typography variant="h5" component="div">
-                                        benevolent
-                                    </Typography>
-                                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                        adjective
-                                    </Typography>
-                                    <Typography variant="body2">
-                                        well meaning and kindly.
-                                        <br />
-                                        {'"a benevolent smile"'}
-                                    </Typography>
-                                </CardContent>
-                                <CardActions>
-                                    <Button size="small">Learn More</Button>
-                                </CardActions>
-                            </Card>
-                        </Grid> */}
+                       
                     </Grid>
 
                 </Box>
@@ -171,58 +169,26 @@ function Clientes() {
                                         Cédula
                                     </Typography>
                                 </TableCell>
-                                <TableCell align="right">
-
-                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody sx={{ width: "100%" }}>
                             {clientes.map(cliente => (
-                                <Cliente
-
-                                    key={cliente.idCliente}
-                                    cliente={cliente}
-                                />
+                                <Cliente 
+                                key={cliente.idCliente} 
+                                cliente={cliente} />
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Box>
 
+            <Button variant ="contained" color="primary" onClick={downloadTxtFile}> Descargar XML </Button>
 
+            
 
         </Fragment >
 
 
-
-
-
-
-
-
-        // <Fragment>
-        //     {/* <h2>Clientes</h2> */}
-        //     <Typography variant="h5" gutterBottom component="h2">
-        //         Clientes
-        //     </Typography>
-
-        //     {/* <Link to={"/clientes/nuevo"} className="btn btn-verde nvo-cliente">
-        //         <i className="fas fa-plus-circle"></i>
-        //         Nuevo Cliente
-        //     </Link> */}
-        //     <Button variant="contained" component={Link} to="/clientes/nuevo" color="secondary">
-        //         <AddCircleOutlinedIcon />
-        //         Nuevo Cliente
-        //     </Button>
-        //     <List className="listado-clientes">
-        //         {clientes.map(cliente => (
-        //             <Cliente
-        //                 key={cliente.idCliente}
-        //                 cliente={cliente}
-        //             />
-        //         ))}
-        //     </List>
-        // </Fragment>
     )
 }
 
