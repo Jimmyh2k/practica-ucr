@@ -50,7 +50,7 @@ function AgregarUsuario(){
                 'success'
             )
         });
-        navigate('/usuario');
+        navigate('/');
     }
 
 

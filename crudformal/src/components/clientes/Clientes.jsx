@@ -119,7 +119,7 @@ function Clientes() {
                                 
                             />
                         ))}
-                       
+
                     </Grid>
 
                 </Box>
@@ -141,7 +141,7 @@ function Clientes() {
                 >
                     Clientes
                 </Typography>
-                
+
                 <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/clientes/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                     Nuevo Cliente
                 </Button>

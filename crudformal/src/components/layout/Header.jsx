@@ -2,7 +2,10 @@ import React, { useContext } from 'react';
 
 import { CRMContext } from '../../context/CRMContext';
 import { useNavigate } from 'react-router-dom';
-import { Tooltip, Avatar, Box, IconButton, Menu, Typography, MenuItem } from '@mui/material';
+import { Tooltip, Avatar, Box, IconButton, Menu, Typography, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const Header = (props) => {
 
     const navigate = useNavigate();
@@ -40,7 +43,7 @@ const Header = (props) => {
         <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <AccountCircleIcon sx={{ color: 'white' }} fontSize="large" />
                 </IconButton>
             </Tooltip>
             <Menu
@@ -59,57 +62,20 @@ const Header = (props) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                {/* {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                ))} */}
                 <MenuItem key={1} onClick={VerUsuarios}>
-                    <Typography textAlign="center">
-                        <i className="far fa-times-circle"></i>
-                        Ver Usuarios
-                    </Typography>
+                    <ListItemIcon>
+                        <PeopleAltIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Ver Usuarios</ListItemText>
                 </MenuItem>
                 <MenuItem key={2} onClick={cerrarSesion}>
-                    <Typography textAlign="center">
-                        <i className="far fa-times-circle"></i>
-                        Cerrar Sesión
-                    </Typography>
+                    <ListItemIcon>
+                        <ExitToAppIcon fontSize="small" />
+                    </ListItemIcon>
+                    <ListItemText>Cerrar Sesión</ListItemText>
                 </MenuItem>
             </Menu>
         </Box >
-        // <header className="barra">
-        //     <div className="contenedor">
-        //         <div className="contenido-barra">
-        //             <h1>Administrador de Clientes</h1>
-
-
-        //             {auth.auth ? (
-        //                 <button
-        //                     type="button"
-        //                     className="btn btn-rojo"
-        //                     onClick={cerrarSesion}
-        //                 >
-        //                     <i className="far fa-times-circle"></i>
-        //                     Cerrar Sesión
-        //                 </button>
-        //             ) : null}
-        //             {auth.auth ? (
-        //                 <button
-        //                     type="button"
-        //                     className="btn btn-rojo"
-        //                     onClick={VerUsuarios}
-        //                 >
-        //                     <i className="far fa-times-circle"></i>
-        //                     Ver Usuarios
-        //                 </button>
-        //             ) : null}
-
-
-        //         </div>
-
-        //     </div>
-        // </header>
     )
 
 }

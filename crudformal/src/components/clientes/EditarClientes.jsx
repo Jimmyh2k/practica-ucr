@@ -1,60 +1,88 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
 import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
-function AgregarCliente() {
+function EditarCliente(props) {
 
     const navigate = useNavigate();
 
+    //Obtener el id
+    const { id } = useParams();
+
+
     //Se guarda primero el cliente en el useState
-    const [cliente, guardarCliente] = useState({
+    const [cliente, datosCliente] = useState({
         nombre: '',
         correo: '',
-        numeroTelefonico: '',
+        numeroTelefonico: 0,
         cedula: '',
-        tipoCedula: '01'
+        tipoCedula: ''
     });
+
+    //Query a la api
+    const consultarApi = async () => {
+        const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
+        console.log(clienteConsulta.data);
+        datosCliente(clienteConsulta.data);
+    }
+
+    useEffect(() => {
+        consultarApi();
+    }, []);
 
     //Leer los datos del formulario
     const actualizarState = e => {
         //Almacena lo que el usuario escribe en el state
-        guardarCliente({
+        datosCliente({
             ...cliente,
             [e.target.name]: e.target.value
         })
 
     }
 
+    // Envia una petición por axios para actualizar el cliente
+    const actualizarCliente = e => {
+        e.preventDefault();
+
+        // enviar petición por axios
+        clienteAxios.put(`/clientes/${cliente.idCliente}`, cliente)
+            .then(res => {
+                // validar si hay errores de mongo 
+                if (res.data.code === 11000) {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Hubo un error',
+                        text: 'Ese cliente ya esta registrado'
+                    })
+                } else {
+                    Swal.fire(
+                        'Correcto',
+                        'Se actualizó Correctamente',
+                        'success'
+                    )
+                }
+
+                // redireccionar
+                navigate('/');
+            })
+    }
+
     //validar el formulario
     const ValidarCliente = () => {
         //Destructuring
         const { _idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = cliente;
+        console.log(cliente.numeroTelefonico);
+        console.log(numeroTelefonico);
+        console.log("--------");
 
         //Revisa que no haya campos vacíos
-        let valido = !nombre.length || !correo.length || !numeroTelefonico.length || !cedula.length
+        let valido = !nombre.length || !correo.length || !numeroTelefonico.toString().length || !cedula.length
             || !tipoCedula.length;
 
-        console.log(valido);
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
-    }
-
-    //Añade en la rest api un cliente nuevo
-    const GuardarCliente = e => {
-        e.preventDefault();
-
-        clienteAxios.post('/clientes', cliente)
-            .then(res => {
-                console.log(res)
-                Swal.fire(
-                    'Se agregó el cliente',
-                    res.data.mensaje,
-                    'success'
-                )
-            });
-        navigate('/');
     }
 
 
@@ -78,110 +106,59 @@ function AgregarCliente() {
                         width: { xs: '90%', md: '70%', lg: '50%' },
                     }}
                 >
-                    <Typography variant="h4" component="h1">Agregar Cliente</Typography>
-                    <form onSubmit={GuardarCliente}>
+                    <Typography variant="h4" component="h1">Editar Cliente</Typography>
+                    <form onSubmit={actualizarCliente}>
                         <Typography variant="h6" component="h2">Llena todos los campos</Typography>
 
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="nombre"
                             label="Nombre"
                             placeholder="Ingrese el nombre"
                             type="text"
                             id="nombre"
                             onChange={actualizarState}
+                            value={cliente.nombre}
                         />
-                        {/* <div className="campo">
-                        <label>Nombre:</label>
-                        <input
-                            type="text"
-                            placeholder="Ingrese el nombre"
-                            name="nombre"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
 
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="correo"
                             label="Correo Electronico"
                             placeholder="Ingrese el correo"
                             type="email"
                             id="correo"
                             onChange={actualizarState}
+                            value={cliente.correo}
                         />
-                        {/* <div className="campo">
-                        <label>Correo Electronico:</label>
-                        <input
-                            type="email"
-                            placeholder="Ingrese el correo"
-                            name="correo"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="numeroTelefonico"
                             label="Numero Telefonico"
                             placeholder="Ingrese el telefono"
                             type="number"
                             id="numeroTelefonico"
                             onChange={actualizarState}
+                            value={cliente.numeroTelefonico}
                         />
-                        {/* <div className="campo">
-                        <label>Numero Telefonico</label>
-                        <input
-                            type="number"
-                            placeholder="Ingrese el telefono"
-                            name="numeroTelefonico"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="cedula"
                             label="Cédula"
                             placeholder="Ingrese la Cédula"
                             type="number"
                             id="cedula"
                             onChange={actualizarState}
+                            value={cliente.cedula}
                         />
-                        {/* <div className="campo">
-                        <label>Cédula:</label>
-                        <input
-                            type="number"
-                            placeholder="Ingrese la Cédula"
-                            name="cedula"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
-                        {/* <TextField
-                            
-                            required
-                            fullWidth
-
-                            name="tipoCedula"
-                            label="Ingrese el tipo cédula"
-                            placeholder="Tipo Cedula"
-                            type="text"
-                            id="tipoCedula"
-                            onChange={actualizarState} 
-                        />*/}
                         <FormControl fullWidth margin="normal">
                             <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
                             <Select
@@ -198,34 +175,14 @@ function AgregarCliente() {
                                 <MenuItem value={'04'}>NITE</MenuItem>
                             </Select>
                         </FormControl>
-
-                        {/* <div className="campo">
-                        <label>Tipo Cedula:</label>
-                        <input
-                            type="text"
-                            placeholder="Ingrese el tipo cédula"
-                            name="tipoCedula"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
-                        <div className="enviar">
-                            {/* <input
+                        <Button
                             type="submit"
-                            className="btn btn-azul"
-                            value="Agregar Cliente"
-                            
-                        /> */}
-                            <Button
-                                type="submit"
-                                disabled={ValidarCliente()}
-                                variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Agregar Cliente
-                            </Button>
-                        </div>
-
+                            disabled={ValidarCliente()}
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Agregar Cliente
+                        </Button>
                     </form>
                 </Box>
             </Box>
@@ -234,4 +191,4 @@ function AgregarCliente() {
     )
 }
 
-export default AgregarCliente;
+export default EditarCliente;

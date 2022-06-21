@@ -42,6 +42,9 @@ module.exports = function() {
     //Elimina una habitación
     router.delete('/habitacion/:idHabitacion', habitacionController.eliminarHabitacion);
 
+    //Actualzar una habitación
+    router.put('/habitacion/:idHabitacion', habitacionController.actualizarHabitacion);
+
     //------------------- Rutas de Reservación -------------------
 
     //Agrega nuevos Reservaciones via POST

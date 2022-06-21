@@ -1,19 +1,20 @@
 import React from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
+import { Link } from 'react-router-dom'
+
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import PersonIcon from '@mui/icons-material/Person';
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 
 function Cliente(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = props.cliente;
-    var XML = correo;
-    var clientes =[];
-       
-
-
 
     //Eliminar Cliente
     const eliminarCliente = (id) => {
@@ -46,21 +47,33 @@ function Cliente(props) {
             <Grid item xs={6} >
                 <Card sx={{}}>
                     <CardContent>
-                        <Typography variant="h6" component="h3">
-                            {nombre}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {correo}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {numeroTelefonico}
-                        </Typography>
-                        <Typography variant="subtitle1" component="p" gutterBottom>
-                            {cedula}
-                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <PersonIcon />
+                            <Typography variant="h6" component="h3">
+                                {nombre}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <EmailIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {correo}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <LocalPhoneIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {numeroTelefonico}
+                            </Typography>
+                        </Box>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '0.5rem' }}>
+                            <CreditCardIcon />
+                            <Typography variant="body" component="p" gutterBottom>
+                                {cedula}
+                            </Typography>
+                        </Box>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" sx={{ marginRight: 1 }}>
+                        <Button size="small" component={Link} to={`/clientes/editar/${idCliente}`} sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
                         <Button size="small" onClick={() => eliminarCliente(idCliente)}>
@@ -71,15 +84,12 @@ function Cliente(props) {
             </Grid>
         )
     }
-    // {!props.products.length
-    //     ? <p>No product matched the criteria</p> 
-    //     : props.products.map(product => {... whatever your code is })
-    //   }
+
     return (
 
         <TableRow sx={{ display: {} }} key={cedula}>
             <TableCell>
-                {nombre + " GG"}
+                {nombre}
             </TableCell>
             <TableCell align="right">
                 <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
@@ -92,37 +102,16 @@ function Cliente(props) {
             <TableCell align="right">
                 {cedula}
             </TableCell>
-            {/* <TableCell align="right">
-                {tipoCedula}
-            </TableCell> */}
+
             <TableCell align="right">
-                <Button variant="outlined" startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
-
-                    Editar
-
-                </Button>
-                <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
-                    Eliminar
-                </Button>
-                <Button variant ="contained" color="primary" onClick={() => { console.log(XML + "1")}}>
-             descargar XML
-            </Button>
-
-
-                {/* 
-                <a href="#" className="btn btn-azul">
-                    
-                    
-                </a>
-
-                <button
-                    type="button"
-                    className="btn btn-rojo btn-eliminar"
-                    onClick={() => eliminarCliente(idCliente)}>
-
-                    
-                    
-                </button> */}
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                        Editar
+                    </Button>
+                    <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarCliente(idCliente)}>
+                        Eliminar
+                    </Button>
+                </Box>
             </TableCell>
         </TableRow >
 

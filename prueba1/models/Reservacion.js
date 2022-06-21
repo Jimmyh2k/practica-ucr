@@ -24,7 +24,10 @@ const Reservacion = db.define('reservacion',{
     },
 
     idCliente: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
+    },
+    idHabitacion: {
+        type: Sequelize.INTEGER
     }
 });
 

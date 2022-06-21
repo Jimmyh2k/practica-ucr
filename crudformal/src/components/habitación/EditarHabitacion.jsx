@@ -1,30 +1,71 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Swal from "sweetalert2";
 import { Typography, Box, TextField, Button } from '@mui/material'
 
-function AgregarHabitacion() {
+function EditarHabitacion(props) {
 
     const navigate = useNavigate();
 
-    //Se guarda primero la habitacion en el useState
-    const [habitacion, guardarHabitacion] = useState({
-        numero: '',
-        camasIndividuales: '',
-        camasDobles: '',
-        recomendacionPrecioNacional: '',
-        recomendacionPrecioExtranjero: ''
+    //Obtener el id
+    const { id } = useParams();
+
+
+    //Se guarda primero la hab en el useState
+    const [habitacion, datosHabitacion] = useState({
+        numero: 0,
+        camasIndividuales: 0,
+        camasDobles: 0,
+        recomendacionPrecioNacional: 0,
+        recomendacionPrecioExtranjero: 0
     });
+
+    //Query a la api
+    const consultarApi = async () => {
+        const habitacionConsulta = await clienteAxios.get(`/habitacion/${id}`);
+        datosHabitacion(habitacionConsulta.data);
+    }
+
+    useEffect(() => {
+        consultarApi();
+    }, []);
 
     //Leer los datos del formulario
     const actualizarState = e => {
         //Almacena lo que el usuario escribe en el state
-        guardarHabitacion({
+        datosHabitacion({
             ...habitacion,
             [e.target.name]: e.target.value
         })
 
+    }
+
+    // Envia una petición por axios para actualizar el la habitacion
+    const actualizarHabitacion = e => {
+        e.preventDefault();
+
+        // enviar petición por axios
+        clienteAxios.put(`/habitacion/${habitacion.idHabitacion}`, habitacion)
+            .then(res => {
+                // validar si hay errores de mongo 
+                if (res.data.code === 11000) {
+                    Swal.fire({
+                        type: 'error',
+                        title: 'Hubo un error',
+                        text: 'Esta habitacion ya esta registrado'
+                    })
+                } else {
+                    Swal.fire(
+                        'Correcto',
+                        'Se actualizó Correctamente',
+                        'success'
+                    )
+                }
+
+                // redireccionar
+                navigate('/habitacion');
+            })
     }
 
     //validar el formulario
@@ -33,28 +74,14 @@ function AgregarHabitacion() {
         const { numero, camasIndividuales, camasDobles, recomendacionPrecioNacional, recomendacionPrecioExtranjero } = habitacion;
 
         //Revisa que no haya campos vacíos
-        let valido = !numero.length || !camasIndividuales.length || !camasDobles.length || !recomendacionPrecioNacional.length
-            || !recomendacionPrecioExtranjero.length;
+        let valido = !numero.toString().length || !camasIndividuales.toString().length ||
+            !camasDobles.toString().length || !recomendacionPrecioNacional.toString().length
+            || !recomendacionPrecioExtranjero.toString().length;
 
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
     }
 
-    //Añade en la rest api una habitacion nueva
-    const GuardarHabitacion = e => {
-        e.preventDefault();
-
-        clienteAxios.post('/habitacion', habitacion)
-            .then(res => {
-                console.log(res)
-                Swal.fire(
-                    'Se agregó la habitacion',
-                    res.data.mensaje,
-                    'success'
-                )
-            });
-        navigate('/habitacion');
-    }
 
     return (
         <Fragment>
@@ -77,9 +104,8 @@ function AgregarHabitacion() {
                     }}
                 >
                     <Typography variant="h4" component="h1">Agregar Habitacion</Typography>
-                    <form onSubmit={GuardarHabitacion}>
+                    <form onSubmit={actualizarHabitacion}>
                         <Typography variant="h6" component="h2">Llena todos los campos</Typography>
-
                         <TextField
                             margin="normal"
                             required
@@ -89,6 +115,7 @@ function AgregarHabitacion() {
                             placeholder="Ingrese la cantidad"
                             type="text"
                             id="numero"
+                            value={habitacion.numero}
                             onChange={actualizarState}
                         />
                         <TextField
@@ -100,9 +127,9 @@ function AgregarHabitacion() {
                             placeholder="Ingrese la cantidad"
                             type="number"
                             id="camasIndividuales"
+                            value={habitacion.camasIndividuales}
                             onChange={actualizarState}
                         />
-
                         <TextField
                             margin="normal"
                             required
@@ -113,6 +140,8 @@ function AgregarHabitacion() {
                             type="number"
                             id="camasDobles"
                             onChange={actualizarState}
+                            value={habitacion.camasDobles}
+
                         />
                         <TextField
                             margin="normal"
@@ -124,6 +153,8 @@ function AgregarHabitacion() {
                             type="number"
                             id="recomendacionPrecioNacional"
                             onChange={actualizarState}
+                            value={habitacion.recomendacionPrecioNacional}
+
                         />
                         <TextField
                             margin="normal"
@@ -135,6 +166,7 @@ function AgregarHabitacion() {
                             type="number"
                             id="recomendacionPrecioExtranjero"
                             onChange={actualizarState}
+                            value={habitacion.recomendacionPrecioExtranjero}
                         />
                         <Button
                             type="submit"
@@ -142,7 +174,7 @@ function AgregarHabitacion() {
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            Agregar Habitación
+                            Guardar Cambios
                         </Button>
                     </form>
                 </Box>
@@ -150,9 +182,6 @@ function AgregarHabitacion() {
 
         </Fragment>
     )
-
-
-
 }
 
-export default AgregarHabitacion;
+export default EditarHabitacion;
