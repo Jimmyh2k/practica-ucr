@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function SeleccionarCliente() {
 
 
-    const { seleccionDeCliente, actualizarReservacion, dataForUI, clientes, setClientes } = useContext(FacturaContext);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(FacturaContext);
     const navigate = useNavigate();
 
     // utilizar valores del context
@@ -47,7 +47,8 @@ function SeleccionarCliente() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeCliente ? (
-                    <p>Cliente: {dataForUI.datosDelCliente.nombre}</p>
+                    <p>Cliente: {(clientes.find(cliente => cliente.idCliente === reservacion.idCliente).nombre)}</p>
+                    //array1.find(element => element > 10);
                 ) : (
                     <p>Seleccione el cliente</p>
                 )}
