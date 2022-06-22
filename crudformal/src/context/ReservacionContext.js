@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-export const FacturaContext = createContext();
+export const ReservacionContext = createContext();
 
-export const FacturaProvider = ({ children }) => {
+export const ReservacionProvider = ({ children }) => {
 
     const [reservacion, setReservacion] = useState({
         cantidadDePersonas: 0,
@@ -60,7 +60,7 @@ export const FacturaProvider = ({ children }) => {
     },
         [clientes, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);
     return (
-        <FacturaContext.Provider value={{
+        <ReservacionContext.Provider value={{
 
             checkIn,
             setCheckIn,
@@ -77,6 +77,6 @@ export const FacturaProvider = ({ children }) => {
             setClientes
         }}>
             {children}
-        </FacturaContext.Provider>
+        </ReservacionContext.Provider>
     )
 }

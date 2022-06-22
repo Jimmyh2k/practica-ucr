@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FacturaContext } from '../../context/FacturaContext';
+import { ReservacionContext } from '../../context/ReservacionContext';
 import { Paper, Typography, Button, TextField } from '@mui/material'
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const AceptarNuevaReservacion = () => {
 
-    const { checkIn, checkOut, reservacion, dataForUI, actualizarReservacion } = useContext(FacturaContext);
+    const { checkIn, checkOut, reservacion, dataForUI, actualizarReservacion } = useContext(ReservacionContext);
     const navigate = useNavigate();
     const GuardarReservacion = e => {
         e.preventDefault();

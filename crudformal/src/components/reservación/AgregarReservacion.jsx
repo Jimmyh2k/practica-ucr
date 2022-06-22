@@ -3,7 +3,7 @@ import { Button, Typography, Box, Step, Stepper, StepButton, Paper } from '@mui/
 import SeleccionarFechas from "./SeleccionarFechas";
 import SeleccionarCliente from "./SeleccionarCliente";
 import SeleccionarHabitacion from "./SeleccionarHabitacion";
-import { FacturaProvider } from '../../context/FacturaContext';
+import { ReservacionProvider } from '../../context/ReservacionContext';
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
@@ -63,7 +63,7 @@ function AgregarReservacion() {
     };
     return (
         <Fragment>
-            <FacturaProvider>
+            <ReservacionProvider>
                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
                     <Box sx={{ width: { xs: '95%', sm: '70%', md: '50%' }, pt: 10 }}>
                         <Stepper nonLinear activeStep={activeStep}>
@@ -134,7 +134,7 @@ function AgregarReservacion() {
                         </div>
                     </Box>
                 </Box>
-            </FacturaProvider>
+            </ReservacionProvider>
         </Fragment>
 
         // import React, {Fragment, useState} from "react";
