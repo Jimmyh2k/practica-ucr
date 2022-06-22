@@ -10,11 +10,8 @@ function SeleccionarCliente() {
 
     const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(FacturaContext);
     const navigate = useNavigate();
-
-    // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
 
-    // use effect es similar a componentdidmount y willmount
     useEffect(() => {
 
         if (auth.token !== '') {
@@ -47,8 +44,11 @@ function SeleccionarCliente() {
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
                 {seleccionDeCliente ? (
-                    <p>Cliente: {(clientes.find(cliente => cliente.idCliente === reservacion.idCliente).nombre)}</p>
-                    //array1.find(element => element > 10);
+                    <p>Cliente: {
+                        (clientes.find(
+                            cliente => cliente.idCliente === reservacion.idCliente).nombre
+                        )}
+                    </p>
                 ) : (
                     <p>Seleccione el cliente</p>
                 )}
