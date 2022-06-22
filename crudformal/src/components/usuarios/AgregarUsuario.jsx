@@ -2,6 +2,7 @@ import React, {Fragment, useState} from "react";
 import clienteAxios from "../../config/axios";
 import {useNavigate} from 'react-router-dom'
 import Swal from "sweetalert2";
+import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
 function AgregarUsuario(){
 
@@ -53,64 +54,112 @@ function AgregarUsuario(){
         navigate('/');
     }
 
-
-    return(
+    return (
         <Fragment>
-            <h2>Agregar Usuario</h2>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        alignItems: 'left',
+                        backgroundColor: '#ffffff',
+                        padding: '30px',
+                        margin: { xs: '10px' },
+                        borderRadius: '10px',
+                        width: { xs: '90%', md: '70%', lg: '50%' },
+                    }}
+                >
+                    <Typography variant="h4" component="h1">Agregar Usuario</Typography>
+                    <form onSubmit={GuardarUsuario}>
+                        <Typography variant="h6" component="h2">Llena todos los campos</Typography>
 
-            <form onSubmit={GuardarUsuario}>
-                <legend>Llena todos los campos</legend>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
 
-                <div className="campo">
-                    <label>Nombre:</label>
-                    <input 
-                        type="text" 
-                        placeholder="Ingrese el nombre" 
-                        name="nombre"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Correo Electronico:</label>
-                    <input 
-                        type="email" 
-                        placeholder="Ingrese el correo" 
-                        name="correo"
-                        onChange={actualizarState}
-                    />
-                </div>
-            
-                <div className="campo">
-                    <label>Contraseña: </label>
-                    <input 
-                        type="password" 
-                        placeholder="Ingrese la contraseña" 
-                        name="contrasena"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="campo">
-                    <label>Rol: </label>
-                    <input 
-                        type="text" 
-                        placeholder="Ingrese el rol" 
-                        name="rol"
-                        onChange={actualizarState}
-                    />
-                </div>
-
-                <div className="enviar">
-                        <input 
-                            type="submit" 
-                            className="btn btn-azul" 
-                            value="Agregar Usuario"
-                            disabled={ValidarUsuario()}
+                            name="nombre"
+                            label="Nombre"
+                            placeholder="Ingrese el nombre"
+                            type="text"
+                            id="nombre"
+                            onChange={actualizarState}
                         />
-                </div>
+                    
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
 
-            </form>
+                            name="correo"
+                            label="Correo Electronico"
+                            placeholder="Ingrese el correo"
+                            type="email"
+                            id="correo"
+                            onChange={actualizarState}
+                        />
+                   
+
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="contrasena"
+                            label="Contrasena"
+                            placeholder="Ingrese la contraseña"
+                            type="password  "
+                            id="contrasena"
+                            onChange={actualizarState}
+                        />
+                     
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+
+                            name="cedula"
+                            label="Cédula"
+                            placeholder="Ingrese la Cédula"
+                            type="number"
+                            id="cedula"
+                            onChange={actualizarState}
+                        />
+                        <FormControl fullWidth margin="normal">
+                            <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
+                            <Select
+                                labelId="tipoCedula-label"
+                                id="tipoCedula"
+                                value={usuario.tipoCedula}
+                                label="Ingrese el tipo de cédula"
+                                name="rol"
+                                onChange={actualizarState}
+                            >
+                                <MenuItem value={'01'}>Admin</MenuItem>
+                                <MenuItem value={'02'}>Ventas Jurídica</MenuItem>
+                                <MenuItem value={'03'}>DIMEX</MenuItem>
+                                <MenuItem value={'04'}>NITE</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <div className="enviar">
+                            <Button
+                                type="submit"
+                                disabled={ValidarUsuario()}
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                            >
+                                Agregar usuario
+                            </Button>
+                        </div>
+
+                    </form>
+                </Box>
+            </Box>
 
         </Fragment>
     )
