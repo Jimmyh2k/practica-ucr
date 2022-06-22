@@ -22,6 +22,8 @@ import Usuarios from "./components/usuarios/Usuarios";
 import { CssBaseline } from "@mui/material";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
 import EditarUsuario from "./components/usuarios/EditarUsuario";
+import Facturas from "./components/factura/Facturas";
+import AgregarFactura from "./components/factura/AgregarFactura";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider } from "./context/CRMContext";
@@ -59,8 +61,6 @@ function App() {
 
                 <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
 
-                <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
-
                 <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
 
                 <Route exact path="/iniciar-sesion" element={<Login />} />
@@ -70,16 +70,18 @@ function App() {
                 <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
 
                 <Route exact path="/usuario" element={<Usuarios />} />
-              </Routes >
-            </main >
-          </div >
 
+                <Route exact path="/factura" element={<Facturas />} />
 
+                <Route exact path="/factura/nuevo" element={<AgregarFactura />} />
 
+              </Routes>
 
-        </CRMProvider >
-      </div >
-    </Router >
+            </main>
+          </div>
+        </CRMProvider>
+      </div>
+    </Router>
   );
 }
 

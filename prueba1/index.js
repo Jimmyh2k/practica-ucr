@@ -8,12 +8,14 @@ const cors = require('cors');
 const Reservacion = require('./models/Reservacion');
 const Clientes = require('./models/Clientes');
 const Habitacion = require('./models/Habitacion');
+const Factura = require('./models/Factura');
 
 //Importa el modelo para crear las tablas por default
 require('./models/Clientes');
 require('./models/Habitacion');
 require('./models/Usuarios');
 require('./models/Reservacion');
+require('./models/Factura');
 
  //Asosiaciones
   Clientes.hasOne(Reservacion,{foreignKey: "idCliente"});
@@ -21,6 +23,9 @@ require('./models/Reservacion');
 
   Habitacion.hasOne(Reservacion,{foreignKey: "idHabitacion"});
   Reservacion.belongsTo(Habitacion,{foreignKey: "idHabitacion"});
+
+  Reservacion.hasOne(Factura,{foreignKey: "idReservacion"});
+  Factura.belongsTo(Reservacion,{foreignKey: "idReservacion"});
 
 db.sync()  //.authenticate sirve solo para conectar, .sync sirve para crear las tablas
     .then(() => console.log('Conectado al servidor'))

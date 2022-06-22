@@ -4,6 +4,7 @@ const clienteController = require('../controllers/clienteController');
 const habitacionController = require('../controllers/habitacionController');
 const reservacionController = require('../controllers/reservacionController');
 const usuariosController = require('../controllers/usuariosController');
+const facturaController = require('../controllers/facturaController');
 const auth = require('../middleware/auth');
 
 
@@ -69,14 +70,23 @@ module.exports = function() {
     //Mostrar los usuarios via GET
     router.get('/usuarios',auth, usuariosController.mostrarUsuarios);
 
-    //Muestra un cliente por id (buscar)
+    //Muestra un usuario por id (buscar)
     router.get('/usuarios/:idUsuario', usuariosController.buscarUsuario);
 
-    //Actualzar Cliente
+    //Actualzar usuario
     router.put('/usuarios/:idUsuario', usuariosController.actualizarUsuario);
 
-    //elimina un cliente
+    //elimina un usuario
     router.delete('/usuarios/:idUsuario', usuariosController.eliminarUsuario);
+
+
+    //------------------ Rutas de Factura -----------------------
+
+    //Agrega nuevos Reservaciones via POST
+    router.post('/factura', facturaController.agregarFacturas);
+
+    //Mostrar las Reservaciones via GET
+    router.get('/factura', facturaController.mostrarFacturas);
 
 
     return router;
