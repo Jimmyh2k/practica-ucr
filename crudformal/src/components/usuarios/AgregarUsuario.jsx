@@ -1,35 +1,35 @@
-import React, {Fragment, useState} from "react";
+import React, { Fragment, useState } from "react";
 import clienteAxios from "../../config/axios";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
 import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
-function AgregarUsuario(){
+function AgregarUsuario() {
 
     const navigate = useNavigate();
 
     //Se guarda primero el usuario en el useState
-    const[usuario,guardarUsuario] = useState({
+    const [usuario, guardarUsuario] = useState({
         nombre: '',
         correo: '',
-        contrasena:'',
+        contrasena: '',
         rol: ''
     });
 
     //Leer los datos del formulario
     const actualizarState = e => {
-            //Almacena lo que el usuario escribe en el state
-            guardarUsuario({
-                ...usuario,
-                [e.target.name] : e.target.value
-            })
+        //Almacena lo que el usuario escribe en el state
+        guardarUsuario({
+            ...usuario,
+            [e.target.name]: e.target.value
+        })
 
     }
 
     //validar el formulario
     const ValidarUsuario = () => {
         //Destructuring
-        const {_idUsuario, nombre, correo, contrasena,rol} = usuario;
+        const { _idUsuario, nombre, correo, contrasena, rol } = usuario;
 
         //Revisa que no haya campos vacíos
         let valido = !nombre.length || !correo.length || !contrasena.length || !rol.length;
@@ -39,19 +39,19 @@ function AgregarUsuario(){
     }
 
     //Añade en la rest api un usuario nuevo
-    const GuardarUsuario = e =>{
+    const GuardarUsuario = e => {
         e.preventDefault();
 
         clienteAxios.post('/crear-cuenta', usuario)
-        .then(res => {
-            console.log(res)
-            Swal.fire(
-                'Se agregó el usuario',
-                res.data.mensaje,
-                'success'
-            )
-        });
-        navigate('/');
+            .then(res => {
+                console.log(res)
+                Swal.fire(
+                    'Se agregó el usuario',
+                    res.data.mensaje,
+                    'success'
+                )
+            });
+        navigate('/usuario');
     }
 
     return (
@@ -90,7 +90,7 @@ function AgregarUsuario(){
                             id="nombre"
                             onChange={actualizarState}
                         />
-                    
+
                         <TextField
                             margin="normal"
                             required
@@ -103,26 +103,24 @@ function AgregarUsuario(){
                             id="correo"
                             onChange={actualizarState}
                         />
-                   
+
 
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="contrasena"
-                            label="Contrasena"
+                            label="Contraseña"
                             placeholder="Ingrese la contraseña"
-                            type="password  "
+                            type="password"
                             id="contrasena"
                             onChange={actualizarState}
                         />
-                     
+
                         <TextField
                             margin="normal"
                             required
                             fullWidth
-
                             name="cedula"
                             label="Cédula"
                             placeholder="Ingrese la Cédula"
@@ -140,10 +138,8 @@ function AgregarUsuario(){
                                 name="rol"
                                 onChange={actualizarState}
                             >
-                                <MenuItem value={'01'}>Admin</MenuItem>
-                                <MenuItem value={'02'}>Ventas Jurídica</MenuItem>
-                                <MenuItem value={'03'}>DIMEX</MenuItem>
-                                <MenuItem value={'04'}>NITE</MenuItem>
+                                <MenuItem value={'Administrativo'}>Administrativo</MenuItem>
+                                <MenuItem value={'Recepcionista'}>Recepcionista</MenuItem>
                             </Select>
                         </FormControl>
                         <div className="enviar">
