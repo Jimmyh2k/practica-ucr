@@ -27,6 +27,8 @@ import AgregarFactura from "./components/factura/AgregarFactura";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider } from "./context/CRMContext";
+import { ReservacionProvider } from './context/ReservacionContext';
+
 
 function App() {
 
@@ -39,46 +41,50 @@ function App() {
       <CssBaseline />
       <div className="App">
         <CRMProvider value={[auth, guardarAuth]}>
-          {/* <Header></Header> */}
-          <div className="grid contenedor contenido-principal">
-            <Navegacion></Navegacion>
+          <ReservacionProvider>
 
-            <main className="caja-contenido col-9">
-              <Routes>
-                <Route exact path="/" element={<Clientes />} />
+            {/* <Header></Header> */}
+            <div className="grid contenedor contenido-principal">
+              <Navegacion></Navegacion>
 
-                <Route exact path="/clientes/editar/:id" element={<EditarCliente />} />
+              <main className="caja-contenido col-9">
+                <Routes>
+                  <Route exact path="/" element={<Clientes />} />
 
-                <Route exact path="/habitacion" element={<Habitaciones />} />
+                  <Route exact path="/clientes/editar/:id" element={<EditarCliente />} />
 
-                <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
+                  <Route exact path="/habitacion" element={<Habitaciones />} />
 
-                <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion />} />
+                  <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
 
-                {/* <Route exact path="/Reservacion" element={<Reservaciones />} /> */}
+                  <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion />} />
 
-                <Route exact path="/reservacion" element={<Reservaciones />} />
+                  {/* <Route exact path="/Reservacion" element={<Reservaciones />} /> */}
 
-                <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
+                  <Route exact path="/reservacion" element={<Reservaciones />} />
 
-                <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
+                  <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
 
-                <Route exact path="/iniciar-sesion" element={<Login />} />
+                  <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
 
-                <Route exact path="/usuario/nuevo" element={<AgregarUsuario />} />
+                  <Route exact path="/iniciar-sesion" element={<Login />} />
 
-                <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
+                  <Route exact path="/usuario/nuevo" element={<AgregarUsuario />} />
 
-                <Route exact path="/usuario" element={<Usuarios />} />
+                  <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
 
-                <Route exact path="/factura" element={<Facturas />} />
+                  <Route exact path="/usuario" element={<Usuarios />} />
 
-                <Route exact path="/factura/nuevo" element={<AgregarFactura />} />
+                  <Route exact path="/factura" element={<Facturas />} />
 
-              </Routes>
+                  <Route exact path="/factura/nuevo" element={<AgregarFactura />} />
 
-            </main>
-          </div>
+                </Routes>
+
+              </main>
+            </div>
+          </ReservacionProvider>
+
         </CRMProvider>
       </div>
     </Router>

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-
+import { ReservacionContext } from '../../context/ReservacionContext';
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
 import { styled } from '@mui/material/styles';
@@ -24,27 +24,28 @@ function Clientes() {
     }));
     var XML = "HHHHHH";
 
-    
+
     const downloadTxtFile = () => {
         const element = document.createElement("a");
         const file = new Blob([XML], {
-          type: "text/plain"
+            type: "text/plain"
         });
         element.href = URL.createObjectURL(file);
         element.download = "Factura.txt";
         document.body.appendChild(element);
         element.click();
-      };
+    };
 
 
     const navigate = useNavigate();
 
     //Trabajar con useState
-    const [clientes, guardarclientes] = useState([]);
+    // const [clientes, guardarclientes] = useState([]);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(ReservacionContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
-    
+
 
     // use effect es similar a componentdidmount y willmount
     useEffect(() => {
@@ -61,7 +62,7 @@ function Clientes() {
                     });
 
                     // colocar el resultado en el state
-                    guardarclientes(clientesConsulta.data);
+                    setClientes(clientesConsulta.data);
 
                 } catch (error) {
                     // Error con authorizacion
@@ -107,16 +108,16 @@ function Clientes() {
                 </Button>
                 <Box sx={{ width: '100%' }}>
                     <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}  >
-                  
+
 
                         {clientes.map(cliente => (
-                            
+
                             <Cliente
 
                                 key={cliente.idCliente}
                                 cliente={cliente}
                                 card={true}
-                                
+
                             />
                         ))}
 
@@ -173,18 +174,17 @@ function Clientes() {
                         </TableHead>
                         <TableBody sx={{ width: "100%" }}>
                             {clientes.map(cliente => (
-                                <Cliente 
-                                key={cliente.idCliente} 
-                                cliente={cliente} />
+                                <Cliente
+                                    key={cliente.idCliente}
+                                    cliente={cliente} />
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Box>
 
-            <Button variant ="contained" color="primary" onClick={downloadTxtFile}> Descargar XML </Button>
+            <Button variant="contained" color="primary" onClick={downloadTxtFile}> Descargar XML </Button>
 
-            
 
         </Fragment >
 

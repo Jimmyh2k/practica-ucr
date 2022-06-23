@@ -55,7 +55,7 @@ export const ReservacionProvider = ({ children }) => {
     useEffect(() => {
         if (reservacion.idCliente !== 0) setSeleccionDeCliente(true);
         if (Object.keys(dataForUI.datosDeHabitacion).length !== 0) setSeleccionDeHabitacion(true);
-        console.log(reservacion);
+        console.log("Clientes: ", clientes);
 
     },
         [clientes, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);
