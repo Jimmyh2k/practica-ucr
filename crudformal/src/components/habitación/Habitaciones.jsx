@@ -1,19 +1,38 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment, useContext } from "react";
 import clienteAxios from '../../config/axios';
 import Habitacion from "./Habitacion";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Typography, Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import { CRMContext } from '../../context/CRMContext';
+import { DataContext } from '../../context/DataContext';
 
 
 function Habitaciones() {
 
     //Trabajar con useState
-    const [habitaciones, guardarhabitaciones] = useState([]);
+    // const [habitaciones, guardarhabitaciones] = useState([]);
+    const [auth, guardarAuth] = useContext(CRMContext);
+    const navigate = useNavigate();
+    const { habitaciones, setHabitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
     //query al api
     const consultarAPI = async () => {
-        const habitacionesConsulta = await clienteAxios.get('/habitacion');
-        guardarhabitaciones(habitacionesConsulta.data);
+        try {
+
+            const habitacionesConsulta = await clienteAxios.get('/habitacion', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            setHabitaciones(habitacionesConsulta.data);
+        }
+        catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
     }
 
     //use effect es similar a componentdidmount y willmount
@@ -21,7 +40,13 @@ function Habitaciones() {
         consultarAPI();
     }, []); //EL [habitaciones] permite refrescar si hay un cambio, el arreglo vacio evita la iteracion
 
-
+    if (estaBorrado.habitacionBorrada) {
+        consultarAPI();
+        setEstaBorrado({ habitacionBorrada: false });
+    }
+    if (!auth.auth) {
+        navigate('/iniciar-sesion'); //REVISAR
+    }
     return (
         <Fragment>
             {/*

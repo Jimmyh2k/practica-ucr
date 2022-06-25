@@ -15,13 +15,7 @@ import { styled } from '@mui/material/styles';
 
 
 function Clientes() {
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
+
     var XML = "HHHHHH";
 
 
@@ -41,7 +35,7 @@ function Clientes() {
 
     //Trabajar con useState
     // const [clientes, guardarclientes] = useState([]);
-    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(DataContext);
+    const { clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
