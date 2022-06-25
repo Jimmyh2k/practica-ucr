@@ -10,7 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
-import { ReservacionContext } from '../../context/ReservacionContext';
+import { DataContext } from '../../context/DataContext';
 
 
 function Cliente(props) {
@@ -18,7 +18,7 @@ function Cliente(props) {
     //Extraer los valores
     const { idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = props.cliente;
 
-    const { estaBorrado, setEstaBorrado } = useContext(ReservacionContext);
+    const { estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     //Eliminar Cliente
     const eliminarCliente = (id) => {

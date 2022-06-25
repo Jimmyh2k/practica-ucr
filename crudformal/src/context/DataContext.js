@@ -1,8 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react'
 
-export const ReservacionContext = createContext();
+export const DataContext = createContext();
 
-export const ReservacionProvider = ({ children }) => {
+export const DataProvider = ({ children }) => {
 
     const [reservacion, setReservacion] = useState({
         cantidadDePersonas: 0,
@@ -64,7 +64,7 @@ export const ReservacionProvider = ({ children }) => {
     },
         [clientes, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);
     return (
-        <ReservacionContext.Provider value={{
+        <DataContext.Provider value={{
 
             checkIn,
             setCheckIn,
@@ -82,6 +82,6 @@ export const ReservacionProvider = ({ children }) => {
             estaBorrado, setEstaBorrado
         }}>
             {children}
-        </ReservacionContext.Provider>
+        </DataContext.Provider>
     )
 }

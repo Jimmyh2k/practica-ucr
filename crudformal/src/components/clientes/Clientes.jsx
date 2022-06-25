@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-import { ReservacionContext } from '../../context/ReservacionContext';
+import { DataContext } from '../../context/DataContext';
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
 import { styled } from '@mui/material/styles';
@@ -41,7 +41,7 @@ function Clientes() {
 
     //Trabajar con useState
     // const [clientes, guardarclientes] = useState([]);
-    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(ReservacionContext);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);

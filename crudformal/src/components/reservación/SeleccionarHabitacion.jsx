@@ -7,12 +7,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button } from '@mui/material';
-import { ReservacionContext } from '../../context/ReservacionContext';
+import { DataContext } from '../../context/DataContext';
 
 
 function SeleccionarHabitacion() {
 
-    const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(ReservacionContext);
+    const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(DataContext);
 
     const rows = [
         { id: 1, numero: 1, camasDobles: 1, camasIndividuales: 2 },

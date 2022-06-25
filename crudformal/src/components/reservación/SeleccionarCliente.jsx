@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { ReservacionContext } from '../../context/ReservacionContext';
+import { DataContext } from '../../context/DataContext';
 import clienteAxios from '../../config/axios';
 import { CRMContext } from '../../context/CRMContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function SeleccionarCliente() {
 
 
-    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(ReservacionContext);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(DataContext);
     const navigate = useNavigate();
     const [auth, guardarAuth] = useContext(CRMContext);
 

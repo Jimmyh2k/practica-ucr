@@ -3,14 +3,14 @@ import Calendar from 'react-calendar';
 import { useContext } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import { Box, Typography, Paper, TextField } from '@mui/material';
-import { ReservacionContext } from '../../context/ReservacionContext';
+import { DataContext } from '../../context/DataContext';
 import DatePicker from 'react-date-picker';
 
 
 
 function SeleccionarFechas() {
 
-    const { checkIn, setCheckIn, checkOut, setCheckOut, reservacion, actualizarReservacion } = useContext(ReservacionContext);
+    const { checkIn, setCheckIn, checkOut, setCheckOut, reservacion, actualizarReservacion } = useContext(DataContext);
     return (
         <Paper sx={{
             display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', textAlign: 'center', height: '100%'

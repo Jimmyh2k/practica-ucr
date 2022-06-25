@@ -27,7 +27,7 @@ import AgregarFactura from "./components/factura/AgregarFactura";
 
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider } from "./context/CRMContext";
-import { ReservacionProvider } from './context/ReservacionContext';
+import { DataProvider } from './context/DataContext';
 
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
       <CssBaseline />
       <div className="App">
         <CRMProvider value={[auth, guardarAuth]}>
-          <ReservacionProvider>
+          <DataProvider>
 
             {/* <Header></Header> */}
             <div className="grid contenedor contenido-principal">
@@ -83,7 +83,7 @@ function App() {
 
               </main>
             </div>
-          </ReservacionProvider>
+          </DataProvider>
 
         </CRMProvider>
       </div>
