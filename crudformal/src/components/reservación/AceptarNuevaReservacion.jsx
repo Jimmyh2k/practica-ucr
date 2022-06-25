@@ -41,6 +41,7 @@ const AceptarNuevaReservacion = () => {
                     id="comentarios"
                     name="comentarios"
                     label="Comentarios"
+                    fullWidth
                     multiline
                     rows={4}
                     variant="outlined"
@@ -48,7 +49,7 @@ const AceptarNuevaReservacion = () => {
                     onChange={e => (actualizarReservacion({ name: e.target.name, value: e.target.value }))}
 
                 />
-                <Button type="submit" sx={{ mb: '2rem' }} variant="outlined">Crear reservacion</Button>
+                <Button type="submit" sx={{ mt: '2rem', mb: '2rem' }} variant="outlined">Crear reservacion</Button>
             </form>
         </Paper>
     )
