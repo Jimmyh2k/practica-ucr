@@ -20,6 +20,11 @@ export const ReservacionProvider = ({ children }) => {
     const [checkOut, setCheckOut] = useState(new Date());
     const [seleccionDeCliente, setSeleccionDeCliente] = useState(false);
     const [seleccionDeHabitacion, setSeleccionDeHabitacion] = useState(false);
+    const [estaBorrado, setEstaBorrado] = useState({
+        clienteBorrado: false,
+        habitacionBorrada: false,
+        reservacionBorrada: false
+    })
     const listaDeClientes = [
         { id: 1, nombre: 'Jon Snow', cedula: 604560017 },
         { id: 2, nombre: 'Cersei Lannister', cedula: 123446789 },
@@ -51,7 +56,6 @@ export const ReservacionProvider = ({ children }) => {
 
     }
 
-
     useEffect(() => {
         if (reservacion.idCliente !== 0) setSeleccionDeCliente(true);
         if (Object.keys(dataForUI.datosDeHabitacion).length !== 0) setSeleccionDeHabitacion(true);
@@ -74,7 +78,8 @@ export const ReservacionProvider = ({ children }) => {
             dataForUI,
             listaDeClientes,
             clientes,
-            setClientes
+            setClientes,
+            estaBorrado, setEstaBorrado
         }}>
             {children}
         </ReservacionContext.Provider>

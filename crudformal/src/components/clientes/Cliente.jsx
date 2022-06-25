@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import { Link } from 'react-router-dom'
@@ -10,11 +10,15 @@ import PersonIcon from '@mui/icons-material/Person';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import CreditCardIcon from '@mui/icons-material/CreditCard';
+import { ReservacionContext } from '../../context/ReservacionContext';
+
 
 function Cliente(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = props.cliente;
+
+    const { estaBorrado, setEstaBorrado } = useContext(ReservacionContext);
 
     //Eliminar Cliente
     const eliminarCliente = (id) => {
@@ -38,6 +42,7 @@ function Cliente(props) {
                             'success'
                         );
                     });
+                setEstaBorrado({ clienteBorrado: true });
             }
         })
     }

@@ -41,11 +41,28 @@ function Clientes() {
 
     //Trabajar con useState
     // const [clientes, guardarclientes] = useState([]);
-    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(ReservacionContext);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(ReservacionContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
+    const consultarAPI = async () => {
+        try {
+            const clientesConsulta = await clienteAxios.get('/clientes', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
 
+            // colocar el resultado en el state
+            setClientes(clientesConsulta.data);
+
+        } catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
 
     // use effect es similar a componentdidmount y willmount
     useEffect(() => {
@@ -53,30 +70,16 @@ function Clientes() {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const clientesConsulta = await clienteAxios.get('/clientes', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
-
-                    // colocar el resultado en el state
-                    setClientes(clientesConsulta.data);
-
-                } catch (error) {
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/iniciar-sesion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/iniciar-sesion');
         }
     }, []); //[clientes] es para refrescar buscar otra manera
 
+    if (estaBorrado.clienteBorrado) {
+        consultarAPI();
+        setEstaBorrado({ clienteBorrado: false });
+    }
 
     // Si el state esta como false
     if (!auth.auth) {

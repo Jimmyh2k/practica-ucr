@@ -16,30 +16,31 @@ function SeleccionarCliente() {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const clientesConsulta = await clienteAxios.get('/clientes', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
 
-                    // colocar el resultado en el state
-                    setClientes(clientesConsulta.data);
-
-                } catch (error) {
-                    console.error(error);
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/reservacion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/reservacion');
         }
     }, []);
+    const consultarAPI = async () => {
+        try {
+            const clientesConsulta = await clienteAxios.get('/clientes', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setClientes(clientesConsulta.data);
+
+        } catch (error) {
+            console.error(error);
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/reservacion');
+            }
+        }
+    }
     return (
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
