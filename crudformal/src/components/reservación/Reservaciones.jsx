@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment, useContext } from "react";
-import { Button, Typography, Box } from '@mui/material';
+import { Button, Typography, Box, Grid } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import clienteAxios from '../../config/axios';
@@ -57,30 +57,45 @@ function Reservaciones() {
 
     return (
         <Fragment>
-            <Typography variant="h4" gutterBottom component="h2"
-                sx={{
-                    mr: 2,
-                    fontWeight: 700,
-                    letterSpacing: '.3rem',
-                    color: 'white',
-                    paddingTop: '2rem',
-                    paddingBottom: '1rem'
-                }}
-            >
-                Reservaciones
-            </Typography>
+            <Box pl={1} pr={1} sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column' }}>
+                <Typography variant="h4" gutterBottom component="h2"
+                    sx={{
+                        mr: 2,
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'white',
+                        paddingTop: '2rem',
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    Reservaciones
+                </Typography>
 
-            <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/reservacion/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
-                Nueva reservacion
-            </Button>
-            <ul className="listado-clientes">
-                {reservaciones.map(reservacion => (
-                    <Reservacion
-                        key={reservacion.idReservacion}
-                        reservacion={reservacion}
-                    />
-                ))}
-            </ul>
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to="/reservacion/nuevo" color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                    Nueva reservacion
+                </Button>
+
+                <Box sx={{ width: '100%' }}>
+                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}  >
+                        {reservaciones.map(reservacion => (
+                            <Reservacion
+                                key={reservacion.idReservacion}
+                                reservacion={reservacion}
+                                card={true}
+                            />
+                        ))}
+                    </Grid>
+                </Box>
+
+                {/* <ul className="listado-clientes">
+                    {reservaciones.map(reservacion => (
+                        <Reservacion
+                            key={reservacion.idReservacion}
+                            reservacion={reservacion}
+                        />
+                    ))}
+                </ul> */}
+            </Box>
         </Fragment >
         // import React,{useEffect, useState, Fragment, useContext} from "react";
         // import clienteAxios from '../../config/axios';

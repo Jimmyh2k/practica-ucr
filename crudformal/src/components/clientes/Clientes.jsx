@@ -119,7 +119,6 @@ function Clientes() {
                         ))}
 
                     </Grid>
-
                 </Box>
             </Box>
             {/*
