@@ -52,7 +52,7 @@ const Navegacion = () => {
     if (!auth.auth) return null;
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: '#9000B3', height: '7vh' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>

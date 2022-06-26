@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 import clienteAxios from '../../config/axios';
 import { useNavigate } from 'react-router-dom';
 import { Box, TextField, Button, Container, Typography, Avatar } from '@mui/material';
@@ -76,8 +76,7 @@ function Login() {
                     borderRadius: '10px'
                 }}
             >
-
-                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">

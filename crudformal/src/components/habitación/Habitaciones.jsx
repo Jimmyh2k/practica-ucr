@@ -89,7 +89,7 @@ function Habitaciones() {
             Versión de PC
             Se usa table
             */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', mx: '2rem' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
                         mr: 2,

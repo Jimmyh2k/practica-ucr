@@ -1,11 +1,16 @@
 body {
-    background: #c04848;
-    /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left,
-            #480048,
-            #c04848);
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to left,
-            #480048,
-            #c04848);
+        width: 100%;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        background: #9000B3;
+        /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left top, #9000B3, #1416B4);
+        /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(bottom right, #9000B3, #1416B4);
+        /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(bottom right, #9000B3, #1416B4);
+        /* For Firefox 3.6 to 15 */
+        background: linear-gradient(to bottom right, #9000B3, #1416B4);
+        /* Standard syntax */
 }
