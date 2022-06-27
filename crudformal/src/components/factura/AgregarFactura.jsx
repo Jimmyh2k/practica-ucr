@@ -7,14 +7,12 @@ import { CRMContext } from '../../context/CRMContext';
 import { DataContext } from '../../context/DataContext';
 import DatePicker from 'react-date-picker';
 import Swal from "sweetalert2";
-
 function AgregarFactura() {
 
     const navigate = useNavigate();
 
     //Se guarda primero el factura en el useState
     const [factura, guardarFactura] = useState({
-        idFactura: 0,
         fechaEmision: new Date(),
         condicionVenta: '01',
         MedioPago: '01',
@@ -28,6 +26,7 @@ function AgregarFactura() {
     }
     const [auth, guardarAuth] = useContext(CRMContext);
     const { reservaciones, setReservaciones, clientes, habitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
+    const [value, onChange] = useState(new Date());
 
 
     //Leer los datos del formulario
@@ -138,10 +137,7 @@ function AgregarFactura() {
                         <Typography variant="h6" component="h2">Llena todos los campos</Typography>
                         <Box sx={{ my: '1rem' }}>
                             <Typography variant="subtitle1" component="h2">Fecha de emision:</Typography>
-                            <DatePicker
-                                value={fecha}
-                                onChange={e => setFecha(e)}
-                            />
+                            <DatePicker onChange={onChange} value={value} />
                         </Box>
                         <FormControl fullWidth margin="normal">
                             <InputLabel id="condicionVenta-label">Condicion Venta:</InputLabel>
@@ -251,6 +247,22 @@ function AgregarFactura() {
                                 </TableBody>
                             </Table>
                         </TableContainer>
+                        <Button
+                            type="submit"
+                            disabled={ValidarFactura()}
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >
+                            Agregar Factura
+                        </Button>
+                        {/* <div className="enviar">
+                    <input
+                        type="submit"
+                        className="btn btn-azul"
+                        value="Agregar Cliente"
+                        disabled={ValidarFactura()}
+                    />
+                </div> */}
                     </form>
                 </Box>
 
