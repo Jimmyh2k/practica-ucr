@@ -13,19 +13,19 @@ module.exports = function() {
     //------------------- Rutas de Clientes ------------------- 
 
     //Agrega nuevos clientes via POST
-    router.post('/clientes', clienteController.agregarCliente);
+    router.post('/clientes',auth, clienteController.agregarCliente);
 
     //Mostrar los clientes via GET
     router.get('/clientes',auth, clienteController.mostrarClientes);
 
     //Muestra un cliente por id (buscar)
-    router.get('/clientes/:idCliente', clienteController.buscarCliente);
+    router.get('/clientes/:idCliente',auth, clienteController.buscarCliente);
 
     //Actualzar Cliente
-    router.put('/clientes/:idCliente', clienteController.actualizarCliente);
+    router.put('/clientes/:idCliente',auth, clienteController.actualizarCliente);
 
     //elimina un cliente
-    router.delete('/clientes/:idCliente', clienteController.eliminarCliente);
+    router.delete('/clientes/:idCliente',auth, clienteController.eliminarCliente);
 
 
 
@@ -56,6 +56,9 @@ module.exports = function() {
 
     //Muestra una Reservacion por id (buscar)
     router.get('/reservacion/:idReservacion', reservacionController.detallesReservacion);   
+
+    //Elimina una habitación
+    router.delete('/reservacion/:idReservacion', reservacionController.eliminarReservacion);
      
 
     //------------------ Rutas de Usuarios -----------------------

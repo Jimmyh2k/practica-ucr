@@ -49,3 +49,17 @@ exports.detallesReservacion = async (req, res, next) => {
     // Mostrar la reservacion
     res.json(reservacion);
 }
+
+// Elimina una reservacion por su ID 
+exports.eliminarReservacion = async (req, res, next) => {
+    try {
+        await Reservacion.destroy({
+            where:{
+            idReservacion : req.params.idReservacion }
+        });
+        res.json({mensaje : 'La reservación se ha eliminado'});
+    } catch (error) {
+        console.log(error);
+        next();
+    }
+}
