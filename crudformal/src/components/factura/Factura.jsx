@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import { Link } from 'react-router-dom'
 import SimCardDownloadOutlinedIcon from '@mui/icons-material/SimCardDownloadOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import { DataContext } from '../../context/DataContext';
 
 function Factura(props) {
     //console.log(props.factura.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idFactura, fechaEmision, condicionVenta, MedioPago, totalVenta, idReservacion, reservacion } = props.factura;
+    const [cliente, setCliente] = useState({});
+    const [habitacion, sethabitacion] = useState({});
+    console.log("Reservacion", reservacion);
     console.log(props.factura.reservacion.cliente.nombre);
     const fechaConFormato = (fechaSinFormato) => {
         const date = new Date(fechaSinFormato);
@@ -71,34 +76,48 @@ function Factura(props) {
                                 {totalVenta}
                             </Typography>
                         </Box>
+
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
+                            <Typography variant="h6" component="h3">
+                                Reservación
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                Cliente
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                {reservacion.cliente.nombre}
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                Habitación
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                {reservacion.habitacion.numero}
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                CheckIn
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                {fechaConFormato(reservacion.checkIn)}
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                CheckOut
+                            </Typography>
+                            <Typography variant="subtitle1" component="h3">
+                                {fechaConFormato(reservacion.checkOut)}
+                            </Typography>
+                        </Box>
+                        {/* <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
                             <Typography variant="h6" component="h3">
                                 Condición Venta
                             </Typography>
                             <Typography variant="subtitle1" component="h3">
                                 {nombreCondicionDeVenta(condicionVenta)}
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
+                            </Typography> 
+                    </Box>*/}
+                        {/* <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
                             <Typography variant="h6" component="h3">
                             </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                            </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                            </Typography>
-                        </Box>
+                        </Box> */}
                     </CardContent>
                     <CardActions>
                         <Button component={Link} to={''} size="small" sx={{ marginRight: 1 }}>
@@ -109,9 +128,53 @@ function Factura(props) {
                         </Button>
                     </CardActions>
                 </Card>
-            </Grid>
+            </Grid >
         )
     }
+    return (
+        <TableRow sx={{ display: {} }} key={idFactura}>
+            <TableCell>
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {fechaConFormato(fechaEmision)}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {totalVenta}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {reservacion.cliente.nombre}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {reservacion.habitacion.numero}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {fechaConFormato(reservacion.checkIn)}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {fechaConFormato(reservacion.checkOut)}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button variant="outlined" component={Link} to={''} startIcon={<VisibilityOutlinedIcon />} sx={{ marginRight: 1 }}>
+                        Ver detalles
+                    </Button>
+                    <Button variant="outlined" startIcon={<SimCardDownloadOutlinedIcon />} onClick={''}>
+                        Descargar XML
+                    </Button>
+                </Box>
+            </TableCell>
+        </TableRow>
+    )
 }
 
 export default Factura;

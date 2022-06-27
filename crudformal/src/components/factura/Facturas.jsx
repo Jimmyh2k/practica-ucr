@@ -73,6 +73,87 @@ function Facturas() {
                 <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to={"/factura/nuevo"} color="secondary" startIcon={<AddCircleOutlinedIcon />}>
                     Nueva factura
                 </Button>
+                <Box sx={{ width: '100%' }}>
+                    <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
+                        {facturas.map(factura => (
+                            <Factura
+                                key={factura.idFactura}
+                                factura={factura}
+                                card={true}
+                            />
+                        ))}
+
+                    </Grid>
+
+                </Box>
+            </Box>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', mx: '2rem' }}>
+                <Typography variant="h4" gutterBottom component="h2"
+                    sx={{
+                        mr: 2,
+                        fontWeight: 700,
+                        letterSpacing: '.3rem',
+                        color: 'white',
+                        paddingTop: '2rem',
+                        paddingBottom: '1rem'
+                    }}
+                >
+                    Facturas
+                </Typography>
+
+                <Button sx={{ alignSelf: 'flex-start' }} variant="contained" component={Link} to={"/factura/nuevo"} color="secondary" startIcon={<AddCircleOutlinedIcon />}>
+                    Nueva factura
+                </Button>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="tabla facturas">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Fecha de emisión
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Total venta
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Cliente
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        Habitación
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        CheckIn
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                        CheckOut
+                                    </Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <Typography variant="h6" component="h2" gutterBottom>
+                                    </Typography>
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody sx={{ width: "100%" }}>
+                            {facturas.map(factura => (
+                                <Factura
+                                    key={factura.idFactura}
+                                    factura={factura}
+                                />
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Box>
             {/* <h2>Facturas</h2> */}
 
@@ -90,19 +171,7 @@ function Facturas() {
                     />
                 ))}
             </ul> */}
-            <Box sx={{ width: '100%' }}>
-                <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}>
-                    {facturas.map(factura => (
-                        <Factura
-                            key={factura.idFactura}
-                            factura={factura}
-                            card={true}
-                        />
-                    ))}
 
-                </Grid>
-
-            </Box>
         </Fragment>
     )
 }
