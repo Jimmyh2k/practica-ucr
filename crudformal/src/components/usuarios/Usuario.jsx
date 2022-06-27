@@ -81,7 +81,7 @@ function Usuario(props) {
     }
     return (
         <TableRow sx={{ display: {} }} key={idUsuario}>
-            <TableCell align="right">
+            <TableCell>
                 <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
                     {nombre}
                 </Typography>

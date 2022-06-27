@@ -95,7 +95,7 @@ function Usuarios() {
                 Versión de PC
                 Se usa table
                 */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', mx: '2rem' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
                         mr: 2,
@@ -116,7 +116,7 @@ function Usuarios() {
                     <Table sx={{ minWidth: 650 }} aria-label="tabla usuarios">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="right">
+                                <TableCell>
                                     <Typography variant="h6" component="h2" gutterBottom>
                                         Nombre
                                     </Typography>
