@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Clientes from "./components/clientes/Clientes";
 import AgregarCliente from "./components/clientes/AgregarCliente";
 import EditarCliente from "./components/clientes/EditarClientes";
+import DetallesCliente from "./components/clientes/DetallesCliente";
 import Habitaciones from "./components/habitación/Habitaciones";
 import AgregarHabitacion from "./components/habitación/AgregarHabitacion";
 import EditarHabitacion from "./components/habitación/EditarHabitacion";
@@ -18,6 +19,7 @@ import Reservacion from "./components/reservación/Reservacion";
 
 import Reservaciones from "./components/reservación/Reservaciones";
 import AgregarReservacion from "./components/reservación/AgregarReservacion";
+import DetallesReservacion from "./components/reservación/DetallesReservacion";
 import Usuarios from "./components/usuarios/Usuarios";
 import { CssBaseline } from "@mui/material";
 import AgregarUsuario from "./components/usuarios/AgregarUsuario";
@@ -25,6 +27,10 @@ import EditarUsuario from "./components/usuarios/EditarUsuario";
 import Facturas from "./components/factura/Facturas";
 import AgregarFactura from "./components/factura/AgregarFactura";
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+
+import DetallesFactura from "./components/factura/DetalleFactura";
+
+
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider } from "./context/CRMContext";
 import { DataProvider } from './context/DataContext';
@@ -63,7 +69,9 @@ function App() {
 
                     <Route exact path="/clientes/editar/:id" element={<EditarCliente />} />
 
-                    <Route exact path="/habitacion" element={<Habitaciones />} />
+                <Route exact path="/clientes/detalle/:id" element={<DetallesCliente />} />
+
+                <Route exact path="/habitacion" element={<Habitaciones />} />
 
                     <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
 

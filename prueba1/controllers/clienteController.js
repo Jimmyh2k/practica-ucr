@@ -43,7 +43,7 @@ exports.buscarCliente = async (req, res, next) => {
     res.json(cliente);
 }
 
-//Actualizar el cliente //No funciona F
+//Actualizar el cliente
 exports.actualizarCliente = async (req, res, next) => {
     await Clientes.update(
         {

@@ -13,10 +13,10 @@ module.exports = function() {
     //------------------- Rutas de Clientes ------------------- 
 
     //Agrega nuevos clientes via POST
-    router.post('/clientes', clienteController.agregarCliente);
+    router.post('/clientes',auth, clienteController.agregarCliente);
 
     //Mostrar los clientes via GET
-    router.get('/clientes',auth, clienteController.mostrarClientes);
+    router.get('/clientes', clienteController.mostrarClientes);
 
     //Muestra un cliente por id (buscar)
     router.get('/clientes/:idCliente', clienteController.buscarCliente);
@@ -56,6 +56,9 @@ module.exports = function() {
 
     //Muestra una Reservacion por id (buscar)
     router.get('/reservacion/:idReservacion', reservacionController.detallesReservacion);   
+
+    //Elimina una habitación
+    router.delete('/reservacion/:idReservacion', reservacionController.eliminarReservacion);
      
 
     //------------------ Rutas de Usuarios -----------------------
@@ -87,6 +90,9 @@ module.exports = function() {
 
     //Mostrar las Reservaciones via GET
     router.get('/factura', facturaController.mostrarFacturas);
+
+    //Muestra un usuario por id (buscar)
+    router.get('/factura/:idFactura', facturaController.detallesFactura);
 
 
     return router;
