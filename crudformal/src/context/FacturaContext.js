@@ -55,7 +55,7 @@ export const FacturaProvider = ({ children }) => {
     useEffect(() => {
         if (reservacion.idCliente !== 0) setSeleccionDeCliente(true);
         if (Object.keys(dataForUI.datosDeHabitacion).length !== 0) setSeleccionDeHabitacion(true);
-        console.log(clientes);
+        console.log(reservacion);
 
     },
         [clientes, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);

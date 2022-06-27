@@ -73,6 +73,9 @@ function Cliente(props) {
                         </Box>
                     </CardContent>
                     <CardActions>
+                        <Button size="small" component={Link} to={`/clientes/detalle/${idCliente}`} sx={{ marginRight: 1 }}>
+                            Detalles
+                        </Button>
                         <Button size="small" component={Link} to={`/clientes/editar/${idCliente}`} sx={{ marginRight: 1 }}>
                             Editar
                         </Button>
@@ -105,6 +108,9 @@ function Cliente(props) {
 
             <TableCell align="right">
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <Button variant="outlined" component={Link} to={`/clientes/detalle/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                        Detalles
+                    </Button>
                     <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
                         Editar
                     </Button>

@@ -26,15 +26,8 @@ import { ListItemIcon, ListItemText } from '@mui/material'
 const pages = [
     { path: '/', name: 'Clientes', key: 'clientes', icon: <GroupsIcon fontSize="small" /> },
     { path: '/habitacion', name: 'Habitación', key: 'habitacion', icon: <HotelIcon fontSize="small" /> },
-    { path: '/reservacion', name: 'Reservación', key: 'reservacion', icon: <NightShelterIcon fontSize="small" /> }
-]
-//         <Link to={"/"} className="clientes">Clientes</Link>
-//         <Link to="/habitacion" className="productos">Habitación</Link>
-//         <Link to="/reservacion" className="pedidos">Reservación</Link>
-const routes = [
-    { path: '/', name: 'Clientes', key: 'clientes' },
-    { path: '/habitacion', name: 'Habitación', key: 'habitacion' },
-    { path: '/reservacion', name: 'Reservación', key: 'reservacion' }
+    { path: '/reservacion', name: 'Reservación', key: 'reservacion', icon: <NightShelterIcon fontSize="small" /> },
+    { path: '/factura', name: 'Factura', key: 'factura', icon: <NightShelterIcon fontSize="small" /> }
 ]
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -58,7 +51,6 @@ const Navegacion = () => {
     if (!auth.auth) return null;
 
     return (
-
         <AppBar position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
