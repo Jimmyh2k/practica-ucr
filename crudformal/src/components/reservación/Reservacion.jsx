@@ -49,9 +49,9 @@ function Reservacion(props) {
                 <p className="empresa">Habitacion escojida:{habitacion.numero}</p>
             </div>
             <div className="acciones">
-                <Link to={`/reservacion/editar/${idReservacion}`} className="btn btn-azul">
+                <Link to={`/reservacion/detalle/${idReservacion}`} className="btn btn-azul">
                     <i className="fas fa-pen-alt"></i>
-                    Editar Reservacion
+                    Detalles
                 </Link>
 
                 <button

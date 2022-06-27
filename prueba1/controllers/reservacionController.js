@@ -39,7 +39,11 @@ exports.detallesReservacion = async (req, res, next) => {
     const reservacion = await Reservacion.findOne({
         where : {
             idReservacion: req.params.idReservacion
-        }
+        },
+        include:[
+            {model: Habitacion},
+            {model: Clientes}
+        ]
       });
 
     if(!reservacion) {

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 function Factura(props){
 //console.log(props.factura.nombre); Consultar por manera mas sencilla de usar props
@@ -18,8 +19,14 @@ function Factura(props){
                         <p className="empresa">idReservacion:{idReservacion}</p>
                         <p className="empresa">Habitacion Pagada:{reservacion.habitacion.numero}</p>
                     </div>
+                    <div className="acciones">
+                        <Link to={`/factura/detalle/${idFactura}`} className="btn btn-azul">
+                            <i className="fas fa-pen-alt"></i>
+                            Detalles
+                        </Link>
+                    </div>
 
-                </li>
+        </li>
     )
 }
 

@@ -16,16 +16,16 @@ module.exports = function() {
     router.post('/clientes',auth, clienteController.agregarCliente);
 
     //Mostrar los clientes via GET
-    router.get('/clientes',auth, clienteController.mostrarClientes);
+    router.get('/clientes', clienteController.mostrarClientes);
 
     //Muestra un cliente por id (buscar)
-    router.get('/clientes/:idCliente',auth, clienteController.buscarCliente);
+    router.get('/clientes/:idCliente', clienteController.buscarCliente);
 
     //Actualzar Cliente
-    router.put('/clientes/:idCliente',auth, clienteController.actualizarCliente);
+    router.put('/clientes/:idCliente', clienteController.actualizarCliente);
 
     //elimina un cliente
-    router.delete('/clientes/:idCliente',auth, clienteController.eliminarCliente);
+    router.delete('/clientes/:idCliente', clienteController.eliminarCliente);
 
 
 
@@ -90,6 +90,9 @@ module.exports = function() {
 
     //Mostrar las Reservaciones via GET
     router.get('/factura', facturaController.mostrarFacturas);
+
+    //Muestra un usuario por id (buscar)
+    router.get('/factura/:idFactura', facturaController.detallesFactura);
 
 
     return router;

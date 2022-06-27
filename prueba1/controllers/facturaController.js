@@ -35,3 +35,24 @@ exports.mostrarFacturas = async (req, res, next) => {
         next();
     }
 }
+
+//Mostrar reservacion por id (busqueda)
+exports.detallesFactura = async (req, res, next) => {
+    const factura = await Factura.findOne({
+        where : {
+            idFactura: req.params.idFactura
+        },
+        include: {model: Reservacion,
+            include:[
+                {model: Habitacion},
+                {model: Clientes}
+            ] }
+      });
+
+    if(!factura) {
+        res.json({mensaje : 'La factura no existe'});
+        next()
+    }
+    // Mostrar la reservacion
+    res.json(factura);
+}
