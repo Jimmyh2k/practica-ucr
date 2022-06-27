@@ -49,9 +49,10 @@ export const DataProvider = ({ children }) => {
         if (Object.keys(dataForUI.datosDeHabitacion).length !== 0) setSeleccionDeHabitacion(true);
         console.log("Clientes: ", clientes);
         console.log("Habitaciones: ", habitaciones);
+        console.log("Reservaciones: ", reservaciones);
 
     },
-        [clientes, habitaciones, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI]);
+        [clientes, habitaciones, reservacion, seleccionDeCliente, seleccionDeHabitacion, dataForUI, reservaciones]);
     return (
         <DataContext.Provider value={{
 

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import clienteAxios from '../../config/axios';
 import Reservacion from "./Reservacion";
-
+import { DataContext } from '../../context/DataContext';
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
 
@@ -16,40 +16,44 @@ function Reservaciones() {
     const navigate = useNavigate();
 
     //Trabajar con useState
-    const [reservaciones, guardarreservaciones] = useState([]);
+    // const [reservaciones, guardarreservaciones] = useState([]);
+    const { reservaciones, setReservaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
 
     // use effect es similar a componentdidmount y willmount
+    const consultarAPI = async () => {
+        try {
+            const reservacionesConsulta = await clienteAxios.get('/reservacion', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setReservaciones(reservacionesConsulta.data);
+
+        } catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
     useEffect(() => {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const reservacionesConsulta = await clienteAxios.get('/reservacion', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
-
-                    // colocar el resultado en el state
-                    guardarreservaciones(reservacionesConsulta.data);
-
-                } catch (error) {
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/iniciar-sesion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/iniciar-sesion');
         }
     }, []); //[clientes] es para refrescar buscar otra manera
-
+    if (estaBorrado.clienteBorrado) {
+        consultarAPI();
+        setEstaBorrado({ reservacionBorrada: false });
+    }
 
     // Si el state esta como false
     if (!auth.auth) {

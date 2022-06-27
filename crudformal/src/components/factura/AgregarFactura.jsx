@@ -32,7 +32,7 @@ function AgregarFactura() {
 
     //Leer los datos del formulario
     const actualizarState = e => {
-        console.log(e);
+        // console.log(e);
         //Almacena lo que el usuario escribe en el state
         guardarFactura({
             ...factura,
@@ -41,34 +41,42 @@ function AgregarFactura() {
 
     }
 
+    const consultarAPI = async () => {
+        try {
+            const reservacionesConsulta = await clienteAxios.get('/reservacion', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setReservaciones(reservacionesConsulta.data);
+
+        } catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
     useEffect(() => {
         actualizarState({ target: "fechaEmision", value: fecha })
+        // console.log(habitaciones);
         console.log("Factura: ", factura);
+    }, [fecha])
+    useEffect(() => {
         if (auth.token !== '') {
-            // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const reservacionesConsulta = await clienteAxios.get('/reservacion', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
-
-                    // colocar el resultado en el state
-                    setReservaciones(reservacionesConsulta.data);
-
-                } catch (error) {
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/iniciar-sesion');
-                    }
-                }
+            if (reservaciones.length !== 0) {
+                consultarAPI();
             }
-            consultarAPI();
+            // Query a la API
         } else {
             navigate('/iniciar-sesion');
         }
-    }, [fecha])
+    }, [])
+    useEffect(() => {
+        console.log(factura);
+    }, [factura])
 
     //validar el formulario
     const ValidarFactura = () => {
@@ -89,7 +97,7 @@ function AgregarFactura() {
 
         clienteAxios.post('/factura', factura)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 Swal.fire(
                     'Se agregó la factura',
                     res.data.mensaje,
@@ -136,13 +144,14 @@ function AgregarFactura() {
                             />
                         </Box>
                         <FormControl fullWidth margin="normal">
-                            <InputLabel id="condicionVenta-label">Ingrese el tipo de cédula</InputLabel>
+                            <InputLabel id="condicionVenta-label">Condicion Venta:</InputLabel>
                             <Select
                                 labelId="condicionVenta-label"
                                 id="condicionVenta"
                                 value={factura.condicionVenta}
-                                label="Ingrese el tipo de cédula"
+                                label="Condicion Venta:"
                                 name="condicionVenta"
+                                defaultValue={'01'}
                                 onChange={actualizarState}
                             >
                                 <MenuItem value={'01'}>Contado</MenuItem>
@@ -157,12 +166,13 @@ function AgregarFactura() {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth margin="normal">
-                            <InputLabel id="MedioPago-label">Ingrese el tipo de cédula</InputLabel>
+                            <InputLabel id="MedioPago-label">Ingrese el medio de pago</InputLabel>
                             <Select
                                 labelId="MedioPago-label"
                                 id="MedioPago"
+                                defaultValue='01'
                                 value={factura.MedioPago}
-                                label="Ingrese el tipo de cédula"
+                                label="Ingrese el medio de pago"
                                 name="MedioPago"
                                 onChange={actualizarState}
                             >
@@ -184,7 +194,8 @@ function AgregarFactura() {
                             id="totalVenta"
                             onChange={actualizarState}
                         />
-                        <TableContainer sx={{ width: '100%' }} component={Paper}>
+                        <Typography variant="subtitle1" component="h2">Seleccione una reservacion:</Typography>
+                        <TableContainer sx={{ width: '100%', height: '10rem' }} component={Paper}>
                             <Table sx={{ minWidth: 650 }} aria-label="tabla clientes">
                                 <TableHead>
                                     <TableRow>
@@ -209,12 +220,16 @@ function AgregarFactura() {
                                     {reservaciones.map(reservacion => (
                                         <TableRow sx={{ display: {} }} key={reservacion.idReservacion}>
                                             <TableCell>
-                                                {reservacion.idCliente}
+                                                {
+                                                    (clientes.find(
+                                                        cliente => cliente.idCliente === reservacion.idCliente).nombre)
+                                                }
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
-                                                {habitaciones.find(habitaciones => habitaciones.idHabitacion == factura.idHabitacion)}
-                                                    {reservacion.idHabitacion}
+                                                    {
+                                                        (habitaciones.find(
+                                                            habitacion => habitacion.idHabitacion == reservacion.idHabitacion).numero)}
                                                 </Typography>
                                             </TableCell>
                                             <TableCell align="right">
@@ -225,7 +240,10 @@ function AgregarFactura() {
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                                    <Button variant="outlined" size="small">Seleccionar</Button>
+                                                    <Button variant="outlined" size="small" onClick={() => actualizarState({ target: { name: "idReservacion", value: reservacion.idReservacion } })}>Seleccionar</Button>
+                                                    {/* actualizarState({ name: "idReservacion", value: reservacion.idReservacion }) 
+                                                    e => guardarFactura({ idFactura: 2 })
+                                                    */}
                                                 </Box>
                                             </TableCell>
                                         </TableRow >

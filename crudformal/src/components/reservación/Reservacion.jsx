@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import { Link } from 'react-router-dom'
@@ -8,11 +8,15 @@ import NumbersIcon from '@mui/icons-material/Numbers';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
+import { DataContext } from '../../context/DataContext';
+
 
 function Reservacion(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idReservacion, cantidadDePersonas, checkIn, checkOut, comentarios, idCliente, idHabitacion, cliente, habitacion } = props.reservacion;
+    const { estaBorrado, setEstaBorrado } = useContext(DataContext);
+
     console.log(props.reservacion)
     console.log(cliente);
     console.log(habitacion);
@@ -38,6 +42,8 @@ function Reservacion(props) {
                             'success'
                         );
                     });
+                setEstaBorrado({ reservacionBorrada: true });
+
             }
         })
     }
