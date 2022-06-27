@@ -27,6 +27,7 @@ export const DataProvider = ({ children }) => {
     });
     const [clientes, setClientes] = useState([]);
     const [habitaciones, setHabitaciones] = useState([]);
+    const [reservaciones, setReservaciones] = useState([])
     //Leer los datos del formulario
     const actualizarReservacion = e => {
         //Almacena lo que el usuario escribe en el state
@@ -66,7 +67,8 @@ export const DataProvider = ({ children }) => {
             clientes,
             setClientes,
             estaBorrado, setEstaBorrado,
-            habitaciones, setHabitaciones
+            habitaciones, setHabitaciones,
+            reservaciones, setReservaciones
         }}>
             {children}
         </DataContext.Provider>

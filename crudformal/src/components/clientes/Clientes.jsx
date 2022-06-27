@@ -16,21 +16,6 @@ import { styled } from '@mui/material/styles';
 
 function Clientes() {
 
-    var XML = "HHHHHH";
-
-
-    const downloadTxtFile = () => {
-        const element = document.createElement("a");
-        const file = new Blob([XML], {
-            type: "text/plain"
-        });
-        element.href = URL.createObjectURL(file);
-        element.download = "Factura.txt";
-        document.body.appendChild(element);
-        element.click();
-    };
-
-
     const navigate = useNavigate();
 
     //Trabajar con useState
@@ -125,7 +110,7 @@ function Clientes() {
             Versión de PC
             Se usa table
             */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', mx: '2rem' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
                         mr: 2,
@@ -178,9 +163,6 @@ function Clientes() {
                     </Table>
                 </TableContainer>
             </Box>
-
-            <Button variant="contained" color="primary" onClick={downloadTxtFile}> Descargar XML </Button>
-
 
         </Fragment >
 

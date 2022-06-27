@@ -6,6 +6,8 @@ import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Butto
 import PersonIcon from '@mui/icons-material/Person';
 import NumbersIcon from '@mui/icons-material/Numbers';
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Reservacion(props) {
     //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
@@ -116,6 +118,39 @@ function Reservacion(props) {
 
         )
     }
+    return (
+
+        <TableRow sx={{ display: {} }} key={habitacion.idHabitacion}>
+            <TableCell>
+                {cliente.nombre}
+            </TableCell>
+            <TableCell align="right">
+                <Typography noWrap variant="subtitle1" component="h2" gutterBottom>
+                    {habitacion.numero}
+                </Typography>
+            </TableCell>
+            <TableCell align="right">
+                {fechaConFormato(checkIn)}
+            </TableCell>
+            <TableCell align="right">
+                {fechaConFormato(checkOut)}
+            </TableCell>
+            <TableCell align="right">
+                {cantidadDePersonas}
+            </TableCell>
+            <TableCell align="right">
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                    <Button variant="outlined" component={Link} to={`/reservacion/editar/${idReservacion}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                        Editar
+                    </Button>
+                    <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarReservacion(idReservacion)}>
+                        Eliminar
+                    </Button>
+                </Box>
+            </TableCell>
+        </TableRow >
+
+    )
 }
 
 export default Reservacion;
