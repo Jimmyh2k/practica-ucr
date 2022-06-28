@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom'
 import SimCardDownloadOutlinedIcon from '@mui/icons-material/SimCardDownloadOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { DataContext } from '../../context/DataContext';
+import exportFromJSON from "export-from-json";
+
+
 
 function Factura(props) {
     //console.log(props.factura.nombre); Consultar por manera mas sencilla de usar props
@@ -18,6 +21,16 @@ function Factura(props) {
         const date = new Date(fechaSinFormato);
         return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
     }
+     
+
+     function download() {
+    const data = props.factura;   //dataForXml
+    const fileName = props.fileName ? props.fileName : "factura";
+    let fields = props.fields ? props.fields : [];  
+    const exportType = 'xml';
+    exportFromJSON({data, fileName, fields, exportType})
+  }
+
     const nombreCondicionDeVenta = (codigoCondicionVenta) => {
         switch (codigoCondicionVenta) {
             case '01':
@@ -106,24 +119,13 @@ function Factura(props) {
                                 {fechaConFormato(reservacion.checkOut)}
                             </Typography>
                         </Box>
-                        {/* <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                                Condición Venta
-                            </Typography>
-                            <Typography variant="subtitle1" component="h3">
-                                {nombreCondicionDeVenta(condicionVenta)}
-                            </Typography> 
-                    </Box>*/}
-                        {/* <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'right', gap: '0.5rem' }}>
-                            <Typography variant="h6" component="h3">
-                            </Typography>
-                        </Box> */}
+                        
                     </CardContent>
                     <CardActions>
                         <Button component={Link} to={''} size="small" sx={{ marginRight: 1 }}>
                             Ver Detalles
                         </Button>
-                        <Button startIcon={<SimCardDownloadOutlinedIcon />} size="small" onClick={''}>
+                        <Button startIcon={<SimCardDownloadOutlinedIcon />} size="small" onClick={download}>
                             XML
                         </Button>
                     </CardActions>
@@ -168,7 +170,7 @@ function Factura(props) {
                     <Button variant="outlined" component={Link} to={''} startIcon={<VisibilityOutlinedIcon />} sx={{ marginRight: 1 }}>
                         Ver detalles
                     </Button>
-                    <Button variant="outlined" startIcon={<SimCardDownloadOutlinedIcon />} onClick={''}>
+                    <Button variant="outlined" startIcon={<SimCardDownloadOutlinedIcon />} onClick={download}>
                         Descargar XML
                     </Button>
                 </Box>
