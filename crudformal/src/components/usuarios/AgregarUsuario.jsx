@@ -1,13 +1,14 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
+import { DataContext } from '../../context/DataContext';
 import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
 
 function AgregarUsuario() {
 
     const navigate = useNavigate();
-
+    const { estaBorrado, setEstaBorrado } = useContext(DataContext);
     //Se guarda primero el usuario en el useState
     const [usuario, guardarUsuario] = useState({
         nombre: '',
@@ -54,6 +55,7 @@ function AgregarUsuario() {
                     'success'
                 )
             });
+        setEstaBorrado({ usuarioBorrado: true });
         navigate('/usuario');
     }
 
@@ -63,6 +65,7 @@ function AgregarUsuario() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: '93vh'
             }}>
                 <Box
                     sx={{

@@ -119,13 +119,9 @@ function Factura(props) {
 
                     </CardContent>
                     <CardActions>
-                        <Button component={Link} to={''} size="small" sx={{ marginRight: 1 }}>
+                        <Button component={Link} to={`/factura/detalle/${idFactura}`} size="small" sx={{ marginRight: 1 }}>
                             Ver Detalles
                         </Button>
-                        <Link to={`/factura/detalle/${idFactura}`} className="btn btn-azul">
-                            <i className="fas fa-pen-alt"></i>
-                            Detalles
-                        </Link>
                         <Button startIcon={<SimCardDownloadOutlinedIcon />} size="small" onClick={download}>
                             XML
                         </Button>
@@ -171,7 +167,7 @@ function Factura(props) {
                     <Button variant="outlined" component={Link} to={`/factura/detalle/${idFactura}`} startIcon={<VisibilityOutlinedIcon />} sx={{ marginRight: 1 }}>
                         Ver detalles
                     </Button>
-                   
+
                     <Button variant="outlined" startIcon={<SimCardDownloadOutlinedIcon />} onClick={download}>
                         Descargar XML
                     </Button>

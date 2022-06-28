@@ -95,15 +95,6 @@ function AgregarCliente() {
                             id="nombre"
                             onChange={actualizarState}
                         />
-                        {/* <div className="campo">
-                        <label>Nombre:</label>
-                        <input
-                            type="text"
-                            placeholder="Ingrese el nombre"
-                            name="nombre"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
 
                         <TextField
                             margin="normal"
@@ -117,16 +108,6 @@ function AgregarCliente() {
                             id="correo"
                             onChange={actualizarState}
                         />
-                        {/* <div className="campo">
-                        <label>Correo Electronico:</label>
-                        <input
-                            type="email"
-                            placeholder="Ingrese el correo"
-                            name="correo"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
                         <TextField
                             margin="normal"
                             required
@@ -139,16 +120,6 @@ function AgregarCliente() {
                             id="numeroTelefonico"
                             onChange={actualizarState}
                         />
-                        {/* <div className="campo">
-                        <label>Numero Telefonico</label>
-                        <input
-                            type="number"
-                            placeholder="Ingrese el telefono"
-                            name="numeroTelefonico"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
                         <TextField
                             margin="normal"
                             required
@@ -161,28 +132,6 @@ function AgregarCliente() {
                             id="cedula"
                             onChange={actualizarState}
                         />
-                        {/* <div className="campo">
-                        <label>Cédula:</label>
-                        <input
-                            type="number"
-                            placeholder="Ingrese la Cédula"
-                            name="cedula"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
-                        {/* <TextField
-                            
-                            required
-                            fullWidth
-
-                            name="tipoCedula"
-                            label="Ingrese el tipo cédula"
-                            placeholder="Tipo Cedula"
-                            type="text"
-                            id="tipoCedula"
-                            onChange={actualizarState} 
-                        />*/}
                         <FormControl fullWidth margin="normal">
                             <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
                             <Select
@@ -199,24 +148,7 @@ function AgregarCliente() {
                                 <MenuItem value={'04'}>NITE</MenuItem>
                             </Select>
                         </FormControl>
-
-                        {/* <div className="campo">
-                        <label>Tipo Cedula:</label>
-                        <input
-                            type="text"
-                            placeholder="Ingrese el tipo cédula"
-                            name="tipoCedula"
-                            onChange={actualizarState}
-                        />
-                    </div> */}
-
                         <div className="enviar">
-                            {/* <input
-                            type="submit"
-                            className="btn btn-azul"
-                            value="Agregar Cliente"
-                            
-                        /> */}
                             <Button
                                 type="submit"
                                 disabled={ValidarCliente()}

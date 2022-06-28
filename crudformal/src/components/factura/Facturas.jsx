@@ -155,22 +155,6 @@ function Facturas() {
                     </Table>
                 </TableContainer>
             </Box>
-            {/* <h2>Facturas</h2> */}
-
-            {/* <Link to={"/factura/nuevo"} className="btn btn-verde nvo-cliente">
-                <i className="fas fa-plus-circle"></i>
-                Nueva factura
-            </Link> */}
-
-            {/* <ul className="listado-clientes">
-                {facturas.map(factura => (
-                    <Factura
-                        key={factura.idFactura}
-                        factura={factura}
-                        card={true}
-                    />
-                ))}
-            </ul> */}
 
         </Fragment>
     )
