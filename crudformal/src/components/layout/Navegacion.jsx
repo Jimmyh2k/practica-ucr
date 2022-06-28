@@ -21,13 +21,14 @@ import LogoIcon from '../../imagenes/logo';
 import GroupsIcon from '@mui/icons-material/Groups';
 import HotelIcon from '@mui/icons-material/Hotel';
 import NightShelterIcon from '@mui/icons-material/NightShelter';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import { ListItemIcon, ListItemText } from '@mui/material'
 
 const pages = [
     { path: '/', name: 'Clientes', key: 'clientes', icon: <GroupsIcon fontSize="small" /> },
     { path: '/habitacion', name: 'Habitación', key: 'habitacion', icon: <HotelIcon fontSize="small" /> },
     { path: '/reservacion', name: 'Reservación', key: 'reservacion', icon: <NightShelterIcon fontSize="small" /> },
-    { path: '/factura', name: 'Factura', key: 'factura', icon: <NightShelterIcon fontSize="small" /> }
+    { path: '/factura', name: 'Factura', key: 'factura', icon: <DescriptionOutlinedIcon fontSize="small" /> }
 ]
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -51,7 +52,7 @@ const Navegacion = () => {
     if (!auth.auth) return null;
 
     return (
-        <AppBar position="static">
+        <AppBar position="static" sx={{ backgroundColor: '#9000B3', height: '7vh' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>

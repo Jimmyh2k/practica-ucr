@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
-
+import { DataContext } from '../../context/DataContext';
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
 import { styled } from '@mui/material/styles';
@@ -15,36 +15,33 @@ import { styled } from '@mui/material/styles';
 
 
 function Clientes() {
-    const Item = styled(Paper)(({ theme }) => ({
-        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-        ...theme.typography.body2,
-        padding: theme.spacing(1),
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
-    }));
-    var XML = "HHHHHH";
-
-    
-    const downloadTxtFile = () => {
-        const element = document.createElement("a");
-        const file = new Blob([XML], {
-          type: "text/plain"
-        });
-        element.href = URL.createObjectURL(file);
-        element.download = "Factura.txt";
-        document.body.appendChild(element);
-        element.click();
-      };
-
 
     const navigate = useNavigate();
 
     //Trabajar con useState
-    const [clientes, guardarclientes] = useState([]);
+    // const [clientes, guardarclientes] = useState([]);
+    const { clientes, setClientes, estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
-    
+    const consultarAPI = async () => {
+        try {
+            const clientesConsulta = await clienteAxios.get('/clientes', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setClientes(clientesConsulta.data);
+
+        } catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
 
     // use effect es similar a componentdidmount y willmount
     useEffect(() => {
@@ -52,30 +49,16 @@ function Clientes() {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const clientesConsulta = await clienteAxios.get('/clientes', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
-
-                    // colocar el resultado en el state
-                    guardarclientes(clientesConsulta.data);
-
-                } catch (error) {
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/iniciar-sesion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/iniciar-sesion');
         }
     }, []); //[clientes] es para refrescar buscar otra manera
 
+    if (estaBorrado.clienteBorrado) {
+        consultarAPI();
+        setEstaBorrado({ clienteBorrado: false });
+    }
 
     // Si el state esta como false
     if (!auth.auth) {
@@ -107,28 +90,27 @@ function Clientes() {
                 </Button>
                 <Box sx={{ width: '100%' }}>
                     <Grid pt={1} container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2 }}  >
-                  
+
 
                         {clientes.map(cliente => (
-                            
+
                             <Cliente
 
                                 key={cliente.idCliente}
                                 cliente={cliente}
                                 card={true}
-                                
+
                             />
                         ))}
 
                     </Grid>
-
                 </Box>
             </Box>
             {/*
             Versión de PC
             Se usa table
             */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column' }}>
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, flexDirection: 'column', mx: '2rem' }}>
                 <Typography variant="h4" gutterBottom component="h2"
                     sx={{
                         mr: 2,
@@ -173,18 +155,14 @@ function Clientes() {
                         </TableHead>
                         <TableBody sx={{ width: "100%" }}>
                             {clientes.map(cliente => (
-                                <Cliente 
-                                key={cliente.idCliente} 
-                                cliente={cliente} />
+                                <Cliente
+                                    key={cliente.idCliente}
+                                    cliente={cliente} />
                             ))}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </Box>
-
-            <Button variant ="contained" color="primary" onClick={downloadTxtFile}> Descargar XML </Button>
-
-            
 
         </Fragment >
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Box, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { FacturaContext } from '../../context/FacturaContext';
+import { DataContext } from '../../context/DataContext';
 import clienteAxios from '../../config/axios';
 import { CRMContext } from '../../context/CRMContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 function SeleccionarCliente() {
 
 
-    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(FacturaContext);
+    const { seleccionDeCliente, actualizarReservacion, reservacion, clientes, setClientes } = useContext(DataContext);
     const navigate = useNavigate();
     const [auth, guardarAuth] = useContext(CRMContext);
 
@@ -16,30 +16,31 @@ function SeleccionarCliente() {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const clientesConsulta = await clienteAxios.get('/clientes', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
 
-                    // colocar el resultado en el state
-                    setClientes(clientesConsulta.data);
-
-                } catch (error) {
-                    console.error(error);
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/reservacion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/reservacion');
         }
     }, []);
+    const consultarAPI = async () => {
+        try {
+            const clientesConsulta = await clienteAxios.get('/clientes', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setClientes(clientesConsulta.data);
+
+        } catch (error) {
+            console.error(error);
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/reservacion');
+            }
+        }
+    }
     return (
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>

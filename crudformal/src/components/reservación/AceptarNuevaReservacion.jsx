@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FacturaContext } from '../../context/FacturaContext';
+import { DataContext } from '../../context/DataContext';
 import { Paper, Typography, Button, TextField } from '@mui/material'
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const AceptarNuevaReservacion = () => {
 
-    const { checkIn, checkOut, reservacion, dataForUI, actualizarReservacion } = useContext(FacturaContext);
+    const { checkIn, checkOut, reservacion, dataForUI, actualizarReservacion } = useContext(DataContext);
     const navigate = useNavigate();
     const GuardarReservacion = e => {
         e.preventDefault();
@@ -41,6 +41,7 @@ const AceptarNuevaReservacion = () => {
                     id="comentarios"
                     name="comentarios"
                     label="Comentarios"
+                    fullWidth
                     multiline
                     rows={4}
                     variant="outlined"
@@ -48,7 +49,7 @@ const AceptarNuevaReservacion = () => {
                     onChange={e => (actualizarReservacion({ name: e.target.name, value: e.target.value }))}
 
                 />
-                <Button type="submit" sx={{ mb: '2rem' }} variant="outlined">Crear reservacion</Button>
+                <Button type="submit" sx={{ mt: '2rem', mb: '2rem' }} variant="outlined">Crear reservacion</Button>
             </form>
         </Paper>
     )

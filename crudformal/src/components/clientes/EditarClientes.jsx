@@ -92,6 +92,7 @@ function EditarCliente(props) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                height: '93vh'
             }}>
                 <Box
                     sx={{

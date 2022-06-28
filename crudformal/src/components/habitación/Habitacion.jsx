@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
 import { Link } from 'react-router-dom'
-
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import SingleBedIcon from '@mui/icons-material/SingleBed';
 import BedIcon from '@mui/icons-material/Bed';
 import NumbersIcon from '@mui/icons-material/Numbers';
+import { DataContext } from '../../context/DataContext';
+
 
 function Habitacion(props) {
     //console.log(props.habitacion.nombre); //Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idHabitacion, numero, camasIndividuales, camasDobles, recomendacionPrecioNacional, recomendacionPrecioExtranjero } = props.habitacion;
+    const { habitaciones, setHabitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     //Eliminar Habitacion
     const eliminarHabitacion = (id) => {
@@ -37,6 +39,7 @@ function Habitacion(props) {
                             'success'
                         );
                     });
+                setEstaBorrado({ habitacionBorrada: true });
             }
         })
     }

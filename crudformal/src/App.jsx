@@ -27,14 +27,26 @@ import EditarUsuario from "./components/usuarios/EditarUsuario";
 import Facturas from "./components/factura/Facturas";
 import AgregarFactura from "./components/factura/AgregarFactura";
 import DetallesFactura from "./components/factura/DetalleFactura";
-
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import Login from "./components/auth/Login";
 import { CRMContext, CRMProvider } from "./context/CRMContext";
+import { DataProvider } from './context/DataContext';
+
 
 function App() {
 
   //Utilizar el context
   const [auth, guardarAuth] = useContext(CRMContext);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#9000B3',
+      },
+      secondary: {
+        main: '#D14465',
+      },
+    },
+  });
 
   return (
 
@@ -42,52 +54,55 @@ function App() {
       <CssBaseline />
       <div className="App">
         <CRMProvider value={[auth, guardarAuth]}>
-          {/* <Header></Header> */}
-          <div className="grid contenedor contenido-principal">
-            <Navegacion></Navegacion>
+          <DataProvider>
+            <ThemeProvider theme={theme}>
+              {/* <Header></Header> */}
+              <div className="grid contenedor contenido-principal">
+                <Navegacion></Navegacion>
 
-            <main className="caja-contenido col-9">
-              <Routes>
-                <Route exact path="/" element={<Clientes />} />
+                <main className="caja-contenido col-9">
+                  <Routes>
+                    <Route exact path="/" element={<Clientes />} />
 
-                <Route exact path="/clientes/editar/:id" element={<EditarCliente />} />
+                    <Route exact path="/clientes/editar/:id" element={<EditarCliente />} />
 
-                <Route exact path="/clientes/detalle/:id" element={<DetallesCliente />} />
+                    <Route exact path="/clientes/detalle/:id" element={<DetallesCliente />} />
 
-                <Route exact path="/habitacion" element={<Habitaciones />} />
+                    <Route exact path="/habitacion" element={<Habitaciones />} />
 
-                <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
+                    <Route exact path="/clientes/nuevo" element={<AgregarCliente />} />
 
-                <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion />} />
+                    <Route exact path="/habitacion/editar/:id" element={<EditarHabitacion />} />
 
-                {/* <Route exact path="/Reservacion" element={<Reservaciones />} /> */}
+                    {/* <Route exact path="/Reservacion" element={<Reservaciones />} /> */}
 
-                <Route exact path="/reservacion" element={<Reservaciones />} />
+                    <Route exact path="/reservacion" element={<Reservaciones />} />
 
-                <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
+                    <Route exact path="/reservacion/nuevo" element={<AgregarReservacion />} />
 
-                <Route exact path="/reservacion/detalle/:id" element={<DetallesReservacion />} />
+                    <Route exact path="/reservacion/detalle/:id" element={<DetallesReservacion />} />
 
-                <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
+                    <Route exact path="/habitacion/nuevo" element={<AgregarHabitacion />} />
 
-                <Route exact path="/iniciar-sesion" element={<Login />} />
+                    <Route exact path="/iniciar-sesion" element={<Login />} />
 
-                <Route exact path="/usuario/nuevo" element={<AgregarUsuario />} />
+                    <Route exact path="/usuario/nuevo" element={<AgregarUsuario />} />
 
-                <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
+                    <Route exact path="/usuario/editar/:id" element={<EditarUsuario />} />
 
-                <Route exact path="/usuario" element={<Usuarios />} />
+                    <Route exact path="/usuario" element={<Usuarios />} />
 
-                <Route exact path="/factura" element={<Facturas />} />
+                    <Route exact path="/factura" element={<Facturas />} />
 
-                <Route exact path="/factura/nuevo" element={<AgregarFactura />} />
+                    <Route exact path="/factura/nuevo" element={<AgregarFactura />} />
 
-                <Route exact path="/factura/detalle/:id" element={<DetallesFactura />} />
+                    <Route exact path="/factura/detalle/:id" element={<DetallesFactura />} />
 
-              </Routes>
-
-            </main>
-          </div>
+                  </Routes>
+                </main>
+              </div>
+            </ThemeProvider>
+          </DataProvider>
         </CRMProvider>
       </div>
     </Router>

@@ -1,33 +1,53 @@
-import React, { useContext } from "react";
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React, { useContext, useEffect } from "react";
+import clienteAxios from '../../config/axios';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import { FacturaContext } from '../../context/FacturaContext';
+import { DataContext } from '../../context/DataContext';
+import { CRMContext } from '../../context/CRMContext';
+
 
 
 function SeleccionarHabitacion() {
 
-    const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(FacturaContext);
+    const { seleccionDeHabitacion, actualizarReservacion, dataForUI } = useContext(DataContext);
 
-    const rows = [
-        { id: 1, numero: 1, camasDobles: 1, camasIndividuales: 2 },
-        { id: 2, numero: 2, camasDobles: 1, camasIndividuales: 2 },
-        { id: 3, numero: 3, camasDobles: 1, camasIndividuales: 2 },
-        { id: 4, numero: 4, camasDobles: 1, camasIndividuales: 2 },
-        { id: 5, numero: 5, camasDobles: 1, camasIndividuales: 2 },
-        { id: 6, numero: 6, camasDobles: 1, camasIndividuales: 2 },
-        { id: 7, numero: 7, camasDobles: 1, camasIndividuales: 2 },
-        { id: 8, numero: 8, camasDobles: 1, camasIndividuales: 2 },
-        { id: 9, numero: 9, camasDobles: 1, camasIndividuales: 2 },
-        { id: 10, numero: 10, camasDobles: 1, camasIndividuales: 2 },
-        { id: 11, numero: 11, camasDobles: 1, camasIndividuales: 2 },
-        { id: 12, numero: 12, camasDobles: 1, camasIndividuales: 2 },
-    ];
+
+    const [auth, guardarAuth] = useContext(CRMContext);
+    const navigate = useNavigate();
+    const { habitaciones, setHabitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
+    //query al api
+    const consultarAPI = async () => {
+        try {
+
+            const habitacionesConsulta = await clienteAxios.get('/habitacion', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            setHabitaciones(habitacionesConsulta.data);
+        }
+        catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
+
+    //use effect es similar a componentdidmount y willmount
+    useEffect(() => {
+        consultarAPI();
+    }, []); //EL [habitaciones] permite refrescar si hay un cambio, el arreglo vacio evita la iteracion
+
+    if (estaBorrado.habitacionBorrada) {
+        consultarAPI();
+        setEstaBorrado({ habitacionBorrada: false });
+    }
+    if (!auth.auth) {
+        navigate('/iniciar-sesion'); //REVISAR
+    }
     return (
         <Paper sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', height: '90%' }}>
             <Box pl={2} pt={2} pb={2}>
@@ -48,18 +68,18 @@ function SeleccionarHabitacion() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {habitaciones.map((habitacion) => (
                             <TableRow
-                                key={row.numero}
+                                key={habitacion.numero}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.numero}
+                                    {habitacion.numero}
                                 </TableCell>
-                                <TableCell align="left">{row.camasDobles}</TableCell>
-                                <TableCell align="left">{row.camasIndividuales}</TableCell>
+                                <TableCell align="left">{habitacion.camasDobles}</TableCell>
+                                <TableCell align="left">{habitacion.camasIndividuales}</TableCell>
                                 <TableCell align="right">
-                                    <Button variant="outlined" size="small" onClick={() => (actualizarReservacion({ name: 'idHabitacion', value: row.id, dataForUI: { name: "datosDeHabitacion", value: row } }))}>Seleccionar</Button>
+                                    <Button variant="outlined" size="small" onClick={() => (actualizarReservacion({ name: 'idHabitacion', value: habitacion.idHabitacion, dataForUI: { name: "datosDeHabitacion", value: habitacion } }))}>Seleccionar</Button>
                                 </TableCell>
                             </TableRow>
                         ))}
