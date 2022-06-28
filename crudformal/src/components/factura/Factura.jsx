@@ -168,13 +168,10 @@ function Factura(props) {
             </TableCell>
             <TableCell align="right">
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Button variant="outlined" component={Link} to={''} startIcon={<VisibilityOutlinedIcon />} sx={{ marginRight: 1 }}>
+                    <Button variant="outlined" component={Link} to={`/factura/detalle/${idFactura}`} startIcon={<VisibilityOutlinedIcon />} sx={{ marginRight: 1 }}>
                         Ver detalles
                     </Button>
-                    <Link to={`/factura/detalle/${idFactura}`} className="btn btn-azul">
-                        <i className="fas fa-pen-alt"></i>
-                        Detalles
-                    </Link>
+                   
                     <Button variant="outlined" startIcon={<SimCardDownloadOutlinedIcon />} onClick={download}>
                         Descargar XML
                     </Button>

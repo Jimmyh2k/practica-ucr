@@ -118,10 +118,10 @@ function Reservacion(props) {
                         <Button size="small" onClick={() => eliminarReservacion(idReservacion)}>
                             Eliminar
                         </Button>
-                        <Link to={`/reservacion/detalle/${idReservacion}`} className="btn btn-azul">
-                            <i className="fas fa-pen-alt"></i>
+                        <Button size="small" component={Link}  to={`/reservacion/detalle/${idReservacion}`} sx={{ marginRight: 1 }}>
                             Detalles
-                        </Link>
+                        </Button>
+                      
                     </CardActions>
                 </Card>
             </Grid>
@@ -155,10 +155,12 @@ function Reservacion(props) {
                     <Button variant="outlined" startIcon={<ClearOutlinedIcon />} onClick={() => eliminarReservacion(idReservacion)}>
                         Eliminar
                     </Button>
-                    <Link to={`/reservacion/detalle/${idReservacion}`} className="btn btn-azul">
-                        <i className="fas fa-pen-alt"></i>
+
+                    <Button variant="outlined" component={Link}to={`/reservacion/detalle/${idReservacion}`} startIcon={<EditIcon />} sx={{ marginLeft: 1 }}>
                         Detalles
-                    </Link>
+                    </Button>
+
+                  
                 </Box>
             </TableCell>
         </TableRow >

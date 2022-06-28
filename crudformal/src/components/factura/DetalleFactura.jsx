@@ -34,17 +34,37 @@ function DetallesFactura(props) {
 
     return (
         <Fragment>
-            <h1>Detalles de la Factura</h1>
-            <div className="info-cliente">
-                        
-                        <p className="empresa">Fecha de Emisión: {factura.fechaEmision}</p>
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '93vh'
+        }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    alignItems: 'left',
+                    backgroundColor: '#ffffff',
+                    padding: '30px',
+                    margin: { xs: '10px' },
+                    borderRadius: '10px',
+                    width: { xs: '90%', md: '70%', lg: '50%' },
+                }}
+            >
+                <Typography variant="h4" component="h1">Detalles del Factura</Typography>
+                <form >
+                <p className="empresa">Fecha de Emisión: {factura.fechaEmision}</p>
                         <p className="empresa">Condicion Venta: {factura.condicionVenta}</p>
                         <p className="empresa">Medio de Pago:{factura.MedioPago}</p>
                         <p className="empresa">Total Venta: {factura.totalVenta}</p>
-                        
-                    </div>
+                   
+                </form>
+            </Box>
+        </Box>
 
-        </Fragment>
+    </Fragment>
     )
 }
 

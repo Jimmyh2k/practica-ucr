@@ -1,7 +1,9 @@
 import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
-import { useNavigate, useParams } from 'react-router-dom'
-import { Typography, Box, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@mui/material'
+import { useNavigate, Link, useParams } from 'react-router-dom'
+import { Typography, Box, FormLabel,TextField, Grid, Button, Select, MenuItem, InputLabel, FormControl, Card } from '@mui/material'
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+
 
 function DetallesCliente(props) {
 
@@ -33,16 +35,46 @@ function DetallesCliente(props) {
 
 
     return (
+        
+        
         <Fragment>
-            <div className="info-cliente">
-                        <p className="nombre">Nombre: {cliente.nombre}</p>
-                        <p className="empresa">Correo: {cliente.correo}</p>
-                        <p className="empresa">Telefono:{cliente.numeroTelefonico}</p>
-                        <p className="empresa">Cédula: {cliente.cedula}</p>
-                        <p className="empresa">Tipo Cédula:{cliente.tipoCedula}</p>
-            </div>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '93vh'
+            }}>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '10px',
+                        alignItems: 'left',
+                        backgroundColor: '#ffffff',
+                        padding: '30px',
+                        margin: { xs: '10px' },
+                        borderRadius: '10px',
+                        width: { xs: '90%', md: '70%', lg: '50%' },
+                    }}
+                >
+                    <Typography variant="h4" component="h1">Detalles del Cliente</Typography>
+                    <form >
+                        
+                    <p className="nombre">Nombre: {cliente.nombre}</p>
+                        <p >Correo: {cliente.correo}</p>
+                        <p >Telefono:{cliente.numeroTelefonico}</p>
+                        <p >Cédula: {cliente.cedula}</p>
+                        <p>Tipo Cédula:{cliente.tipoCedula}</p>
+
+                       
+                       
+                    </form>
+                </Box>
+            </Box>
 
         </Fragment>
+
+    
     )
 }
 

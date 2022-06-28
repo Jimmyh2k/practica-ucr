@@ -36,19 +36,62 @@ function DetallesReservacion(props) {
 
 
     return (
-        <Fragment>
-            <h1>Detalles de la Reservación</h1>
-            <div className="info-cliente">
-                <p className="empresa">Nombre del Cliente :{reservacion.cliente.nombre}</p>
-                <p className="empresa">Habitacion escojida:{reservacion.habitacion.numero}</p>
-                <p className="nombre">Cantidad de personas: {reservacion.cantidadDePersonas}</p>
-                <p className="empresa">CheckIn: {reservacion.checkIn}</p>
-                <p className="empresa">CheckOut: {reservacion.checkOut}</p>
-                <p className="empresa">Comentarios: {reservacion.comentarios}</p>
-                
-            </div>
+        
 
-        </Fragment>
+
+        <Fragment>
+        <Box sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '93vh'
+        }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    alignItems: 'left',
+                    backgroundColor: '#ffffff',
+                    padding: '30px',
+                    margin: { xs: '10px' },
+                    borderRadius: '10px',
+                    width: { xs: '90%', md: '70%', lg: '50%' },
+                }}
+            >
+                <Typography variant="h4" component="h1">Detalles del Reservación</Typography>
+                <form >
+                    
+               
+                <p >Nombre del Cliente :{reservacion.cliente.nombre}</p>
+                <p >Habitacion escojida:{reservacion.habitacion.numero}</p>
+                <p >Cantidad de personas: {reservacion.cantidadDePersonas}</p>
+                <p>CheckIn: {reservacion.checkIn}</p>
+                <p >CheckOut: {reservacion.checkOut}</p>
+                <p >Comentarios: {reservacion.comentarios}</p>
+                   
+                   
+                </form>
+            </Box>
+        </Box>
+
+    </Fragment>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
     )
 }
 
