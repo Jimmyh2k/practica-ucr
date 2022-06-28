@@ -13,10 +13,10 @@ module.exports = function() {
     //------------------- Rutas de Clientes ------------------- 
 
     //Agrega nuevos clientes via POST
-    router.post('/clientes',auth, clienteController.agregarCliente);
+    router.post('/clientes', clienteController.agregarCliente);
 
     //Mostrar los clientes via GET
-    router.get('/clientes', clienteController.mostrarClientes);
+    router.get('/clientes',auth, clienteController.mostrarClientes);
 
     //Muestra un cliente por id (buscar)
     router.get('/clientes/:idCliente', clienteController.buscarCliente);
