@@ -4,6 +4,7 @@ import Usuario from "./Usuario";
 import { Link, useNavigate } from 'react-router-dom';
 import { Typography, Button, Box, List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Grid, Card, CardActions, CardContent } from '@mui/material';
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
+import { DataContext } from '../../context/DataContext';
 
 // import el Context
 import { CRMContext } from '../../context/CRMContext';
@@ -14,41 +15,46 @@ function Usuarios() {
     const navigate = useNavigate();
 
     //Trabajar con useState
-    const [usuarios, guardarusuarios] = useState([]);
+    // const [usuarios, guardarusuarios] = useState([]);
 
     // utilizar valores del context
     const [auth, guardarAuth] = useContext(CRMContext);
 
+    const { usuarios, setUsuarios, estaBorrado, setEstaBorrado } = useContext(DataContext);
+
     // use effect es similar a componentdidmount y willmount
+    const consultarAPI = async () => {
+        try {
+            const usuariosConsulta = await clienteAxios.get('/usuarios', {
+                headers: {
+                    Authorization: `Bearer ${auth.token}`
+                }
+            });
+
+            // colocar el resultado en el state
+            setUsuarios(usuariosConsulta.data);
+
+        } catch (error) {
+            // Error con authorizacion
+            if (error.response.status === 500) {
+                navigate('/iniciar-sesion');
+            }
+        }
+    }
     useEffect(() => {
 
         if (auth.token !== '') {
             // Query a la API
-            const consultarAPI = async () => {
-                try {
-                    const usuariosConsulta = await clienteAxios.get('/usuarios', {
-                        headers: {
-                            Authorization: `Bearer ${auth.token}`
-                        }
-                    });
-
-                    // colocar el resultado en el state
-                    guardarusuarios(usuariosConsulta.data);
-
-                } catch (error) {
-                    // Error con authorizacion
-                    if (error.response.status === 500) {
-                        navigate('/iniciar-sesion');
-                    }
-                }
-            }
             consultarAPI();
         } else {
             navigate('/iniciar-sesion');
         }
     }, []); //[usuarios] es para refrescar buscar otra manera
 
-
+    if (estaBorrado.usuarioBorrado) {
+        consultarAPI();
+        setEstaBorrado({ usuarioBorrado: false });
+    }
     // Si el state esta como false
     if (!auth.auth) {
         navigate('/iniciar-sesion'); //REVISAR

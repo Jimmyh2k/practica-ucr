@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import clienteAxios from "../../config/axios";
-
 import { Link } from 'react-router-dom'
-
+import { DataContext } from '../../context/DataContext';
 import { ListItem, Box, Typography, Paper, Card, CardContent, CardActions, Button, TableRow, TableCell, Grid } from '@mui/material';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import EditIcon from '@mui/icons-material/Edit';
@@ -15,6 +14,8 @@ function Usuario(props) {
     //console.log(props.usuario.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idUsuario, nombre, correo, contrasena, rol } = props.usuario;
+
+    const { estaBorrado, setEstaBorrado } = useContext(DataContext);
 
     //Eliminar usuario
     const eliminarUsuario = (id) => {
@@ -38,6 +39,7 @@ function Usuario(props) {
                             'success'
                         );
                     });
+                setEstaBorrado({ usuarioBorrado: true });
             }
         })
     }

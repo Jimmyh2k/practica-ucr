@@ -23,11 +23,13 @@ export const DataProvider = ({ children }) => {
     const [estaBorrado, setEstaBorrado] = useState({
         clienteBorrado: false,
         habitacionBorrada: false,
-        reservacionBorrada: false
+        reservacionBorrada: false,
+        usuarioBorrado: false
     });
     const [clientes, setClientes] = useState([]);
     const [habitaciones, setHabitaciones] = useState([]);
-    const [reservaciones, setReservaciones] = useState([])
+    const [reservaciones, setReservaciones] = useState([]);
+    const [usuarios, setUsuarios] = useState([]);
     //Leer los datos del formulario
     const actualizarReservacion = e => {
         //Almacena lo que el usuario escribe en el state
@@ -69,7 +71,8 @@ export const DataProvider = ({ children }) => {
             setClientes,
             estaBorrado, setEstaBorrado,
             habitaciones, setHabitaciones,
-            reservaciones, setReservaciones
+            reservaciones, setReservaciones,
+            usuarios, setUsuarios
         }}>
             {children}
         </DataContext.Provider>

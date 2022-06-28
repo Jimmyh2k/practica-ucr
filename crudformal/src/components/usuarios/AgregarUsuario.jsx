@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import clienteAxios from "../../config/axios";
 import { useNavigate } from 'react-router-dom'
 import Swal from "sweetalert2";
@@ -25,6 +25,9 @@ function AgregarUsuario() {
         })
 
     }
+    useEffect(() => {
+        console.log(usuario);
+    }, [usuario])
 
     //validar el formulario
     const ValidarUsuario = () => {
@@ -129,14 +132,14 @@ function AgregarUsuario() {
                             onChange={actualizarState}
                         />
                         <FormControl fullWidth margin="normal">
-                            <InputLabel id="tipoCedula-label">Ingrese el tipo de cédula</InputLabel>
+                            <InputLabel id="rol-label">Rol de usuario</InputLabel>
                             <Select
-                                labelId="tipoCedula-label"
-                                id="tipoCedula"
-                                value={usuario.tipoCedula}
+                                labelId="rol-label"
+                                id="rol"
+                                value={usuario.rol}
                                 label="Ingrese el tipo de cédula"
                                 name="rol"
-                                onChange={actualizarState}
+                                onChange={e => actualizarState(e)}
                             >
                                 <MenuItem value={'Administrativo'}>Administrativo</MenuItem>
                                 <MenuItem value={'Recepcionista'}>Recepcionista</MenuItem>
