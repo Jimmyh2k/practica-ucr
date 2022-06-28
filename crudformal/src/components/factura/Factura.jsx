@@ -21,15 +21,15 @@ function Factura(props) {
         const date = new Date(fechaSinFormato);
         return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
     }
-     
 
-     function download() {
-    const data = props.factura;   //dataForXml
-    const fileName = props.fileName ? props.fileName : "factura";
-    let fields = props.fields ? props.fields : [];  
-    const exportType = 'xml';
-    exportFromJSON({data, fileName, fields, exportType})
-  }
+
+    function download() {
+        const data = props.factura;   //dataForXml
+        const fileName = props.fileName ? props.fileName : "facturax";
+        let fields = props.fields ? props.fields : [];
+        const exportType = 'xml';
+        exportFromJSON({ data, fileName, fields, exportType })
+    }
 
     const nombreCondicionDeVenta = (codigoCondicionVenta) => {
         switch (codigoCondicionVenta) {
@@ -119,7 +119,7 @@ function Factura(props) {
                                 {fechaConFormato(reservacion.checkOut)}
                             </Typography>
                         </Box>
-                        
+
                     </CardContent>
                     <CardActions>
                         <Button component={Link} to={''} size="small" sx={{ marginRight: 1 }}>
