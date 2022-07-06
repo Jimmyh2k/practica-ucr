@@ -117,39 +117,6 @@ function Login() {
 
             </Box>
         </Container >
-
-        // <div className="login">
-        //     <h2>Iniciar Sesión</h2>
-
-        //     <div className="contenedor-formulario">
-        //         <form onSubmit={iniciarSesion}>
-
-        //             <div className="campo">
-        //                 <label>Email</label>
-        //                 <input
-        //                     type="text"
-        //                     name="correo"
-        //                     placeholder="Correo Electronico"
-        //                     required
-        //                     onChange={leerDatos}
-        //                 />
-        //             </div>
-
-        //             <div className="campo">
-        //                 <label>Password</label>
-        //                 <input
-        //                     type="password"
-        //                     name="contrasena"
-        //                     placeholder="Contraseña"
-        //                     required
-        //                     onChange={leerDatos}
-        //                 />
-        //             </div>
-
-        //             <input type="submit" value="Iniciar Sesión" className="btn btn-verde btn-block" />
-        //         </form>
-        //     </div>
-        // </div>
     );
 }
 

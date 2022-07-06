@@ -150,9 +150,6 @@ function AgregarHabitacion() {
 
         </Fragment>
     )
-
-
-
 }
 
 export default AgregarHabitacion;

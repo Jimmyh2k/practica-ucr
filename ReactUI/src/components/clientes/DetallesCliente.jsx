@@ -64,9 +64,6 @@ function DetallesCliente(props) {
                         <p >Telefono:{cliente.numeroTelefonico}</p>
                         <p >Cédula: {cliente.cedula}</p>
                         <p>Tipo Cédula:{cliente.tipoCedula}</p>
-
-
-
                     </form>
                 </Box>
             </Box>

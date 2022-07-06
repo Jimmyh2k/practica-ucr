@@ -230,9 +230,6 @@ function AgregarFactura() {
                                             <TableCell align="right">
                                                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                                                     <Button variant="outlined" size="small" onClick={() => actualizarState({ target: { name: "idReservacion", value: reservacion.idReservacion } })}>Seleccionar</Button>
-                                                    {/* actualizarState({ name: "idReservacion", value: reservacion.idReservacion }) 
-                                                    e => guardarFactura({ idFactura: 2 })
-                                                    */}
                                                 </Box>
                                             </TableCell>
                                         </TableRow >
@@ -248,79 +245,11 @@ function AgregarFactura() {
                         >
                             Agregar Factura
                         </Button>
-                        {/* <div className="enviar">
-                    <input
-                        type="submit"
-                        className="btn btn-azul"
-                        value="Agregar Cliente"
-                        disabled={ValidarFactura()}
-                    />
-                </div> */}
+
                     </form>
                 </Box>
 
             </Box>
-            {/* <h2>Agregar Factura</h2>
-
-            <legend>Llena todos los campos</legend> */}
-
-            {/* <div className="campo">
-                    <label>Fecha de emision:</label>
-                    <input
-                        type="date"
-                        placeholder="Ingrese la fecha de emisión"
-                        name="fechaEmision"
-                        onChange={actualizarState}
-                    />
-                </div> */}
-
-            {/* <div className="campo">
-                <label>Condicion Venta:</label>
-                <input
-                    type="text"
-                    placeholder="Ingrese la condicion venta"
-                    name="condicionVenta"
-                    onChange={actualizarState}
-                />
-            </div> */}
-            {/* <div className="campo">
-                <label>Medio de Pago:</label>
-                <input
-                    type="text"
-                    placeholder="Ingrese el medio de pago"
-                    name="MedioPago"
-                    onChange={actualizarState}
-                />
-            </div> */}
-            {/* <div className="campo">
-                <label>Total Venta:</label>
-                <input
-                    type="number"
-                    placeholder="Ingrese el total venta"
-                    name="totalVenta"
-                    onChange={actualizarState}
-                />
-            </div> */}
-
-            {/* <div className="campo">
-                <label>idReservacion:</label>
-                <input
-                    type="number"
-                    placeholder="Ingrese idReservacion"
-                    name="idReservacion"
-                    onChange={actualizarState}
-                />
-            </div> */}
-
-            {/* <div className="enviar">
-                    <input
-                        type="submit"
-                        className="btn btn-azul"
-                        value="Agregar Cliente"
-                        disabled={ValidarFactura()}
-                    />
-                </div> */}
-
 
         </Fragment>
     )
