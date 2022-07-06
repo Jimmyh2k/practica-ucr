@@ -22,7 +22,6 @@ function AgregarFactura() {
     const [fecha, setFecha] = useState(new Date());
     const guaradrFecha = e => {
         guaradrFecha({ fechaEmision: e })
-        // console.log(e);
     }
     const [auth, guardarAuth] = useContext(CRMContext);
     const { reservaciones, setReservaciones, clientes, habitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);
@@ -31,7 +30,6 @@ function AgregarFactura() {
 
     //Leer los datos del formulario
     const actualizarState = e => {
-        // console.log(e);
         //Almacena lo que el usuario escribe en el state
         guardarFactura({
             ...factura,
@@ -60,8 +58,6 @@ function AgregarFactura() {
     }
     useEffect(() => {
         actualizarState({ target: "fechaEmision", value: fecha })
-        // console.log(habitaciones);
-        console.log("Factura: ", factura);
     }, [fecha])
     useEffect(() => {
         if (auth.token !== '') {
@@ -74,7 +70,6 @@ function AgregarFactura() {
         }
     }, [])
     useEffect(() => {
-        console.log(factura);
     }, [factura])
 
     //validar el formulario
@@ -85,7 +80,6 @@ function AgregarFactura() {
         //Revisa que no haya campos vacíos
         let valido = !condicionVenta.length || !MedioPago.length
 
-        // console.log(valido);
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
     }
@@ -96,7 +90,6 @@ function AgregarFactura() {
 
         clienteAxios.post('/factura', factura)
             .then(res => {
-                // console.log(res)
                 Swal.fire(
                     'Se agregó la factura',
                     res.data.mensaje,

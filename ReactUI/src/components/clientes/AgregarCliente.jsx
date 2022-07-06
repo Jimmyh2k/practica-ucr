@@ -36,7 +36,6 @@ function AgregarCliente() {
         let valido = !nombre.length || !correo.length || !numeroTelefonico.length || !cedula.length
             || !tipoCedula.length;
 
-        console.log(valido);
         //Si hay algo retorna false al disable, si no retorna true al disable
         return valido;
     }
@@ -47,7 +46,6 @@ function AgregarCliente() {
 
         clienteAxios.post('/clientes', cliente)
             .then(res => {
-                console.log(res)
                 Swal.fire(
                     'Se agregó el cliente',
                     res.data.mensaje,

@@ -12,7 +12,6 @@ import { DataContext } from '../../context/DataContext';
 
 
 function Habitacion(props) {
-    //console.log(props.habitacion.nombre); //Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idHabitacion, numero, camasIndividuales, camasDobles, recomendacionPrecioNacional, recomendacionPrecioExtranjero } = props.habitacion;
     const { habitaciones, setHabitaciones, estaBorrado, setEstaBorrado } = useContext(DataContext);

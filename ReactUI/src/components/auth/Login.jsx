@@ -43,7 +43,6 @@ function Login() {
             navigate('/');
 
         } catch (error) {
-            console.log(error);
             Swal.fire({
                 type: 'error', title: 'Hubo un error',
                 text: error.response.data.mensaje
@@ -52,14 +51,11 @@ function Login() {
     }
 
     const leerDatos = e => {
-        // console.log(e.target.value);
         guardarCredenciales({
             ...credenciales,
             [e.target.name]: e.target.value
         })
     }
-    // useEffect(() => console.log(credenciales), [credenciales]);
-
 
     return (
 

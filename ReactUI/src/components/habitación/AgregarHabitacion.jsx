@@ -46,7 +46,6 @@ function AgregarHabitacion() {
 
         clienteAxios.post('/habitacion', habitacion)
             .then(res => {
-                console.log(res)
                 Swal.fire(
                     'Se agregó la habitacion',
                     res.data.mensaje,

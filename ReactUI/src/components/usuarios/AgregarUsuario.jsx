@@ -27,7 +27,6 @@ function AgregarUsuario() {
 
     }
     useEffect(() => {
-        console.log(usuario);
     }, [usuario])
 
     //validar el formulario
@@ -48,7 +47,6 @@ function AgregarUsuario() {
 
         clienteAxios.post('/crear-cuenta', usuario)
             .then(res => {
-                console.log(res)
                 Swal.fire(
                     'Se agregó el usuario',
                     res.data.mensaje,

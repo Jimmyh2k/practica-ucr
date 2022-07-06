@@ -8,13 +8,10 @@ import { DataContext } from '../../context/DataContext';
 import exportFromJSON from "export-from-json";
 
 function Factura(props) {
-    //console.log(props.factura.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idFactura, fechaEmision, condicionVenta, MedioPago, totalVenta, idReservacion, reservacion } = props.factura;
     const [cliente, setCliente] = useState({});
     const [habitacion, sethabitacion] = useState({});
-    console.log("Reservacion", reservacion);
-    console.log(props.factura.reservacion.cliente.nombre);
     const fechaConFormato = (fechaSinFormato) => {
         const date = new Date(fechaSinFormato);
         return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`

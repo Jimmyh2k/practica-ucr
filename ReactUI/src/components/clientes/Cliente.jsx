@@ -14,7 +14,6 @@ import { DataContext } from '../../context/DataContext';
 
 
 function Cliente(props) {
-    //console.log(props.cliente.nombre); Consultar por manera mas sencilla de usar props
     //Extraer los valores
     const { idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = props.cliente;
 
@@ -113,7 +112,7 @@ function Cliente(props) {
 
             <TableCell align="right">
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                <Button variant="outlined" component={Link} to={`/clientes/detalle/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
+                    <Button variant="outlined" component={Link} to={`/clientes/detalle/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>
                         Detalles
                     </Button>
                     <Button variant="outlined" component={Link} to={`/clientes/editar/${idCliente}`} startIcon={<EditIcon />} sx={{ marginRight: 1 }}>

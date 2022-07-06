@@ -24,7 +24,6 @@ function EditarCliente(props) {
     //Query a la api
     const consultarApi = async () => {
         const clienteConsulta = await clienteAxios.get(`/clientes/${id}`);
-        console.log(clienteConsulta.data);
         datosCliente(clienteConsulta.data);
     }
 
@@ -73,9 +72,6 @@ function EditarCliente(props) {
     const ValidarCliente = () => {
         //Destructuring
         const { _idCliente, nombre, correo, numeroTelefonico, cedula, tipoCedula } = cliente;
-        console.log(cliente.numeroTelefonico);
-        console.log(numeroTelefonico);
-        console.log("--------");
 
         //Revisa que no haya campos vacíos
         let valido = !nombre.length || !correo.length || !numeroTelefonico.toString().length || !cedula.length

@@ -23,7 +23,6 @@ function DetallesFactura(props) {
     //Query a la api
     const consultarApi = async () => {
         const facturaConsulta = await clienteAxios.get(`/factura/${id}`);
-        console.log(facturaConsulta.data);
         datosFactura(facturaConsulta.data);
     }
 

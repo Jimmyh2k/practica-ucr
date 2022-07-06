@@ -11,10 +11,8 @@ const AceptarNuevaReservacion = () => {
     const navigate = useNavigate();
     const GuardarReservacion = e => {
         e.preventDefault();
-        console.log('yv');
         clienteAxios.post('/reservacion', reservacion)
             .then(res => {
-                console.log(res)
                 Swal.fire(
                     'Se agregó la reservacion',
                     res.data.mensaje,
