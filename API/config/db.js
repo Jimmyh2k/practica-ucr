@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('pruebacliente', 'root', 'root', {
+const db = new Sequelize('hoteljavy', 'root', 'root', {
   host: '127.0.0.1',
   dialect: 'mysql',
   port: '3306',
